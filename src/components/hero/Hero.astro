@@ -1,0 +1,18 @@
+---
+import styles from './Hero.module.css';
+import LottieHero from './lottieHero';
+---
+<section class={styles.hero}>
+    <div class={styles.content}>
+        <h1 class={styles.title}>
+            Ingeniería Digital para el <span class={styles.highlight}>Impacto Real</span>
+        </h1>
+        <p class={styles.subtitle}>
+            Creamos la infraestructura tecnológica y la estrategia de marketing que tu negocio necesita para escalar y competir en el mundo digital.
+        </p>
+        <a href="#cta" class={styles.ctaButton}>Explora las Soluciones</a>
+    </div>
+    <div class={styles.lottie}>
+        <LottieHero client:only="react"/>
+    </div>
+</section>

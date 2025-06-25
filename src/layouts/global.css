@@ -1,0 +1,66 @@
+:root {
+  --color-dark: #0d1117;
+  --color-primary: #161b22;
+  --color-secondary: #010409;
+  --color-accent: #30c59b;
+  --color-accent-hover: #27a07e;
+  --color-text: #c9d1d9;
+  --color-text-muted: #8b949e;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-heading: "Poppins", system-ui, sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: white;
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+}
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}

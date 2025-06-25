@@ -1,0 +1,17 @@
+---
+import styles from './ServiceCard.module.css';
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<div class={styles.card}>
+    <div class={styles.icon}>
+        <slot />
+    </div>
+    <h3 class={styles.title}>{title}</h3>
+    <p class={styles.description}>{description}</p>
+</div>

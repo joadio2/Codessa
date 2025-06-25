@@ -1,0 +1,36 @@
+---
+import styles from './Faq.module.css';
+---
+<section id="faq" class:list={['container', styles.faqSection]}>
+    <h2>Preguntas Frecuentes</h2>
+    <p class={styles.subtitle}>Resolvemos tus dudas para que puedas tomar la mejor decisión.</p>
+    <div class={styles.faqGrid}>
+        <details class={styles.faqItem}>
+            <summary class={styles.question}>¿Cuál es vuestro proceso de trabajo?</summary>
+            <div class={styles.answer}>
+                <p>Nuestro proceso se divide en cuatro fases clave: Descubrimiento, Estrategia, Implementación y Optimización. Esto nos asegura entender a fondo tus necesidades y entregar una solución que no solo funciona, sino que también evoluciona.</p>
+            </div>
+        </details>
+
+        <details class={styles.faqItem}>
+            <summary class={styles.question}>¿Cuánto cuesta un proyecto?</summary>
+            <div class={styles.answer}>
+                <p>Cada proyecto es único. En lugar de tarifas fijas, preparamos un presupuesto detallado y a medida después de nuestra sesión inicial de descubrimiento. Esto garantiza que solo pagues por lo que realmente necesitas.</p>
+            </div>
+        </details>
+
+        <details class={styles.faqItem}>
+            <summary class={styles.question}>¿Trabajáis con startups y pequeñas empresas?</summary>
+            <div class={styles.answer}>
+                <p>¡Absolutamente! Nos encanta colaborar con empresas de todos los tamaños. Adaptamos nuestras soluciones para que sean escalables, permitiendo a las startups crecer con una base tecnológica sólida sin una inversión inicial desorbitada.</p>
+            </div>
+        </details>
+
+        <details class={styles.faqItem}>
+            <summary class={styles.question}>¿Ofrecéis mantenimiento después del lanzamiento?</summary>
+            <div class={styles.answer}>
+                <p>Sí. El lanzamiento es solo el comienzo. Ofrecemos planes de mantenimiento y optimización continua para asegurar que tu plataforma digital se mantenga segura, actualizada y rindiendo al máximo.</p>
+            </div>
+        </details>
+    </div>
+</section>

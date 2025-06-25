@@ -1,0 +1,31 @@
+.cta {
+  background-color: var(--color-dark);
+  text-align: center;
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.content p {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.ctaButton {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-3px);
+}
