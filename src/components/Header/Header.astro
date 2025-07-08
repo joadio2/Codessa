@@ -1,30 +1,32 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 import styles from './Header.module.css';
 ---
 <header class={styles.header}>
-    <div class={styles.container}>
-        <div class={styles.logo}>
-            <a href="/" class={styles.logoLink}>
-                <span class={styles.logoBracket}>&lt;</span>
-                Codessa
-                <span class={styles.logoBracket}>/&gt;</span>
-            </a>
-        </div>
-
-        <input type="checkbox" id="menu-toggle" class={styles.menuToggle} />
-        <label for="menu-toggle" class={styles.hamburger}>
-            <span class={styles.bar}></span>
-            <span class={styles.bar}></span>
-            <span class={styles.bar}></span>
-        </label>
-
-        <nav class={styles.nav}>
-            <a href="#philosophy">Filosofía</a>
-            <a href="#services">Servicios</a>
-            <a href="#process">Nuestro Proceso</a>
-            <a href="#faq">Preguntas Frecuentes</a>
-            <a href="#cta">Contacto</a>
-
-        </nav>
+  <div class={styles.container}>
+    <div class={styles.logo}>
+      <a href={`/${lang}/`} class={styles.logoLink}>
+        <span class={styles.logoBracket}>&lt;</span>
+        Codessa
+        <span class={styles.logoBracket}>/&gt;</span>
+      </a>
     </div>
+
+    <input type="checkbox" id="menu-toggle" class={styles.menuToggle} />
+    <label for="menu-toggle" class={styles.hamburger}>
+      <span class={styles.bar}></span>
+      <span class={styles.bar}></span>
+      <span class={styles.bar}></span>
+    </label>
+
+    <nav class={styles.nav}>
+      <a href="#philosophy">{t('nav.philosophy')}</a>
+      <a href="#services">{t('nav.services')}</a>
+      <a href="#process">{t('nav.process')}</a>
+      <a href="#faq">{t('nav.faq')}</a>
+      <a href="#cta">{t('nav.cta')}</a>
+    </nav>
+  </div>
 </header>

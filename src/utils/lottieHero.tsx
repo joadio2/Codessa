@@ -1,10 +1,13 @@
 import Lottie from "lottie-react";
-import heroAnimation from "../../assets/lottie/hero.json";
 
-export default function LottieHero() {
+type Props = {
+  item: any;
+};
+
+export default function LottieHero({ item }: Props) {
   return (
     <Lottie
-      animationData={heroAnimation}
+      animationData={item}
       loop
       autoplay
       style={{ width: 400, height: 400 }}

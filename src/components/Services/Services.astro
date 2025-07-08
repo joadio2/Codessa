@@ -1,29 +1,20 @@
 ---
 import styles from './Services.module.css';
 import ServiceCard from '../ServiceCard/ServiceCard.astro'; 
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+import { Icon } from 'astro-icon/components';
 ---
 <section id="services" class:list={['container', styles.services]}>
-    <h2>Nuestros Servicios: Soluciones Integrales</h2>
+    <h2>{t('services.title')}</h2>
     <div class={styles.grid}>
-        <ServiceCard 
-            title="Desarrollo Web y Aplicaciones" 
-            description="Creamos plataformas a medida, desde páginas corporativas hasta aplicaciones complejas, siempre enfocadas en el rendimiento, la seguridad y una experiencia de usuario excepcional.">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
-        </ServiceCard>
-        <ServiceCard 
-            title="Automatización de Procesos" 
-            description="Analizamos tus flujos de trabajo y desarrollamos soluciones que eliminan tareas manuales, conectan tus herramientas (vía APIs) y liberan a tu equipo para que se enfoque en lo importante.">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M6.3 17.7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M17.7 6.3m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        </ServiceCard>
-        <ServiceCard 
-            title="Estrategia de Contenido y SEO" 
-            description="Creamos y distribuimos contenido de valor (artículos, videos, guías) que atrae, educa y convierte. Todo optimizado con las mejores prácticas de SEO para asegurar que tu público te encuentre.">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /><path d="M9.7 17l4.6 0" /></svg>
-        </ServiceCard>
-        <ServiceCard 
-            title="Marketing Digital 360°" 
-            description="Gestionamos tus campañas de pago (PPC), redes sociales y email marketing. Usamos un enfoque basado en datos para optimizar tu inversión y maximizar el retorno (ROI) en todos los canales.">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M9 8m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M15 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M4 20l14 0" /></svg>
-        </ServiceCard>
+        {t('services.cards').map(service => (
+            <ServiceCard 
+                title={service.title} 
+                description={service.description}>
+                <Icon name={service.iconName} class={styles.icon} />
+            </ServiceCard>
+        ))}
     </div>
 </section>

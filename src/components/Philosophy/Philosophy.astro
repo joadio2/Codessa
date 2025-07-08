@@ -1,17 +1,20 @@
 ---
 import styles from './Philosophy.module.css';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section id="philosophy" class:list={['container', styles.philosophy]}>
-    <h2>Nuestra Filosofía: El Código del Crecimiento</h2>
-    <p class={styles.subtitle}>No vemos la tecnología y el marketing como dos áreas separadas, sino como un único sistema integrado diseñado para un solo propósito: hacer crecer tu negocio.</p>
+    <h2>{t('philosophy.title')}</h2>
+    <p class={styles.subtitle}>{t('philosophy.subtitle')}</p>
     <div class={styles.grid}>
         <div class={styles.card}>
-            <h3>Ingeniería de Sistemas</h3>
-            <p>No solo escribimos código; diseñamos ecosistemas digitales. Desde webs ultrarrápidas hasta complejos procesos automatizados, construimos la infraestructura robusta y escalable que tu operación necesita para ser eficiente y competitiva.</p>
+            <h3>{t('philosophy.card1_title')}</h3>
+            <p>{t('philosophy.card1_text')}</p>
         </div>
         <div class={styles.card}>
-            <h3>Marketing de Precisión</h3>
-            <p>La tecnología nos da los datos; la creatividad, la conexión. Usamos la analítica de tus sistemas para crear contenido relevante y campañas de marketing digital que no solo alcanzan a tu audiencia, sino que la convierten en clientes leales.</p>
+            <h3>{t('philosophy.card2_title')}</h3>
+            <p>{t('philosophy.card2_text')}</p>
         </div>
     </div>
 </section>

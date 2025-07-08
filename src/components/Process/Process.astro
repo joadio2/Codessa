@@ -1,28 +1,18 @@
 ---
 import styles from './Process.module.css';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section id="process" class:list={['container', styles.process]}>
-    <h2>Nuestro Proceso: De la Idea al Impacto</h2>
+    <h2>{t('process.title')}</h2>
     <div class={styles.timeline}>
-        <div class={styles.step}>
-            <div class={styles.number}>1</div>
-            <h3>Descubrimiento y Análisis</h3>
-            <p>Nos sumergimos en tu negocio para entender tus objetivos, desafíos y audiencia. Analizamos tu ecosistema digital actual para identificar oportunidades clave.</p>
-        </div>
-        <div class={styles.step}>
-            <div class={styles.number}>2</div>
-            <h3>Diseño y Estrategia</h3>
-            <p>Creamos un plan de acción a medida. Diseñamos la arquitectura tecnológica y la estrategia de marketing que servirán como el mapa hacia tus metas.</p>
-        </div>
-        <div class={styles.step}>
-            <div class={styles.number}>3</div>
-            <h3>Desarrollo e Implementación</h3>
-            <p>Es hora de construir. Nuestro equipo de desarrollo da vida a la solución mientras los especialistas en marketing preparan y lanzan las campañas.</p>
-        </div>
-        <div class={styles.step}>
-            <div class={styles.number}>4</div>
-            <h3>Medición y Optimización</h3>
-            <p>El lanzamiento es solo el comienzo. Monitorizamos los resultados en tiempo real, analizamos los datos y optimizamos continuamente para maximizar el ROI.</p>
-        </div>
+        {t('process.steps').map((step, index) => (
+            <div class={styles.step}>
+                <div class={styles.number}>{index + 1}</div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+            </div>
+        ))}
     </div>
 </section>

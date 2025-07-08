@@ -1,0 +1,16 @@
+/* src/components/ProjectShowcase.module.css */
+.showcase {
+  padding: 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem; /* Menos margen para que esté más cerca del primer proyecto */
+}
+
+.highlight {
+  color: var(--color-accent);
+}

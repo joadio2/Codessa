@@ -1,0 +1,45 @@
+---
+// src/components/ProjectFeature.astro
+import styles from './ProjectFeature.module.css';
+
+export interface Props {
+    title: string;
+    description: string;
+    imageUrl: string;
+    projectUrl: string;
+    tags: string[];
+    projectIndex: number;
+}
+
+const { title, description, imageUrl, projectUrl, tags, projectIndex } = Astro.props;
+const isReversed = projectIndex % 2 !== 0; 
+---
+
+<section class:list={[styles.feature, { [styles.reversed]: isReversed }]}>
+    
+    <div class={styles.imageContainer}>
+        <div class={styles.browserWindow}>
+            <div class={styles.browserHeader}>
+                <div class={styles.browserButtons}>
+                    <span class:list={[styles.button, styles.buttonRed]}></span>
+                    <span class:list={[styles.button, styles.buttonYellow]}></span>
+                    <span class:list={[styles.button, styles.buttonGreen]}></span>
+                </div>
+            </div>
+            <img src={imageUrl} alt={`Vista previa del proyecto ${title}`} class={styles.image} />
+        </div>
+    </div>
+
+    <div class={styles.content}>
+        <h3 class={styles.title}>{title}</h3>
+        <p class={styles.description}>{description}</p>
+        
+        <div class={styles.tags}>
+            {tags.map(tag => <span class={styles.tag}>{tag}</span>)}
+        </div>
+
+        <a href={projectUrl} class={styles.ctaButton} target="_blank" rel="noopener noreferrer">
+            Ver Proyecto en Vivo
+        </a>
+    </div>
+</section>

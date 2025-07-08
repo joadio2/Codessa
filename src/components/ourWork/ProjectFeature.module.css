@@ -1,0 +1,140 @@
+/* src/components/ProjectFeature.module.css */
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 0;
+}
+
+/* Modificador para alternar la dirección */
+.reversed {
+  flex-direction: row-reverse;
+}
+
+.content,
+.imageContainer {
+  flex: 1;
+  min-width: 0; /* Previene problemas de desbordamiento en flexbox */
+}
+
+.imageContainer {
+  perspective: 1500px; /* Añade profundidad a la rotación 3D */
+}
+
+/* --- Estilos para la ventana del navegador --- */
+.browserWindow {
+  background: #1e293b;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.browserWindow:hover {
+  transform: rotateY(var(--rotate-direction, -10deg)) scale(1.05);
+}
+
+.reversed .browserWindow:hover {
+  --rotate-direction: 10deg; /* Invierte la dirección de rotación */
+}
+
+.browserHeader {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #334155;
+  border-bottom: 1px solid #475569;
+}
+
+.browserButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+.button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.buttonRed {
+  background-color: #ff5f56;
+}
+.buttonYellow {
+  background-color: #ffbd2e;
+}
+.buttonGreen {
+  background-color: #27c93f;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+}
+
+/* --- Estilos para el contenido de texto --- */
+.title {
+  font-size: 2.2rem;
+  color: var(--color-accent);
+  margin: 0 0 1rem 0;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: #cbd5e1; /* Un gris más claro para mejor lectura */
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.tag {
+  background-color: rgba(0, 198, 255, 0.1);
+  color: var(--color-accent);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.ctaButton {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.2);
+}
+
+@media (max-width: 900px) {
+  .feature,
+  .reversed {
+    flex-direction: column; /* Apila verticalmente en móvil */
+    gap: 2rem;
+    padding: 3rem 0;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .browserWindow:hover,
+  .reversed .browserWindow:hover {
+    transform: scale(1.03); /* Efecto de hover más sutil en móvil */
+  }
+}
