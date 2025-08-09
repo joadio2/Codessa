@@ -8,6 +8,7 @@
   --color-text-muted: #8b949e;
   --font-body: "Inter", system-ui, sans-serif;
   --font-heading: "Poppins", system-ui, sans-serif;
+  --color-border: #334155;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700&display=swap");

@@ -1,0 +1,379 @@
+/* Copia y pega aquí TODO el contenido de tu etiqueta <style> original. */
+/* A continuación, se muestran solo los cambios y el CSS completo. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.briefingContainer {
+  background-color: var(--color-primary);
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+.layoutWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: flex-start;
+}
+.browserWindowForm {
+  flex: 2;
+  max-width: 750px;
+  background: linear-gradient(145deg, #29374e, #1e293b);
+  border-radius: 12px;
+  border: 1px solid #334155;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.browserHeader {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #0f172a;
+  border-bottom: 1px solid #334155;
+}
+.browserButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+.button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.button.red {
+  background-color: #ff5f56;
+}
+.button.yellow {
+  background-color: #ffbd2e;
+}
+.button.green {
+  background-color: #27c93f;
+}
+.browserTitle {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  padding-right: 40px;
+}
+.formContent {
+  padding: 2rem 2.5rem;
+}
+.formHeaderText h1 {
+  font-size: 2.2rem;
+  color: #f8fafc;
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+}
+.formHeaderText p {
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 2.5rem;
+}
+.progressBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+.stepWrapper {
+  text-align: center;
+}
+.stepIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 2px solid #334155;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: all 0.4s ease;
+}
+.stepLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 0.5rem;
+}
+.progressLine {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #334155;
+}
+.stepIcon.current {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
+}
+.stepIcon.completed {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #0f172a;
+}
+.formStep {
+  display: none;
+}
+.formStep.active {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+.formGroup label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: #f8fafc;
+}
+input[type="text"],
+input[type="url"],
+input[type="email"],
+textarea,
+.fileInput {
+  width: 100%;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: #f8fafc;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2);
+}
+.inputError {
+  border-color: #ff5f56 !important;
+}
+.stylePicker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.styleCardPicker {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.styleCardPicker:hover {
+  transform: translateY(-5px);
+  border-color: #55667d;
+}
+.hiddenRadio {
+  display: none;
+}
+.styleCardPicker:has(.hiddenRadio:checked) {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.2);
+  transform: translateY(-5px);
+}
+.cardContentPicker h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #f8fafc;
+}
+.cardContentPicker p {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+.formNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  border-top: 1px solid #334155;
+  padding-top: 1.5rem;
+}
+.prevBtn,
+.nextBtn {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.prevBtn {
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+.prevBtn:hover {
+  background-color: #334155;
+  color: #f8fafc;
+}
+.ctaButton {
+  background-color: var(--color-accent);
+  color: #0f172a;
+}
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.2);
+}
+.formGroupCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: #0f172a;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.formGroupCheckbox.inputError {
+  border-color: #ff5f56;
+}
+.formGroupCheckbox input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 1.25em;
+  height: 1.25em;
+  margin-top: 0.2em;
+  cursor: pointer;
+}
+.formGroupCheckbox label {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
+  cursor: pointer;
+}
+.formGroupCheckbox a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.formGroupCheckbox a:hover {
+  text-decoration: underline;
+}
+.advancedServicesPanel {
+  flex: 1;
+  background: transparent;
+  padding-top: 1rem;
+  position: sticky;
+  top: 2rem;
+}
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.panelHeader svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+.panelHeader h2 {
+  font-size: 1.5rem;
+  color: #f8fafc;
+  margin: 0;
+}
+.panelIntro {
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  padding-left: calc(24px + 0.75rem);
+}
+.servicesGrid {
+  display: grid;
+  gap: 1rem;
+}
+.serviceCard {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background-color: #1e293b;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  transition: all 0.3s ease-in-out;
+}
+.serviceCard:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.cardIcon {
+  background-color: rgba(0, 198, 255, 0.1);
+  color: var(--color-accent);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.cardText h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  color: #f8fafc;
+  font-weight: 600;
+}
+.cardText p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+.advancedServicesPanel .ctaButton.secondary {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+.advancedServicesPanel .ctaButton.secondary:hover {
+  background-color: var(--color-accent);
+  color: #0f172a;
+  box-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
+}
+@media (max-width: 1024px) {
+  .layoutWrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+  .browserWindowForm,
+  .advancedServicesPanel {
+    flex: none;
+    width: 100%;
+    max-width: 750px;
+  }
+  .advancedServicesPanel {
+    position: static;
+  }
+}
+@media (max-width: 768px) {
+  .formContent {
+    padding: 1.5rem;
+  }
+  .stylePicker {
+    grid-template-columns: 1fr;
+  }
+}

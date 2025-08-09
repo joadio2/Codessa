@@ -1,0 +1,113 @@
+---
+import Lottie from "lottie-react"
+import WebDesigning from "../../../assets/lottie/WebDesigning.json"
+import { getLangFromUrl, useTranslations } from "../../../i18n/utilsPromo"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="hero-container">
+    <div class="contentInfo">
+        <h1>{t('hero.title')} <span class="highlight">{t('hero.titleHighlight')}</span></h1>
+        <p class="subtitle">
+            {t('hero.subtitle')}
+        </p>
+        <a href="#prices" class="cta-button">{t('hero.cta')}</a>
+    </div>
+    <div class="lottie-container">
+        <Lottie
+            animationData={WebDesigning}
+            loop={true}
+            autoplay={true}
+            
+            client:only="react"
+        />
+    </div>
+</section>
+
+<style>
+    .hero-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem; 
+        text-align: left;
+        padding: 0 2rem; 
+        max-width: 1200px;
+        margin: 0 auto;
+        height: 100vh;
+    }
+
+    .contentInfo {
+        flex: 1; 
+    }
+
+    .lottie-container {
+        width: 400px;
+        height: 400px;
+    }
+
+    h1 {
+        font-size: 3rem; 
+    }
+
+    .highlight {
+        color: var(--color-accent);
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+        color: var(--color-light-text);
+        margin: 1.5rem 0 2.5rem; 
+    }
+
+    .cta-button {
+        background-color: var(--color-accent);
+        color: var(--color-dark);
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 198, 255, 0.25);
+    }
+
+    @media (max-width: 900px) {
+    .hero-container {
+        min-height: 100vh;
+        height: auto;
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem 1.5rem;
+    }
+
+    .contentInfo {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .lottie-container {
+        width: 80%;
+        max-width: 350px;
+        height: auto;
+        margin-bottom: 2rem;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+</style>

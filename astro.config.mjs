@@ -5,11 +5,16 @@ import react from "@astrojs/react";
 
 import icon from "astro-icon";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
-  output: "static",
-  site: "https://joadio2.github.io/",
-  base: "/Odessa",
+  // site: "https://joadio2.github.io/",
+  // base: "/Odessa",
 
   integrations: [react(), icon()],
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });

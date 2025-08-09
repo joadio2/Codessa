@@ -1,0 +1,432 @@
+---
+// El componente de React se importa igual. No necesita cambios.
+import Scheduler from "./schedule.tsx"
+---
+
+<div class="page-container">
+  <header class="page-header">
+    <h1>Estás a un Paso de Empezar</h1>
+    <p>Asegura tu espacio para la consulta inicial. Aquí definiremos la estrategia para tu proyecto.</p>
+  </header>
+  
+  <!-- El componente interactivo se renderiza aquí -->
+  <Scheduler client:only="react" />
+</div>
+
+<style is:global>
+  /* --- ESTILOS GLOBALES Y DE LA PÁGINA --- */
+  /* --- ESTILOS GLOBALES Y DE LA PÁGINA --- */
+.page-container {
+  font-family: 'Poppins', sans-serif;
+  /* Un gradiente sutil para dar profundidad */
+  background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-bg) 100%);
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  color: var(--color-text);
+  margin-bottom: 30px;
+}
+
+.page-header {
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- LAYOUT PRINCIPAL DE DOS COLUMNAS --- */
+.scheduler-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.calendar-column {
+  flex: 1.5;
+}
+
+.payment-column {
+  flex: 1;
+  position: sticky;
+  top: 2rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Estado "deshabilitado" mucho más claro para el usuario */
+.payment-column.disabled {
+  opacity: 0.6;
+  filter: blur(2px);
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+/* --- ESTILOS PERSONALIZADOS PARA REACT CALENDAR --- */
+.calendar-container {
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.react-calendar {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Forzar el ancho completo del calendario */
+.react-calendar__viewContainer,
+.react-calendar__month-view,
+.react-calendar__month-view > div,
+.react-calendar__month-view__weekdays,
+.react-calendar__month-view__days {
+  width: 100% !important;
+  
+}
+
+.react-calendar__navigation button {
+  color: var(--color-text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-inline: 1px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: var(--color-border);
+  transition: background-color 0.2s ease;
+}
+.react-calendar__navigation button:hover,
+.react-calendar__navigation button:focus {
+    background-color: var(--color-accent);
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+
+.react-calendar__tile {
+  color: var(--color-text-primary);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  padding: 0.75em 0.5em;
+  background-color: #1e293b;
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
+.react-calendar__tile:disabled {
+  background-color: transparent;
+  color: #555;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: var(--color-border);
+  transform: scale(1.05);
+}
+
+.react-calendar__tile--now {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.react-calendar__tile--active {
+  background: var(--color-accent);
+  color: var(--color-dark);
+  font-weight: 700;
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: #00b8d4;
+}
+
+/* --- ESTILOS PARA LOS HORARIOS DISPONIBLES --- */
+.time-slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.time-slots-header h3 {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.timezone-info {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+}
+
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.75rem;
+}
+
+.time-slot-btn {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0.75rem 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.time-slot-btn:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.time-slot-btn.active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 198, 255, 0.25);
+}
+
+.time-slot-btn .client-time {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  transition: color 0.2s ease;
+}
+
+.time-slot-btn .spain-time {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.time-slot-btn.active .client-time,
+.time-slot-btn.active .spain-time {
+  color: var(--color-dark);
+}
+
+.summary-card {
+  background: linear-gradient(145deg, #29374e, #1e293b);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.summary-item:first-child { padding-top: 0; }
+.summary-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.summary-item span:first-child { color: var(--color-text-secondary); }
+.summary-item span:last-child { font-weight: 600; text-align: right; }
+
+/* Estilos para el badge del plan y el precio detallado */
+.plan-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.plan-badge--mensual {
+  background-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.plan-badge--anual {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+
+.summary-item.price {
+  align-items: flex-start;
+}
+
+.price-value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.price-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.main-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.billing-cycle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.price-note {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+  font-style: italic;
+  max-width: 200px;
+}
+
+/* Estilos para botones y otros elementos de pago */
+.cta-button {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.2);
+}
+
+.payment-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+.payment-btn:disabled {
+  background-color: var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.payment-info {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-top: 1rem;
+}
+
+/* --- VISTA DE CONFIRMACIÓN --- */
+.confirmation-view {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: linear-gradient(145deg, #29374e, #1e293b);
+  border: 1px solid var(--color-accent);
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 0 40px rgba(0, 198, 255, 0.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.confirmation-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: popIn 0.5s 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) backwards;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); }
+  to { transform: scale(1); }
+}
+
+.confirmation-view h2 {
+  border: none;
+  font-size: 2rem;
+}
+
+.confirmation-view p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.confirmation-view strong {
+  color: var(--color-text-primary);
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDAD --- */
+@media (max-width: 900px) {
+  .scheduler-layout {
+    flex-direction: column;
+  }
+  .payment-column {
+    position: static;
+    width: 100%;
+    margin-top: 3rem;
+  }
+  .payment-column.disabled {
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}
+</style>

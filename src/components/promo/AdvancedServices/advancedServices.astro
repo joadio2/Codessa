@@ -1,0 +1,185 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utilsPromo"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section id="servicios-avanzados">
+    <div class="synapse-container">
+      <div class="title-wrapper">
+        <h2>{t("advancedServices.title")}</h2>
+        <p>{t("advancedServices.subtitle")}</p>
+      </div>
+  
+      <div class="synapse-map">
+        <div class="synapse-node">
+          <div class="node-icon">🛍️</div>
+          <div class="node-content">
+            <h4>{t("advancedServices.ecommerce.title")}</h4>
+            <p>{t("advancedServices.ecommerce.description")}</p>
+          </div>
+        </div>
+        <div class="synapse-node">
+          <div class="node-icon">🚀</div>
+          <div class="node-content">
+            <h4>{t("advancedServices.saas.title")}</h4>
+            <p>{t("advancedServices.saas.description")}</p>
+          </div>
+        </div>
+        <div class="synapse-node">
+          <div class="node-icon">🔗</div>
+          <div class="node-content">
+            <h4>{t("advancedServices.api.title")}</h4>
+            <p>{t("advancedServices.api.description")}</p>
+          </div>
+        </div>
+        <div class="synapse-node">
+          <div class="node-icon">📊</div>
+          <div class="node-content">
+            <h4>{t("advancedServices.data.title")}</h4>
+            <p>{t("advancedServices.data.description")}</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="cta-wrapper">
+        <a href="#contacto-avanzado" class="synapse-cta">{t("advancedServices.cta")}</a>
+      </div>
+    </div>
+</section>
+  
+<style>
+    #servicios-avanzados {
+      padding: 5rem 1rem;
+      background-color: #020617;
+      position: relative;
+      overflow: hidden;
+    }
+    .synapse-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .title-wrapper {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .title-wrapper h2 {
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+    .title-wrapper p {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .synapse-map {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .synapse-node {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 450px;
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .synapse-node:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 198, 255, 0.1);
+    }
+    .node-icon {
+      font-size: 2rem;
+      background-color: rgba(0, 198, 255, 0.1);
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .node-content h4 {
+      color: #f1f5f9;
+      font-size: 1.2rem;
+      margin: 0 0 0.25rem 0;
+    }
+    .node-content p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .cta-wrapper {
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .synapse-cta {
+        background-color: var(--color-accent);
+        color: var(--color-dark);
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .synapse-cta:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 198, 255, 0.25);
+    }
+    
+    @media (min-width: 950px) {
+      #servicios-avanzados { 
+        padding: 8rem 1rem; 
+      }
+      .title-wrapper { 
+        margin-bottom: 6rem; 
+      }
+
+      .synapse-map {
+        gap: 5rem;
+    }
+
+      
+      .synapse-node {
+        max-width: 850px; 
+      }
+     
+
+      .node-icon {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+        border: 2px solid var(--color-accent);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .synapse-node:hover .node-icon {
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 0 0 25px var(--color-accent);
+      }
+
+      .node-content h4 {
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+      }
+      .node-content p {
+        font-size: 1.1rem;
+      }
+
+     
+      .synapse-node:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+    }
+</style>

@@ -9,17 +9,22 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.4.0",
     "@astrojs/react": "^4.3.0",
     "@iconify-json/tabler": "^1.2.19",
     "@types/react": "^19.1.8",
+    "@types/react-calendar": "^3.9.0",
     "@types/react-dom": "^19.1.6",
     "astro": "^5.10.1",
     "astro-icon": "^1.1.5",
+    "canvas-confetti": "^1.9.3",
     "lottie-react": "^2.4.1",
     "react": "^19.1.0",
+    "react-calendar": "^6.0.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@iconify-json/streamline": "^1.2.5"
+    "@iconify-json/streamline": "^1.2.5",
+    "@types/canvas-confetti": "^1.9.0"
   }
 }

@@ -1,0 +1,179 @@
+/* Usando las mismas variables de color que tu diseño original */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  min-height: 100vh;
+  background-color: var(--color-primary);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: var(--color-light-text);
+  max-width: 500px;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  align-items: center;
+}
+
+.pricingCard {
+  background: linear-gradient(145deg, #29374e, #1e293b);
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricingCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.recommended {
+  border-color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.recommended:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.cardHeader h3 {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+}
+
+.badge {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+}
+
+.priceInfo {
+  margin-bottom: 2rem;
+}
+
+.price {
+  font-size: 4rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  line-height: 1;
+}
+
+.currency {
+  font-size: 2rem;
+  color: var(--color-accent);
+  vertical-align: super;
+  margin-left: 0.2rem;
+}
+
+.period {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-light-text);
+  margin-left: 0.5rem;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  min-height: 2.5em;
+  margin-top: 0.5rem;
+}
+
+.note strong {
+  color: #34d399; /* Un verde para destacar el ahorro */
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  color: var(--color-light-text);
+  margin-top: auto; /* Empuja la lista hacia arriba si las tarjetas tienen alturas diferentes */
+}
+
+.features li {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.cta {
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  cursor: pointer;
+  margin-top: auto; /* Pega el botón al final de la tarjeta */
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+
+.ctaRecommended {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+
+.ctaRecommended:hover {
+  background-color: #00b2e3; /* Un tono ligeramente más oscuro al pasar el ratón */
+  box-shadow: 0 8px 20px rgba(0, 198, 255, 0.25);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .pricingGrid {
+    grid-template-columns: 1fr;
+  }
+  .recommended {
+    order: -1; /* Pone la tarjeta recomendada primero en móvil */
+    transform: scale(1); /* Resetea la escala en móvil */
+  }
+  .recommended:hover {
+    transform: translateY(-10px);
+  }
+}

@@ -1,0 +1,391 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const basePath = t.toString();
+---
+
+  <main class="briefing-container">
+    <div class="layout-wrapper">
+      <div class="browser-window-form">
+        <header class="browser-header">
+          <div class="browser-buttons">
+            <div class="button red"></div>
+            <div class="button yellow"></div>
+            <div class="button green"></div>
+          </div>
+          <div class="browser-title">Nuevo Proyecto - Briefing Interactivo</div>
+        </header>
+
+        <div class="form-content">
+          <div class="form-header-text">
+            <h1>Comienza la Creación</h1>
+            <p>Completa estos 3 pasos para darnos el mapa de tu futura landing page.</p>
+          </div>
+
+          <div class="progress-bar">
+            <div class="step-wrapper">
+              <div class="step-icon" data-step="1">1</div>
+              <span class="step-label">Esencia</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="step-wrapper">
+              <div class="step-icon" data-step="2">2</div>
+              <span class="step-label">Estilo</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="step-wrapper">
+              <div class="step-icon" data-step="3">3</div>
+              <span class="step-label">Detalles</span>
+            </div>
+          </div>
+
+          <form id="briefingForm" action="URL_DE_TU_SERVICIO_DE_FORMULARIO" method="POST" enctype="multipart/form-data">
+            <!-- Paso 1 -->
+            <div class="form-step active">
+              <div class="form-group">
+                <label for="nombre_negocio">Nombre de tu Marca</label>
+                <input type="text" id="nombre_negocio" name="nombre_negocio" placeholder="Ej: Quantum Dynamics" required>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Describe tu negocio en pocas palabras</label>
+                <textarea id="descripcion" name="descripcion" rows="4" placeholder="¿Qué problema único resuelves para tus clientes?"></textarea>
+              </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="form-step">
+              <div class="form-group">
+                <label>Elige la vibra principal para tu diseño</label>
+                <div class="style-picker">
+                  <label class="style-card-picker">
+                    <input type="radio" name="estilo_elegido" value="Minimalista" class="hidden-radio">
+                    <div class="card-content-picker">
+                      <h3>Minimalista & Tech</h3>
+                      <p>Líneas limpias, enfocado en el producto.</p>
+                    </div>
+                  </label>
+                  <label class="style-card-picker">
+                    <input type="radio" name="estilo_elegido" value="Corporativo" class="hidden-radio">
+                    <div class="card-content-picker">
+                      <h3>Corporativo & Elegante</h3>
+                      <p>Confianza, estructura y profesionalismo.</p>
+                    </div>
+                  </label>
+                  <label class="style-card-picker">
+                    <input type="radio" name="estilo_elegido" value="Creativo" class="hidden-radio">
+                    <div class="card-content-picker">
+                      <h3>Creativo & Audaz</h3>
+                      <p>Visualmente impactante, rompe el molde.</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="colores">Paleta de colores (si la tienes)</label>
+                <input type="text" id="colores" name="colores" placeholder="Ej: Azul oscuro, blanco, y un toque de naranja">
+              </div>
+            </div>
+
+            <!-- Paso 3 (CON CAMBIOS) -->
+            <div class="form-step">
+              <div class="form-group">
+                <label for="logo">Sube tu logo (Formatos: .png, .jpg, .svg)</label>
+                <input type="file" id="logo" name="logo" class="file-input">
+              </div>
+              <div class="form-group">
+                <label for="referencias">URL de una web que te guste (opcional)</label>
+                <input type="url" id="referencias" name="referencias" placeholder="https://ejemplo.com">
+              </div>
+              <div class="form-group">
+                <label for="email_contacto">Tu email de contacto</label>
+                <input type="email" id="email_contacto" name="email_contacto" placeholder="Para enviarte los siguientes pasos" required>
+              </div>
+              
+              <!-- === NUEVOS CAMPOS === -->
+              <div class="form-group form-group-checkbox">
+                <input type="checkbox" id="terminos" name="terminos" value="aceptado" required>
+                <label for="terminos">He leído y acepto los <a href="/terminos-y-condiciones" target="_blank">Términos y Condiciones</a> del servicio.</label>
+              </div>
+              <div class="form-group form-group-checkbox">
+                <input type="checkbox" id="comunicaciones" name="comunicaciones" value="si">
+                <label for="comunicaciones">Sí, quiero recibir comunicaciones, ofertas y consejos por email.</label>
+              </div>
+              <!-- === FIN DE NUEVOS CAMPOS === -->
+            </div>
+
+            <!-- Botones de Navegación -->
+            <div class="form-navigation">
+              <button type="button" id="prevBtn">Atrás</button>
+              <button type="button" id="nextBtn" class="cta-button">Siguiente</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Columna Lateral: Panel de Servicios Avanzados -->
+      <aside class="advanced-services-panel">
+        <div class="panel-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <h2>Más Allá de la Landing Page</h2>
+        </div>
+        <p class="panel-intro">
+          Para proyectos que requieren una arquitectura robusta y funcionalidades a medida.
+        </p>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+            <div class="card-text"><h3>E-commerce de Alto Impacto</h3><p>Plataformas de venta optimizadas para la conversión.</p></div>
+          </div>
+          <div class="service-card">
+            <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9.09 9.09.41 5.83 5.41-1.41"></path></svg></div>
+            <div class="card-text"><h3>Automatización Inteligente</h3><p>Conecta tus sistemas y ahorra tiempo valioso.</p></div>
+          </div>
+          <div class="service-card">
+            <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+            <div class="card-text"><h3>Gestores de Contenido (CMS)</h3><p>Toma el control de tu web con sistemas auto-gestionables.</p></div>
+          </div>
+          <div class="service-card">
+            <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+            <div class="card-text"><h3>Aplicaciones Web a Medida</h3><p>Soluciones únicas para problemas específicos.</p></div>
+          </div>
+        </div>
+        <a href={`/${lang}/contact`} class="cta-button secondary">Iniciar Conversación de Proyecto</a>
+      </aside>
+    </div>
+  </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const form = document.getElementById('briefingForm');
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const progressIcons = Array.from(document.querySelectorAll('.step-icon'));
+    let currentStep = 0;
+
+    function updateUI() {
+      prevBtn.style.display = currentStep === 0 ? 'none' : 'inline-block';
+      nextBtn.textContent = currentStep === steps.length - 1 ? 'Enviar y Continuar al Pago' : 'Siguiente';
+      
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === currentStep);
+      });
+
+      progressIcons.forEach((icon, index) => {
+        icon.classList.remove('current', 'completed');
+        if (index < currentStep) {
+          icon.classList.add('completed');
+        } else if (index === currentStep) {
+          icon.classList.add('current');
+        }
+      });
+    }
+
+    function validateCurrentStep() {
+      const currentStepElement = steps[currentStep];
+      const fields = currentStepElement.querySelectorAll('[required]');
+      let isValid = true;
+      
+      for (const field of fields) {
+        let fieldIsValid = true;
+        if (field.type === 'checkbox') {
+          fieldIsValid = field.checked;
+        } else {
+          fieldIsValid = field.value.trim() !== '';
+        }
+
+        if (!fieldIsValid) {
+          isValid = false;
+          field.classList.add('input-error');
+          field.closest('.form-group-checkbox')?.classList.add('input-error');
+        } else {
+          field.classList.remove('input-error');
+          field.closest('.form-group-checkbox')?.classList.remove('input-error');
+        }
+      }
+      return isValid;
+    }
+
+    async function handleFormSubmit() {
+      if (!validateCurrentStep()) return;
+
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Enviando...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          // ¡Éxito! Redirigimos al pago
+          window.location.href = '/payment';
+        } else {
+          console.error('Error en el servidor:', response.statusText);
+          alert('Hubo un problema al enviar tu briefing. Por favor, inténtalo de nuevo.');
+          nextBtn.disabled = false;
+          nextBtn.textContent = 'Enviar y Continuar al Pago';
+        }
+      } catch (error) {
+        console.error('Error de red:', error);
+        alert('No se pudo conectar para enviar tu briefing. Revisa tu conexión e inténtalo de nuevo.');
+        nextBtn.disabled = false;
+        nextBtn.textContent = 'Enviar y Continuar al Pago';
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < steps.length - 1) {
+        if (!validateCurrentStep()) return;
+        currentStep++;
+        updateUI();
+      } else {
+        handleFormSubmit();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentStep > 0) {
+        currentStep--;
+        updateUI();
+      }
+    });
+
+    updateUI();
+  });
+</script>
+
+<style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  .briefing-container {
+    background-color: var(--color-bg);
+    min-height: 100vh;
+    padding: 4rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .layout-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1200px;
+    align-items: flex-start;
+  }
+  .browser-window-form {
+    flex: 2;
+    max-width: 750px;
+    background: linear-gradient(145deg, #29374e, #1e293b);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+  .browser-header { display: flex; align-items: center; padding: 0.75rem 1rem; background-color: #0f172a; border-bottom: 1px solid var(--color-border); }
+  .browser-buttons { display: flex; gap: 0.5rem; }
+  .button { width: 12px; height: 12px; border-radius: 50%; }
+  .button.red { background-color: #ff5f56; }
+  .button.yellow { background-color: #ffbd2e; }
+  .button.green { background-color: #27c93f; }
+  .browser-title { color: var(--color-text-secondary); font-size: 0.8rem; margin: 0 auto; padding-right: 40px; }
+  .form-content { padding: 2rem 2.5rem; }
+  .form-header-text h1 { font-size: 2.2rem; color: var(--color-text-primary); text-align: center; margin: 0 0 0.5rem 0; }
+  .form-header-text p { text-align: center; color: var(--color-text-secondary); margin-bottom: 2.5rem; }
+  .progress-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
+  .step-wrapper { text-align: center; }
+  .step-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--color-surface); border: 2px solid var(--color-border); display: grid; place-items: center; font-weight: 600; color: var(--color-text-secondary); transition: all 0.4s ease; }
+  .step-label { display: block; font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.5rem; }
+  .progress-line { flex-grow: 1; height: 2px; background-color: var(--color-border); }
+  .step-icon.current { border-color: var(--color-accent); color: var(--color-accent); box-shadow: 0 0 15px rgba(0, 198, 255, 0.3); }
+  .step-icon.completed { background-color: var(--color-accent); border-color: var(--color-accent); color: var(--color-dark); }
+  .form-step { display: none; }
+  .form-step.active { display: block; animation: fadeIn 0.5s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label { display: block; margin-bottom: 0.75rem; font-weight: 500; color: var(--color-text-primary); }
+  input[type="text"], input[type="url"], input[type="email"], textarea, .file-input { width: 100%; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 0.8rem 1rem; color: var(--color-text-primary); font-size: 1rem; transition: all 0.3s ease; }
+  input:focus, textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2); }
+  .input-error { border-color: #ff5f56 !important; }
+  .style-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .style-card-picker { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 10px; padding: 1.5rem 1rem; text-align: center; cursor: pointer; transition: all 0.3s ease; }
+  .style-card-picker:hover { transform: translateY(-5px); border-color: #55667d; }
+  .hidden-radio { display: none; }
+  .style-card-picker:has(.hidden-radio:checked) { border-color: var(--color-accent); box-shadow: 0 0 15px rgba(0, 198, 255, 0.2); transform: translateY(-5px); }
+  .card-content-picker h3 { font-size: 1rem; margin: 0.5rem 0; color: var(--color-text-primary); }
+  .card-content-picker p { font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.4; }
+  .form-navigation { display: flex; justify-content: space-between; margin-top: 2.5rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem; }
+  #prevBtn, #nextBtn { padding: 0.8rem 2rem; border: none; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+  #prevBtn { background-color: var(--color-surface); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+  #prevBtn:hover { background-color: var(--color-border); color: var(--color-text-primary); }
+  .cta-button { background-color: var(--color-accent); color: var(--color-dark); }
+  .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 198, 255, 0.2); }
+  
+  /* === NUEVOS ESTILOS PARA CHECKBOXES === */
+  .form-group-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background-color: var(--color-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  .form-group-checkbox.input-error {
+    border-color: #ff5f56;
+  }
+  .form-group-checkbox input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+    margin-top: 0.2em;
+    cursor: pointer;
+  }
+  .form-group-checkbox label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    cursor: pointer;
+  }
+  .form-group-checkbox a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .form-group-checkbox a:hover {
+    text-decoration: underline;
+  }
+  /* === FIN DE ESTILOS PARA CHECKBOXES === */
+
+  .advanced-services-panel { flex: 1; background: transparent; padding-top: 1rem; position: sticky; top: 2rem; }
+  .panel-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .panel-header svg { color: var(--color-accent); flex-shrink: 0; }
+  .panel-header h2 { font-size: 1.5rem; color: var(--color-text-primary); margin: 0; }
+  .panel-intro { color: var(--color-text-secondary); margin-bottom: 2rem; line-height: 1.6; padding-left: calc(24px + 0.75rem); }
+  .services-grid { display: grid; gap: 1rem; }
+  .service-card { display: flex; gap: 1rem; align-items: flex-start; background-color: var(--color-surface); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--color-border); transition: all 0.3s ease-in-out; }
+  .service-card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--color-accent); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+  .card-icon { background-color: rgba(0, 198, 255, 0.1); color: var(--color-accent); width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0; }
+  .card-text h3 { margin: 0 0 0.25rem 0; font-size: 1rem; color: var(--color-text-primary); font-weight: 600; }
+  .card-text p { margin: 0; font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5; }
+  .advanced-services-panel .cta-button.secondary { display: block; text-align: center; margin-top: 2rem; background-color: transparent; border: 1px solid var(--color-accent); color: var(--color-accent); border-radius: 10px; font-weight: 400; font-size: 1.3rem; }
+  .advanced-services-panel .cta-button.secondary:hover { background-color: var(--color-accent); color: var(--color-dark); box-shadow: 0 5px 15px rgba(0, 198, 255, 0.2); }
+
+  @media (max-width: 1024px) {
+    .layout-wrapper { flex-direction: column; align-items: center; gap: 3rem; }
+    .browser-window-form, .advanced-services-panel { flex: none; width: 100%; max-width: 750px; }
+    .advanced-services-panel { position: static; }
+  }
+  @media (max-width: 768px) {
+    .form-content { padding: 1.5rem; }
+    .style-picker { grid-template-columns: 1fr; }
+  }
+</style>

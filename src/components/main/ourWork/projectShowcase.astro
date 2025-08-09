@@ -1,0 +1,27 @@
+---
+import styles from './ProjectShowcase.module.css';
+import ProjectFeature from './projectFeature.astro';
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+
+---
+
+<div id="proyectos" class={styles.showcase}>
+    <h2 class={styles.title}>
+        {t('showcase.title_prefix')}
+        <span class={styles.highlight}>{t('showcase.title_highlight')}</span>
+    </h2>
+    
+    {t('showcase.items').map((project, index) => (
+        <ProjectFeature
+            title={project.title}
+            description={project.description}
+            imageUrl={project.imageUrl}
+            projectUrl={project.projectUrl}
+            tags={project.tags}
+            projectIndex={index}
+        />
+    ))}
+</div>

@@ -1,0 +1,45 @@
+---
+import styles from './ContactForm.module.css';
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="contacto" class={styles.contactSection}>
+    <h2 class={styles.title}>
+        {t('contactForm.titlePart1')}
+        <span class={styles.highlight}>{t('contactForm.titlePart2')}</span>
+    </h2>
+    <p class={styles.subtitle}>
+        {t('contactForm.subtitle')}
+    </p>
+
+    <form name="contacto" class={styles.form} id="contact-form">
+        <div class={styles.formGroup}>
+            <label for="name" class={styles.label}>{t('contactForm.nameLabel')}</label>
+            <input type="text" id="name" name="name" class={styles.input} placeholder={t('contactForm.namePlaceholder')} required>
+        </div>
+
+        <div class={styles.formGroup}>
+            <label for="email" class={styles.label}>{t('contactForm.emailLabel')}</label>
+            <input type="email" id="email" name="email" class={styles.input} placeholder={t('contactForm.emailPlaceholder')} required>
+        </div>
+
+        <div class={styles.formGroup}>
+            <label for="idea" class={styles.label}>{t('contactForm.ideaLabel')}</label>
+            <textarea id="idea" name="idea" class={styles.textarea} placeholder={t('contactForm.ideaPlaceholder')} required></textarea>
+        </div>
+
+        <button type="submit" class={styles.submitButton}>{t('contactForm.submitButton')}</button>
+    </form>
+</section>
+
+<script type="module" is:inline define:vars={{ lang }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = `/${lang}/thanks`;
+    });
+  });
+</script>

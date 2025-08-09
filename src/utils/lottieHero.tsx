@@ -2,15 +2,17 @@ import Lottie from "lottie-react";
 
 type Props = {
   item: any;
+  width: number;
+  height: number;
 };
 
-export default function LottieHero({ item }: Props) {
+export default function LottieHero({ item, width, height }: Props) {
   return (
     <Lottie
       animationData={item}
       loop
       autoplay
-      style={{ width: 400, height: 400 }}
+      style={{ width: width, height: height }}
     />
   );
 }

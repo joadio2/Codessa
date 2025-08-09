@@ -1,0 +1,221 @@
+---
+import Countdown from './countdown.jsx';
+const offerEndDate = new Date();
+offerEndDate.setDate(offerEndDate.getDate() + 15); 
+import { getLangFromUrl, useTranslations } from "../../../i18n/utilsPromo"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="ultima-llamada">
+    <div class="container">
+        <div class="grid-container">
+            <!-- Columna de Urgencia -->
+            <div class="urgency-column">
+                <h3><span class="highlight">{t('finalCall.urgency.title')}</span><br>{t('finalCall.urgency.subtitle')}</h3>
+                <p>{t('finalCall.urgency.description.pre')} <strong class="strong">{t('finalCall.urgency.description.strong')}</strong> {t('finalCall.urgency.description.post')}</p>
+                
+                <Countdown targetDate={offerEndDate.toISOString()} client:only="react" />
+
+                <a href="#contacto" class="cta-button">{t('finalCall.urgency.cta')}</a>
+            </div>
+
+            <!-- Columna de Prueba Social -->
+            <div class="proof-column">
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <blockquote>
+                        {t('finalCall.testimonial1.quote')}
+                    </blockquote>
+                    <cite>{t('finalCall.testimonial1.author')}</cite>
+                </div>
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <blockquote>
+                        {t('finalCall.testimonial2.quote')}
+                    </blockquote>
+                    <cite>{t('finalCall.testimonial2.author')}</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- ESTILOS BASE (MOBILE-FIRST) --- */
+    #ultima-llamada {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 4rem 0;
+        background-color: var(--color-dark);
+        overflow: hidden;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .urgency-column {
+        text-align: center;
+        background: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .urgency-column h3 {
+        font-size: 2rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+    .urgency-column p {
+        font-size: 1.1rem;
+        color: var(--color-light-text);
+        margin-bottom: 2rem;
+    }
+    .highlight {
+        color: var(--color-accent);
+    }
+   p .strong{
+        font-weight: 700;
+        color: var(--color-accent);
+        text-decoration: underline;
+        font-size: 1.1rem;
+        
+
+    }
+    .cta-button {
+        background-color: #e11d48;
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2rem;
+    }
+    .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(225, 29, 72, 0.3);
+    }
+    :global(.countdown-timer) {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+    :global(.time-block) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #1e293b;
+        border-radius: 10px;
+        padding: 0.8rem;
+        border: 1px solid var(--color-border);
+        flex: 1;
+    }
+    :global(.time-value) {
+        font-size: 1.9rem; /* <-- AQUÍ ESTÁ EL CAMBIO */
+        font-weight: 700;
+        color: white;
+        line-height: 1;
+    }
+    :global(.time-label) {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--color-light-text);
+        margin-top: 0.25rem;
+    }
+    .proof-column {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin: 0 -1.5rem; 
+        padding: 0 1.5rem 1.5rem;
+    }
+    .proof-column::-webkit-scrollbar { height: 8px; }
+    .proof-column::-webkit-scrollbar-track { background: var(--color-card-bg); border-radius: 4px; }
+    .proof-column::-webkit-scrollbar-thumb { background: #e11d48; border-radius: 4px; }
+    .testimonial-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        background: linear-gradient(145deg, #29374e, #1e293b);
+        border: 1px solid var(--color-border);
+        border-radius: 15px;
+        padding: 2rem;
+        position: relative;
+    }
+    .quote-icon {
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        font-size: 5rem;
+        color: var(--color-accent);
+        opacity: 0.2;
+        line-height: 1;
+    }
+    .testimonial-card blockquote {
+        margin: 0 0 1rem 0;
+        font-style: italic;
+        color: var(--color-light-text);
+        position: relative;
+        z-index: 1;
+    }
+    .testimonial-card cite {
+        font-weight: 600;
+        color: white;
+        font-style: normal;
+    }
+    
+    @media (min-width: 950px) {
+        #ultima-llamada {
+            padding: 6rem 0;
+        }
+        .grid-container {
+            flex-direction: row;
+            align-items: center;
+            gap: 4rem;
+        }
+        .urgency-column, .proof-column {
+            flex: 1;
+        }
+        .urgency-column {
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+        }
+        .urgency-column h3 {
+            font-size: 2.5rem;
+        }
+        .cta-button {
+            font-size: 1.2rem;
+        }
+        :global(.countdown-timer) {
+            justify-content: flex-start;
+        }
+        .proof-column {
+            flex-direction: column;
+            overflow-x: visible;
+            scroll-snap-type: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+        .testimonial-card {
+            flex-basis: auto;
+        }
+    }
+</style>

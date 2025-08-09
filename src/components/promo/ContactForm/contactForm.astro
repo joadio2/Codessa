@@ -1,0 +1,83 @@
+---
+// src/components/ContactForm.astro
+---
+<section id="contacto">
+    <h2>¿Necesitas algo más avanzado?</h2>
+    <p class="subtitle">
+        Si tu proyecto requiere una tienda online, bases de datos, integraciones o funcionalidades a medida,
+        cuéntanos tu idea. Un colaborador se pondrá en contacto contigo para explorar las posibilidades.
+    </p>
+    <form name="contacto-complejo" class="contact-form" >
+        <!-- Para usar Netlify Forms, añade el atributo 'netlify' al form -->
+        <!-- Para otros servicios como Formspree, usa su URL en el 'action' -->
+        <div class="form-group">
+            <label for="name">Tu Nombre</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Tu Email</label>
+            <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="message">Describe tu proyecto</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="cta-button">Enviar Consulta</button>
+    </form>
+</section>
+
+<style>
+    section {
+        padding: 4rem 0;
+        text-align: center;
+    }
+    .subtitle {
+        max-width: 700px;
+        margin: 0 auto 3rem;
+    }
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: left;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background-color: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        color: var(--color-light-text);
+        font-size: 1rem;
+        font-family: inherit;
+    }
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.3);
+    }
+    .cta-button {
+        background-color: var(--color-accent);
+        color: var(--color-dark);
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+    .cta-button:hover {
+        transform: translateY(-3px);
+    }
+</style>

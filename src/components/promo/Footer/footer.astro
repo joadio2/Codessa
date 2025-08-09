@@ -1,0 +1,17 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+---
+<footer>
+    <p>&copy; {year} Tu Nombre o Nombre de Empresa. Todos los derechos reservados.</p>
+</footer>
+<style>
+    footer {
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+        border-top: 1px solid var(--color-border);
+        color: #94a3b8;
+        font-size: 0.9rem;
+    }
+</style>

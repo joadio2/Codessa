@@ -153,11 +153,32 @@ export const ui = {
         },
       ],
     },
+    contactForm: {
+      titlePart1: "Have an idea? ",
+      titlePart2: "Let's talk.",
+      subtitle:
+        "I'm ready to help you automate processes, launch your next e-commerce store, or build the web application your business needs. Fill out the form, and I'll get in touch with you.",
+      nameLabel: "Name",
+      namePlaceholder: "Your full name",
+      emailLabel: "Email",
+      emailPlaceholder: "you@email.com",
+      ideaLabel: "Project Idea",
+      ideaPlaceholder:
+        "Describe your project, your goals, or the problem you want to solve...",
+      submitButton: "Send Message",
+    },
     cta: {
       title: "Ready to Turn Your Idea into a Real Project?",
       subtitle:
         "Schedule a free strategic session with us and discover how the right technology and marketing can drive your business results.",
       ctaButton: "Schedule Free Session",
+    },
+    thanksPage: {
+      title: "Thank You",
+      exclamationMark: "!",
+      subtitle:
+        "We have received your message. We will get in touch with you very soon.",
+      buttonText: "Back to Home",
     },
   },
   es: {
@@ -306,11 +327,32 @@ export const ui = {
         },
       ],
     },
+    contactForm: {
+      titlePart1: "¿Tienes una idea? ",
+      titlePart2: "Hablemos.",
+      subtitle:
+        "Estoy listo para ayudarte a automatizar procesos, lanzar tu próximo e-commerce o construir la aplicación web que tu negocio necesita. Rellena el formulario y me pondré en contacto contigo.",
+      nameLabel: "Nombre",
+      namePlaceholder: "Tu nombre completo",
+      emailLabel: "Email",
+      emailPlaceholder: "tu@email.com",
+      ideaLabel: "Idea a desarrollar",
+      ideaPlaceholder:
+        "Describe tu proyecto, tus objetivos o el problema que quieres resolver...",
+      submitButton: "Enviar Mensaje",
+    },
     cta: {
       title: "Convierte tu Idea en un Proyecto Real",
       subtitle:
         "Agenda una sesión estratégica gratuita y descubre cómo la tecnología y el marketing adecuados pueden impulsar los resultados de tu negocio.",
       ctaButton: "Agendar Sesión Gratuita",
+    },
+    thanksPage: {
+      title: "Gracias",
+      exclamationMark: "!",
+      subtitle:
+        "Hemos recibido tu mensaje. Nos pondremos en contacto contigo muy pronto.",
+      buttonText: "Volver al Inicio",
     },
   },
   pt: {
@@ -461,11 +503,32 @@ export const ui = {
         },
       ],
     },
+    contactForm: {
+      titlePart1: "Tem uma ideia? ",
+      titlePart2: "Vamos conversar.",
+      subtitle:
+        "Estou pronto para o ajudar a automatizar processos, lançar a sua próxima loja de e-commerce ou construir a aplicação web que o seu negócio precisa. Preencha o formulário e entrarei em contacto consigo.",
+      nameLabel: "Nome",
+      namePlaceholder: "O seu nome completo",
+      emailLabel: "Email",
+      emailPlaceholder: "o.seu@email.com",
+      ideaLabel: "Ideia do Projeto",
+      ideaPlaceholder:
+        "Descreva o seu projeto, os seus objetivos ou o problema que pretende resolver...",
+      submitButton: "Enviar Mensagem",
+    },
     cta: {
       title: "Transforme a sua Ideia num Projeto Real",
       subtitle:
         "Agende uma sessão estratégica gratuita connosco e descubra como a tecnologia e o marketing certos podem impulsionar os resultados do seu negócio.",
       ctaButton: "Agendar Sessão Gratuita",
+    },
+    thanksPage: {
+      title: "Obrigado",
+      exclamationMark: "!",
+      subtitle:
+        "Recebemos a sua mensagem. Entraremos em contacto consigo em breve.",
+      buttonText: "Voltar ao Início",
     },
   },
 };
