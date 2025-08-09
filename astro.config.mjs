@@ -7,13 +7,9 @@ import icon from "astro-icon";
 
 import node from "@astrojs/node";
 
-// https://astro.build/config
 export default defineConfig({
-  // site: "https://joadio2.github.io/",
-  // base: "/Odessa",
-
   integrations: [react(), icon()],
-
+  output: "server",
   adapter: node({
     mode: "standalone",
   }),
