@@ -1,0 +1,287 @@
+---
+import { imageConfig } from "astro:assets";
+
+const { title, subtitle, ctaText, imageUrl } = Astro.props;
+
+---
+
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Realza tu
+          <span class="highlight">belleza natural</span>
+        </h1>
+        <p class="hero-description">
+          Descubre nuestra colección de maquillaje premium diseñada para resaltar 
+          tu esencia única con productos de alta calidad y acabados impecables.
+        </p>
+        <div class="hero-buttons">
+          <a href="/e-commerce/shop" class="btn-primary">Explorar productos</a>
+          <a  class="btn-secondary">Ver tutoriales</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-container">
+          <img 
+            src={imageUrl} 
+            alt="Productos de maquillaje elegantes"
+            class="hero-img"
+          />
+          <div class="floating-elements">
+            <div class="floating-item item-1"></div>
+            <div class="floating-item item-2"></div>
+            <div class="floating-item item-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #fdf7f0 0%, #f8f1eb 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 218, 185, 0.1) 100%);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: 80vh;
+  }
+
+  .hero-text {
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #2c2c2c;
+    letter-spacing: -0.02em;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 400;
+    position: relative;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #c44569;
+    border-color: #c44569;
+  }
+
+  .btn-secondary:hover {
+    background: #c44569;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .hero-image {
+    position: relative;
+    animation: fadeInRight 1s ease-out 0.3s both;
+  }
+
+  .image-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+  }
+
+  .floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .floating-item {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.8), rgba(196, 69, 105, 0.8));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .item-1 {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: -10%;
+    animation-delay: 0s;
+  }
+
+  .item-2 {
+    width: 40px;
+    height: 40px;
+    top: 60%;
+    right: -5%;
+    animation-delay: 2s;
+  }
+
+  .item-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 10%;
+    left: 10%;
+    animation-delay: 4s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      max-width: 100%;
+    }
+
+    .hero-buttons {
+      justify-content: center;
+    }
+
+    .btn-primary, .btn-secondary {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .floating-item {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-container {
+      padding: 0 1rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 250px;
+      text-align: center;
+    }
+  }
+</style>

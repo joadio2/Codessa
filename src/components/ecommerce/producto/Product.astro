@@ -1,0 +1,831 @@
+---
+// ProductDetail.astro
+export interface Props {
+  product: {
+    id: number;
+    name: string;
+    category: string;
+    price: number;
+    originalPrice: number;
+    image: string;
+    rating: number;
+    reviews: number;
+    bestseller: boolean;
+    colors: string[];
+    description: string;
+  }
+}
+
+
+const { product } = Astro.props;
+---
+
+<div class="product-detail">
+  <div class="container">
+    <div class="product-detail__grid">
+      <!-- Galería de imágenes -->
+      <div class="product-detail__gallery">
+        <div class="main-image">
+          <img src={product.image} alt={product.name} id="mainImage" />
+          <div class="image-zoom" id="imageZoom"></div>
+        </div>
+        <div class="thumbnail-images">
+          <img src={product.image} alt={product.name} class="thumbnail active" data-image={product.image} />
+          <img src={product.image.replace('?w=400', '?w=400&sat=-100')} alt={`${product.name} - Vista 2`} class="thumbnail" data-image={product.image.replace('?w=400', '?w=400&sat=-100')} />
+          <img src={product.image.replace('?w=400', '?w=400&sepia=100')} alt={`${product.name} - Vista 3`} class="thumbnail" data-image={product.image.replace('?w=400', '?w=400&sepia=100')} />
+          <img src={product.image.replace('?w=400', '?w=400&blur=2')} alt={`${product.name} - Vista 4`} class="thumbnail" data-image={product.image.replace('?w=400', '?w=400&blur=2')} />
+        </div>
+      </div>
+
+      <!-- Información del producto -->
+      <div class="product-detail__info">
+        <div class="product-breadcrumb">
+          <a href="/">Inicio</a> / <a href="/shop">Tienda</a> / <span>{product.category}</span>
+        </div>
+
+        {product.bestseller && (
+          <div class="bestseller-badge">
+            <span>🏆 Más Vendido</span>
+          </div>
+        )}
+
+        <h1 class="product-title">{product.name}</h1>
+        
+        <div class="product-rating">
+          <div class="stars">
+            {Array.from({ length: 5 }, (_, i) => (
+              <span class={`star ${i < Math.floor(product.rating) ? 'filled' : ''}`}>★</span>
+            ))}
+          </div>
+          <span class="rating-text">({product.rating}) • {product.reviews} reseñas</span>
+        </div>
+
+        <div class="product-price">
+          <span class="current-price">${product.price}</span>
+          {product.originalPrice > product.price && (
+            <span class="original-price">${product.originalPrice}</span>
+          )}
+          {product.originalPrice > product.price && (
+            <span class="discount">
+              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+            </span>
+          )}
+        </div>
+
+        <p class="product-description">{product.description}</p>
+
+        <!-- Selector de colores -->
+        <div class="color-selector">
+          <h3>Colores disponibles:</h3>
+          <div class="color-options">
+            {product.colors.map((color, index) => (
+              <button 
+                class={`color-option ${index === 0 ? 'selected' : ''}`}
+                style={`background-color: ${color}`}
+                data-color={color}
+                title={`Color ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="quantity-selector">
+          <h3>Cantidad:</h3>
+          <div class="quantity-controls">
+            <button class="quantity-btn" id="decreaseBtn">-</button>
+            <input type="number" id="quantityInput" value="1" min="1" max="10" />
+            <button class="quantity-btn" id="increaseBtn">+</button>
+          </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="product-actions">
+          <button class="btn btn-primary add-to-cart" id="addToCartBtn">
+            <span class="btn-text">Agregar al Carrito</span>
+            <span class="btn-icon">🛒</span>
+          </button>
+          <button class="btn btn-secondary add-to-wishlist" id="addToWishlistBtn">
+            <span class="btn-icon">♡</span>
+          </button>
+          <button class="btn btn-secondary share-product" id="shareBtn">
+            <span class="btn-icon">📤</span>
+          </button>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="product-features">
+          <div class="feature">
+            <span class="feature-icon">🚚</span>
+            <div class="feature-text">
+              <strong>Envío gratis</strong>
+              <p>En compras mayores a $50</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">↩️</span>
+            <div class="feature-text">
+              <strong>Devolución fácil</strong>
+              <p>30 días para cambios</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">✨</span>
+            <div class="feature-text">
+              <strong>Producto original</strong>
+              <p>100% auténtico</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs de información -->
+    <div class="product-tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="description">Descripción</button>
+        <button class="tab-btn" data-tab="ingredients">Ingredientes</button>
+        <button class="tab-btn" data-tab="reviews">Reseñas</button>
+        <button class="tab-btn" data-tab="shipping">Envío</button>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-panel active" id="description">
+          <h3>Descripción del producto</h3>
+          <p>{product.description}</p>
+          <p>Este producto ha sido cuidadosamente formulado para ofrecerte la mejor calidad y durabilidad. Perfecto para uso diario y ocasiones especiales.</p>
+          <ul>
+            <li>Fórmula de larga duración</li>
+            <li>Resistente al agua</li>
+            <li>No testado en animales</li>
+            <li>Libre de parabenos</li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="ingredients">
+          <h3>Ingredientes principales</h3>
+          <p>Aqua, Cyclopentasiloxane, Dimethicone, Glycerin, Titanium Dioxide, Iron Oxides, Phenoxyethanol, Ethylhexylglycerin.</p>
+          <p><strong>Libre de:</strong> Parabenos, Sulfatos, Ftalatos</p>
+        </div>
+
+        <div class="tab-panel" id="reviews">
+          <h3>Reseñas de clientes</h3>
+          <div class="reviews-summary">
+            <div class="rating-breakdown">
+              <div class="rating-bar">
+                <span>5★</span>
+                <div class="bar"><div class="fill" style="width: 70%"></div></div>
+                <span>70%</span>
+              </div>
+              <div class="rating-bar">
+                <span>4★</span>
+                <div class="bar"><div class="fill" style="width: 20%"></div></div>
+                <span>20%</span>
+              </div>
+              <div class="rating-bar">
+                <span>3★</span>
+                <div class="bar"><div class="fill" style="width: 7%"></div></div>
+                <span>7%</span>
+              </div>
+              <div class="rating-bar">
+                <span>2★</span>
+                <div class="bar"><div class="fill" style="width: 2%"></div></div>
+                <span>2%</span>
+              </div>
+              <div class="rating-bar">
+                <span>1★</span>
+                <div class="bar"><div class="fill" style="width: 1%"></div></div>
+                <span>1%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="shipping">
+          <h3>Información de envío</h3>
+          <p><strong>Envío estándar:</strong> 3-5 días hábiles - Gratis en compras mayores a $50</p>
+          <p><strong>Envío express:</strong> 1-2 días hábiles - $9.99</p>
+          <p><strong>Envío mismo día:</strong> Disponible en ciudades principales - $19.99</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-detail {
+    padding: 2rem 0;
+    background: #fafafa;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .product-detail__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Galería de imágenes */
+  .product-detail__gallery {
+    position: relative;
+  }
+
+  .main-image {
+    position: relative;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #f8f8f8;
+  }
+
+  .main-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .main-image:hover img {
+    transform: scale(1.05);
+  }
+
+  .thumbnail-images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .thumbnail:hover,
+  .thumbnail.active {
+    border-color: #e91e63;
+    transform: scale(1.05);
+  }
+
+  /* Información del producto */
+  .product-breadcrumb {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .product-breadcrumb a {
+    color: #e91e63;
+    text-decoration: none;
+  }
+
+  .bestseller-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #8b4513;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .product-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .star {
+    color: #ddd;
+    font-size: 1.2rem;
+  }
+
+  .star.filled {
+    color: #ffd700;
+  }
+
+  .rating-text {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .product-price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .current-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e91e63;
+  }
+
+  .original-price {
+    font-size: 1.2rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .discount {
+    background: #e91e63;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .product-description {
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  /* Selector de colores */
+  .color-selector {
+    margin-bottom: 2rem;
+  }
+
+  .color-selector h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: #2d3748;
+  }
+
+  .color-options {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .color-option:hover,
+  .color-option.selected {
+    border-color: #2d3748;
+    transform: scale(1.1);
+  }
+
+  .color-option.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  /* Selector de cantidad */
+  .quantity-selector {
+    margin-bottom: 2rem;
+  }
+
+  .quantity-selector h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: #2d3748;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quantity-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e2e8f0;
+    background: white;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .quantity-btn:hover {
+    border-color: #e91e63;
+    color: #e91e63;
+  }
+
+  #quantityInput {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Botones de acción */
+  .product-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    color: white;
+    flex: 1;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+  }
+
+  .btn-secondary {
+    background: white;
+    border: 2px solid #e2e8f0;
+    color: #4a5568;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .btn-secondary:hover {
+    border-color: #e91e63;
+    color: #e91e63;
+    transform: translateY(-2px);
+  }
+
+  .btn-icon {
+    font-size: 1.2rem;
+  }
+
+  /* Características del producto */
+  .product-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f7fafc;
+    border-radius: 12px;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .feature-icon {
+    font-size: 1.5rem;
+  }
+
+  .feature-text strong {
+    display: block;
+    color: #2d3748;
+    margin-bottom: 0.2rem;
+  }
+
+  .feature-text p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  /* Tabs */
+  .product-tabs {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .tab-buttons {
+    display: flex;
+    background: #f7fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .tab-btn.active {
+    color: #e91e63;
+    background: white;
+  }
+
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e91e63;
+  }
+
+  .tab-content {
+    padding: 2rem;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .tab-panel h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+  }
+
+  .tab-panel ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tab-panel li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .tab-panel li::before {
+    content: '✓';
+    color: #e91e63;
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  /* Reviews */
+  .rating-breakdown {
+    max-width: 400px;
+  }
+
+  .rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rating-bar span:first-child {
+    width: 30px;
+    font-size: 0.9rem;
+  }
+
+  .bar {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .fill {
+    height: 100%;
+    background: #ffd700;
+    transition: width 0.3s ease;
+  }
+
+  .rating-bar span:last-child {
+    width: 40px;
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .product-detail__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .product-title {
+      font-size: 2rem;
+    }
+
+    .current-price {
+      font-size: 1.5rem;
+    }
+
+    .product-actions {
+      flex-direction: column;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      height: 50px;
+    }
+
+    .tab-buttons {
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      flex: 1 1 50%;
+    }
+  }
+</style>
+
+<script>
+  // Cambio de imagen principal
+  document.querySelectorAll('.thumbnail').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      const newImage = this.dataset.image;
+      document.getElementById('mainImage').src = newImage;
+      
+      document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Selector de colores
+  document.querySelectorAll('.color-option').forEach(colorBtn => {
+    colorBtn.addEventListener('click', function() {
+      document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+
+  // Control de cantidad
+  const quantityInput = document.getElementById('quantityInput');
+  const decreaseBtn = document.getElementById('decreaseBtn');
+  const increaseBtn = document.getElementById('increaseBtn');
+
+  decreaseBtn.addEventListener('click', () => {
+    const currentValue = parseInt(quantityInput.value);
+    if (currentValue > 1) {
+      quantityInput.value = currentValue - 1;
+    }
+  });
+
+  increaseBtn.addEventListener('click', () => {
+    const currentValue = parseInt(quantityInput.value);
+    if (currentValue < 10) {
+      quantityInput.value = currentValue + 1;
+    }
+  });
+
+  // Agregar al carrito
+  document.getElementById('addToCartBtn').addEventListener('click', function() {
+    const quantity = quantityInput.value;
+    const selectedColor = document.querySelector('.color-option.selected').dataset.color;
+    
+    // Animación del botón
+    this.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      this.style.transform = 'scale(1)';
+    }, 150);
+
+    // Aquí puedes agregar la lógica para añadir al carrito
+    console.log(`Agregado al carrito: cantidad ${quantity}, color ${selectedColor}`);
+    
+    // Mostrar notificación
+    showNotification('¡Producto agregado al carrito!');
+  });
+
+  // Wishlist
+  document.getElementById('addToWishlistBtn').addEventListener('click', function() {
+    this.innerHTML = this.innerHTML.includes('♡') ? '♥' : '♡';
+    this.style.color = this.innerHTML.includes('♥') ? '#e91e63' : '#4a5568';
+    
+    const message = this.innerHTML.includes('♥') ? 
+      '¡Agregado a favoritos!' : '¡Removido de favoritos!';
+    showNotification(message);
+  });
+
+  // Compartir
+  document.getElementById('shareBtn').addEventListener('click', function() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.querySelector('.product-title').textContent,
+        url: window.location.href
+      });
+    } else {
+      // Fallback: copiar URL
+      navigator.clipboard.writeText(window.location.href);
+      showNotification('¡URL copiada al portapapeles!');
+    }
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const tabId = this.dataset.tab;
+      
+      // Remover active de todos los botones y paneles
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      
+      // Activar el botón y panel seleccionado
+      this.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+
+  // Función para mostrar notificaciones
+  function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #e91e63;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
+  }
+
+  // Animación para las notificaciones
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>

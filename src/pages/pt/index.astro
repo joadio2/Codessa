@@ -1,27 +1,26 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/main/Header/Header.astro';
-import Hero from '../../components/main/hero/Hero.astro';
-import Philosophy from '../../components/main/Philosophy/Philosophy.astro';
-import Services from '../../components/main/Services/Services.astro';
-import Cta from '../../components/main/Cta/Cta.astro';
+import Layout from '../../layouts/Layout.astro'
+import Hero from '../../components/promo/Hero/hero.astro';
+import PricingChange from '../../components/promo/Pricing/pricingChange';
 import Footer from '../../components/main/Footer/Footer.astro';
-import Process from '../../components/main/Process/Process.astro';
+import Why from '../../components/promo/why/why.astro';
+import HowItWorks from '../../components/promo/HowItWorks/howItWorks.astro';
+import AdvancedServices from '../../components/promo/AdvancedServices/advancedServices.astro';
 import Faq from '../../components/main/Faq/Faq.astro';
-import ProjectShowcase from '../../components/main/ourWork/projectShowcase.astro';
-import ContactForm from '../../components/main/contactForm/contactForm.astro';
----
+import Prueba from '../../components/Prueba.astro';
+const basePath = Astro.url.pathname
 
-<Layout title="Code&Growth | Arquitectos del Crecimiento Digital">
-	<Header />
+---
+<Layout title="Website de negócios econômicos para sua empresa">
 	<main>
 		<Hero />
-		<ProjectShowcase />
-		<Philosophy />
-		<Services />
-		<Process />
+		<Prueba/>
+		<PricingChange client:only="react" basePath={basePath}  />
+		<Why />
+		<HowItWorks />
+		<AdvancedServices />
 		<Faq />
-		<Cta />
+		<Footer />
 	</main>
-	<Footer />
+		
 </Layout>

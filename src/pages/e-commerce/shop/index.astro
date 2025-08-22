@@ -1,0 +1,18 @@
+---
+import Layout from '../../../layouts/LayoutEcommerce.astro';
+import ShopMain from '../../../components/ecommerce/shop/ShopMain.astro'
+
+const { category = 'all', sortBy = 'featured' } = Astro.props;
+---
+
+<Layout title="Tienda">
+  <main class="main">
+    <ShopMain category={category} sortBy={sortBy} />
+  </main>
+</Layout>
+
+<style>
+  .main{
+    padding-top: 50px;
+  }
+</style>

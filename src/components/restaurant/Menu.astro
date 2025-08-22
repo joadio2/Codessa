@@ -1,0 +1,301 @@
+---
+import pastaImage from "@/assets/pasta-dish.jpg";
+import seafoodImage from "@/assets/seafood-dish.jpg";
+import dessertImage from "@/assets/dessert.jpg";
+
+const menuItems = [
+  {
+    id: 1,
+    name: "Risotto Trufa Negra",
+    description:
+      "Cremoso risotto italiano con trufa negra fresca, queso parmesano y hierbas aromáticas",
+    price: "$45",
+    image: 'https://cdn.pixabay.com/photo/2023/05/06/17/33/ai-generated-7974773_1280.jpg',
+    category: "Principales",
+  },
+  {
+    id: 2,
+    name: "Salmón Glacé",
+    description:
+      "Salmón fresco glazeado con miso, acompañado de vegetales de temporada y salsa teriyaki",
+    price: "$52",
+    image: 'https://cdn.pixabay.com/photo/2024/05/10/10/51/food-8752912_1280.jpg',
+    category: "Principales",
+  },
+  {
+    id: 3,
+    name: "Tarta de Chocolate",
+    description:
+      "Decadente tarta de chocolate belga con coulis de frutos rojos y helado de vainilla",
+    price: "$18",
+    image: 'https://cdn.pixabay.com/photo/2024/01/25/14/01/chocolate-mousse-8531996_1280.png',
+    category: "Postres",
+  },
+];
+---
+
+<section id="menu" class="menu-section">
+  <div class="container">
+    <div class="intro">
+      <h2 class="title">Nuestro Menú</h2>
+      <p class="subtitle">
+        Cada plato es una obra de arte culinaria, preparada con ingredientes frescos y
+        técnicas refinadas que despiertan todos tus sentidos
+      </p>
+    </div>
+
+    <div class="grid">
+      {menuItems.map((item, index) => (
+        <article class="card animate-fade-in" style={`animation-delay: ${index * 0.2}s`}>
+          <div class="card-media">
+            <img src={item.image} alt={item.name} class="card-img" />
+            <span class="badge">{item.category}</span>
+          </div>
+
+          <div class="card-body">
+            <div class="card-head">
+              <h3 class="card-title">{item.name}</h3>
+              <span class="price">{item.price}</span>
+            </div>
+
+            <p class="card-desc">{item.description}</p>
+
+            <button class="btn btn-outline btn-block hover-primary">
+              Agregar al Pedido
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="cta">
+      <button class="btn btn-hero btn-lg shadow-elegant">Ver Menú Completo</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --bg-section: linear-gradient(180deg, #faf9ff 0%, #ffffff 100%);
+    --container-max: 1100px;
+
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #7c3aed;
+    --primary-contrast: #ffffff;
+
+    --card-bg: #ffffff;
+    --card-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+    --card-shadow-hover: 0 16px 40px rgba(17, 24, 39, 0.12);
+
+    --border: #e6e6e6;
+
+    --badge-bg: var(--primary);
+    --badge-text: var(--primary-contrast);
+  }
+
+  .menu-section {
+    padding: 80px 0;
+    background: var(--bg-section);
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .intro {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .title {
+    margin: 0 0 12px;
+    color: var(--text);
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3rem); /* ~text-4xl to 5xl */
+    letter-spacing: 0.2px;
+  }
+
+  .subtitle {
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: clamp(1.125rem, 0.6vw + 1rem, 1.25rem); /* ~text-xl */
+    max-width: 42rem;
+    line-height: 1.7;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 0;
+    transition: transform 220ms ease, box-shadow 240ms ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .card-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms ease;
+  }
+
+  .card:hover .card-img {
+    transform: scale(1.08);
+  }
+
+  .badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    margin: 0;
+    color: var(--text);
+    font-family: "MD Sans", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .price {
+    color: var(--primary);
+    font-size: 22px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .card-desc {
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0 0 16px;
+  }
+
+  .btn {
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 200ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+    border: 2px solid transparent;
+    text-decoration: none;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .btn-lg {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  .btn-hero {
+    background: var(--primary);
+    color: var(--primary-contrast);
+    box-shadow: 0 10px 22px rgba(124, 58, 237, 0.32);
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(124, 58, 237, 0.42);
+  }
+
+  .btn-outline {
+    background: #ffffff;
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--primary);
+  }
+
+  /* Efecto hover para el botón dentro de la card (similar a group-hover) */
+  .card:hover .hover-primary {
+    background: var(--primary);
+    color: var(--primary-contrast);
+    border-color: var(--primary);
+  }
+
+  .cta {
+    text-align: center;
+  }
+
+  .shadow-elegant {
+    box-shadow: 0 16px 36px rgba(17, 24, 39, 0.18);
+  }
+
+  /* Animaciones */
+  .animate-fade-in {
+    animation: fadeInUp 520ms ease both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

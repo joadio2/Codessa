@@ -1,0 +1,137 @@
+---
+---
+
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <h1>Justicia y Excelencia Juridica</h1>
+    <p class="subtitle">
+      Defendemos sus derechos con experiencia, dedicacion y resultados comprobados. Su tranquilidad es nuestra prioridad.
+    </p>
+    <div class="cta-buttons">
+      <a href="#contacto" class="btn btn-primary">
+        <i class="fas fa-phone"></i>
+        Consulta Gratuita
+      </a>
+      <a href="#servicios" class="btn btn-secondary">
+        <i class="fas fa-arrow-down"></i>
+        Nuestros Servicios
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    height: 100vh;
+    background-image: url('https://images.pexels.com/photos/4427627/pexels-photo-4427627.jpeg?_gl=1*17345e8*_ga*MjExMDI1NTg5MC4xNzU1Njk0OTM5*_ga_8JE65Q40S6*czE3NTU2OTQ5MzkkbzEkZzEkdDE3NTU2OTUwMTYkajUzJGwwJGgw');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45));
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" fill-opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    animation: float 20s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 3;
+    padding: 0 1rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease;
+  }
+
+  .hero .subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease 0.3s both;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 0.6s both;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(45deg, #f1c40f, #f39c12);
+    color: #333;
+    box-shadow: 0 4px 20px rgba(241, 196, 15, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(241, 196, 15, 0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #f1c40f;
+  }
+  .btn-secondary:hover {
+    background: #f1c40f;
+    color: #333;
+    transform: translateY(-3px);
+  }
+  @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+  @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(180deg); }
+    }
+
+  
+</style>

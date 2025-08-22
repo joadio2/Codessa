@@ -2,6 +2,10 @@
 import { getLangFromUrl, useTranslations } from "../../../i18n/utilsPromo"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+let newLink = "";
+if (lang === "es") newLink = `/${lang}/proyecto-web`;
+if (lang === "pt") newLink = `/${lang}/projeto-web`;
+if (lang === "en") newLink = `/${lang}/project-details`;
 ---
 <section id="nos-encargamos">
     <h2>{t("howItWorks.title")}</h2>
@@ -63,119 +67,147 @@ const t = useTranslations(lang);
     </div>
   
     <div class="cta-container">
-      <a href="#contacto" class="cta-button">{t("howItWorks.cta")}</a>
+      <a href={newLink} class="cta-button">{t("howItWorks.cta")}</a>
     </div>
 </section>
   
-<style>
+<style is:inline>
     #nos-encargamos {
-      padding: 6rem 2rem;
-      text-align: center;
+  padding: 0 2rem 3rem;
+  text-align: center;
+}
+
+#nos-encargamos h2 {
+  font-size: 2.8rem;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+#nos-encargamos .section-subtitle {
+  max-width: 600px;
+  margin: 0 auto 5rem;
+  font-size: 1.2rem;
+  color: var(--color-light-text);
+  line-height: 1.6;
+}
+
+.comic-strip {
+  display: flex;
+  align-items: stretch; /* Paneles de igual altura */
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.comic-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Usar background para gradiente */
+  background: linear-gradient(145deg, #29374e, #1e293b);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.comic-panel:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: var(--color-accent);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+}
+
+.panel-illustration {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-light-text);
+  transition: color 0.3s ease;
+}
+
+.comic-panel:hover .panel-illustration {
+  color: var(--color-accent);
+}
+
+.panel-content h3 {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.panel-content p {
+  font-size: 1rem;
+  color: var(--color-light-text);
+  line-height: 1.7;
+  flex-grow: 1; /* Asegura que el texto llene el espacio */
+}
+
+.arrow-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+}
+
+.cta-container {
+  margin-top: 5rem;
+}
+
+.cta-button {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.25);
+}
+
+/* Animación base (fallback): aplica al cargar */
+  h2, h3, svg,p,.panel-content p, .cta-button, .comic-panel,.arrow-connector {
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @supports (animation-timeline: view()) {
+    h2, h3,svg,p,.panel-content p, .cta-button ,.comic-panel,.arrow-connector {
+      animation-timeline: view();
+      animation-range: entry 0% cover 20%;
     }
-  
-    #nos-encargamos h2 {
-      font-size: 2.8rem;
-      color: var(--color-accent);
-      margin-bottom: 1rem;
-    }
-  
-    #nos-encargamos .section-subtitle {
-      max-width: 600px;
-      margin: 0 auto 5rem;
-      font-size: 1.2rem;
-      color: var(--color-light-text);
-      line-height: 1.6;
-    }
-  
-    .comic-strip {
-      display: flex;
-      align-items: stretch; /* Paneles de igual altura */
-      justify-content: center;
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-  
-    .comic-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background-color: linear-gradient(145deg, #29374e, #1e293b);;
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-  
-    .comic-panel:hover {
-      transform: translateY(-12px) scale(1.02);
-      border-color: var(--color-accent);
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    }
-  
-    .panel-illustration {
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      color: var(--color-light-text)
-      transition: color 0.3s ease;
-    }
-    .comic-panel:hover .panel-illustration {
-      color: var(--color-accent);
-    }
-  
-    .panel-content h3 {
-      font-size: 1.5rem;
-      color: var(--color-accent);
-      margin-bottom: 0.75rem;
-    }
-  
-    .panel-content p {
-      font-size: 1rem;
-      color: var(--color-light-text);
-      line-height: 1.7;
-      flex-grow: 1; /* Asegura que el texto llene el espacio */
-    }
-  
-    .arrow-connector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #cbd5e1;
-    }
-  
-    .cta-container {
-      margin-top: 5rem;
-    }
-  
-    .cta-button {
-        background-color: var(--color-accent);
-        color: var(--color-dark);
-        padding: 1rem 2.5rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-    }
-  
-    .cta-button:hover {
-        transform: translateY(-4px) scale(1.05);
-        box-shadow: 0 10px 20px rgba(0, 198, 255, 0.25);
-    }
-  
-    @media (max-width: 900px) {
-      .comic-strip {
-        flex-direction: column;
-        gap: 2rem;
-      }
-      .arrow-connector {
-        transform: rotate(90deg);
-        margin: -1rem 0;
-      }
-    }
+  }
+
+/* Respeta reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  h2, h3, svg,p,.panel-content p, .cta-button ,.comic-panel ,.arrow-connector{
+    animation: none;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .comic-strip {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .arrow-connector {
+    transform: rotate(90deg);
+    margin: -1rem 0;
+  }
+}
 </style>

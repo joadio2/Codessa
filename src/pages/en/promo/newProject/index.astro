@@ -1,9 +1,0 @@
----
-import Layout from "../../../../layouts/Layout.astro";
-import ProcessPage from "../../../../components/promo/NewProject/processPage";
-const basePath = Astro.url.pathname
-
----
-<Layout title="Cuéntanos sobre tu Proyecto">
-  <ProcessPage client:only="react" basePath={basePath} />
-</Layout>

@@ -180,6 +180,21 @@ export const ui = {
         "We have received your message. We will get in touch with you very soon.",
       buttonText: "Back to Home",
     },
+    banner: {
+      title: "Special Offer! Your Professional Landing Page for only €50",
+    },
+    successPage: {
+      title: "Thank You for Your Payment",
+      subtitle:
+        "Your data has been saved. You will receive a confirmation email.",
+      buttonText: "Back to Home",
+    },
+    failPage: {
+      title: "Something went wrong",
+      exclamationMark: "!",
+      subtitle: "Please try again later",
+      buttonText: "Back to Home",
+    },
   },
   es: {
     nav: {
@@ -352,6 +367,22 @@ export const ui = {
       exclamationMark: "!",
       subtitle:
         "Hemos recibido tu mensaje. Nos pondremos en contacto contigo muy pronto.",
+      buttonText: "Volver al Inicio",
+    },
+
+    banner: {
+      title: "¡Oferta Especial! Tu Landing Page Profesional por solo 50€",
+    },
+    successPage: {
+      title: "Gracias por tu pago",
+      subtitle:
+        "Tus datos han sido guardados. Recibirás un email de confirmación.",
+      buttonText: "Volver al Inicio",
+    },
+    failPage: {
+      title: "Algo salió mal",
+      exclamationMark: "!",
+      subtitle: "Por favor, inténtalo de nuevo más tarde",
       buttonText: "Volver al Inicio",
     },
   },
@@ -528,6 +559,21 @@ export const ui = {
       exclamationMark: "!",
       subtitle:
         "Recebemos a sua mensagem. Entraremos em contacto consigo em breve.",
+      buttonText: "Voltar ao Início",
+    },
+    banner: {
+      title: "Oferta Especial! A sua Landing Page Profissional por apenas 50€",
+    },
+    successPage: {
+      title: "Obrigado por sua compra",
+      subtitle:
+        "Os seus dados foram guardados. Receberá um email de confirmação.",
+      buttonText: "Voltar ao Início",
+    },
+    failPage: {
+      title: "Algo deu errado",
+      exclamationMark: "!",
+      subtitle: "Por favor, tente novamente mais tarde",
       buttonText: "Voltar ao Início",
     },
   },

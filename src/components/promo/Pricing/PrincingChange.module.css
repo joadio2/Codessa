@@ -1,8 +1,10 @@
 .section {
-  padding: 6rem 1rem;
+  padding: 0 1rem 5rem;
   text-align: center;
 }
-
+.title {
+  color: var(--color-accent);
+}
 .subtitle {
   max-width: 600px;
   margin: 0 auto 3rem;

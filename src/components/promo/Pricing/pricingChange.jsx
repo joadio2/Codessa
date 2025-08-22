@@ -4,9 +4,7 @@ import RocketLaunch from "../../../assets/lottie/RocketLaunch.json";
 import styles from "./PrincingChange.module.css";
 import { translations } from "./translate";
 export default function PricingChange({ basePath }) {
-  console.log(basePath);
   const lang = basePath.split("/")[1];
-  console.log(lang);
   const t = translations[lang];
   const [plan, setPlan] = useState("anual");
   const newProjectUrl = `${basePath}/newProject`;
@@ -19,13 +17,17 @@ export default function PricingChange({ basePath }) {
   }, []);
 
   const handleStartProject = () => {
+    let newLink = "";
+    if (lang === "es") newLink = `/${lang}/proyecto-web`;
+    else if (lang === "pt") newLink = `/${lang}/projeto-web`;
+    else newLink = `/${lang}/project-details`;
     sessionStorage.setItem("planElegido", plan);
-    window.location.href = newProjectUrl;
+    window.location.href = newLink;
   };
 
   return (
     <section id="prices" className={styles.section}>
-      <h2>{t.pricing.title}</h2>
+      <h2 className={styles.title}>{t.pricing.title}</h2>
       <p className={styles.subtitle}>{t.pricing.subtitle}</p>
 
       <div className={styles.card}>

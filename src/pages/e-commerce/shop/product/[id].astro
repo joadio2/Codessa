@@ -1,0 +1,22 @@
+---
+import Layout from '../../../../layouts/LayoutEcommerce.astro';
+import ProductDetail from '../../../../components/ecommerce/producto/Product.astro'
+import { productsList } from '../../../../data/product';
+const { id } = Astro.params;
+if (!id) return Astro.redirect('/e-commerce/shop');
+const normalice = Number(id)- 1
+const product = productsList[normalice]
+console.log(product)
+---
+
+<Layout title="Tienda">
+  <main class="main">
+    <ProductDetail   product={product}  client:load/>
+  </main>
+---
+
+<style>
+.main{
+    padding-top: 50px;
+}
+</style>

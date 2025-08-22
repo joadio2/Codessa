@@ -1,0 +1,265 @@
+---
+---
+
+<section id="inicio" class="hero">
+  <!-- Background -->
+  <div class="hero-bg">
+    <img
+      src={'https://plus.unsplash.com/premium_photo-1678897742200-85f052d33a71?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
+      alt="Plato gourmet elegantemente presentado"
+      class="hero-img"
+    />
+    <div class="hero-overlay" aria-hidden="true"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <h1 class="hero-title animate-fade-in">Bella Vista</h1>
+    <p class="hero-subtitle animate-fade-in">
+      Una experiencia gastronómica única donde cada plato cuenta una historia de sabor,
+      pasión y tradición culinaria
+    </p>
+
+    <div class="hero-actions animate-scale-in">
+      <button class="btn btn-hero btn-xl shadow-glow">Reservar Mesa</button>
+      <button class="btn btn-ghost btn-xl">Ver Menú</button>
+    </div>
+
+    <!-- Floating elements -->
+    <div class="float-dot dot-1"></div>
+    <div class="float-dot dot-2"></div>
+    <div class="float-dot dot-3"></div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --primary: #7c3aed;
+    --accent: #22d3ee;
+    --text-on-dark: #ffffff;
+    --overlay-from: rgba(0, 0, 0, 0.60);
+    --overlay-to: rgba(0, 0, 0, 0.25);
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--overlay-from), var(--overlay-to));
+    pointer-events: none;
+  }
+
+  /* Content */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--text-on-dark);
+    padding: 0 16px;
+    max-width: 64rem; /* ~max-w-4xl */
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    margin: 0 0 24px;
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); /* ~text-5xl to 7xl */
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.125rem, 1.2vw + 1rem, 1.5rem); /* ~text-xl to 2xl */
+    font-weight: 300;
+    margin: 0 auto 32px;
+    max-width: 42rem; /* ~max-w-2xl */
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    .hero-actions {
+      flex-direction: row;
+    }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 180ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+    border: 2px solid transparent;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .btn-xl {
+    padding: 14px 24px;
+    font-size: 18px;
+  }
+
+  .btn-hero {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(124, 58, 237, 0.35);
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(124, 58, 237, 0.45);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .btn-ghost:hover {
+    background: #ffffff;
+    color: var(--primary);
+  }
+
+  .shadow-glow {
+    box-shadow:
+      0 0 0 2px rgba(124, 58, 237, 0.15) inset,
+      0 10px 22px rgba(124, 58, 237, 0.35);
+  }
+
+  /* Floating dots */
+  .float-dot {
+    position: absolute;
+    border-radius: 999px;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .dot-1 {
+    top: 80px;
+    left: 40px;
+    width: 16px; height: 16px;
+    background: radial-gradient(closest-side, rgba(124, 58, 237, 0.8), rgba(124, 58, 237, 0.0));
+    filter: blur(0.5px);
+  }
+
+  .dot-2 {
+    bottom: 128px;
+    right: 64px;
+    width: 24px; height: 24px;
+    background: var(--primary);
+    opacity: 0.4;
+    animation-delay: 1s;
+  }
+
+  .dot-3 {
+    top: 160px;
+    right: 80px;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    opacity: 0.5;
+    animation-delay: 2s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 700ms ease-out both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 500ms ease-out 100ms both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    animation: bounce 1.5s infinite;
+  }
+
+  .mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 8px;
+  }
+
+  .wheel {
+    width: 4px;
+    height: 12px;
+    background: #fff;
+    border-radius: 999px;
+    animation: pulse 1.2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -8px); }
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.4; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+</style>

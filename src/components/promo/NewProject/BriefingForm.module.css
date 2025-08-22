@@ -377,3 +377,149 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+/* Base existente (ya lo tienes) */
+.hiddenRadio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Contenedor clicable de cada opción */
+.styleCardPicker {
+  position: relative;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem 1rem 1.25rem 3.25rem; /* espacio para el radio a la izquierda */
+  text-align: left;
+  cursor: pointer;
+  transition: transform 200ms ease, border-color 200ms ease,
+    box-shadow 220ms ease, background-color 200ms ease;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+}
+
+.styleCardPicker:hover {
+  transform: translateY(-3px);
+  border-color: #55667d;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* Indicador visual del radio */
+.radioMark {
+  position: absolute;
+  left: 1rem;
+  top: 1.25rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 2px solid #55667d;
+  background: #0f172a;
+  box-shadow: inset 0 0 0 2px rgba(15, 23, 42, 0.8);
+  transition: border-color 200ms ease, box-shadow 220ms ease,
+    background-color 200ms ease;
+}
+
+/* Punto interno cuando está seleccionado */
+.radioMark::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 999px;
+  background: transparent;
+  transform: scale(0.6);
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+/* Hover resalta el aro */
+.styleCardPicker:hover .radioMark {
+  border-color: #7a8aa3;
+}
+
+/* Estado checked usando :has() si está disponible (Chrome, Safari modernos) */
+.styleCardPicker:has(.hiddenRadio:checked) {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.15) inset,
+    0 12px 28px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #0f172a, #122137);
+  transform: translateY(-3px);
+}
+
+.styleCardPicker:has(.hiddenRadio:checked) .radioMark {
+  border-color: var(--color-accent);
+  background: rgba(0, 198, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.18);
+}
+
+.styleCardPicker:has(.hiddenRadio:checked) .radioMark::after {
+  background: var(--color-accent);
+  transform: scale(1);
+}
+
+/* Enfoque accesible cuando se navega con teclado */
+.hiddenRadio:focus-visible + .radioMark,
+.styleCardPicker:focus-within .radioMark {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.25);
+}
+
+/* Texto dentro de la tarjeta */
+.cardContentPicker h3 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem 0;
+  color: #f8fafc;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  transition: color 160ms ease;
+}
+
+.cardContentPicker p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Cambia color del título cuando está seleccionado */
+.styleCardPicker:has(.hiddenRadio:checked) .cardContentPicker h3 {
+  color: #e6f9ff;
+}
+
+/* Grid para el selector de estilos: responsivo */
+.stylePicker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.submitError {
+  color: red;
+}
+@media (max-width: 960px) {
+  .stylePicker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .stylePicker {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fallback para navegadores sin :has()
+   Agrega también una clase .isChecked via JS cuando cambie el radio */
+.no-has .styleCardPicker.isChecked {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.15) inset,
+    0 12px 28px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #0f172a, #122137);
+}
+.no-has .styleCardPicker.isChecked .radioMark {
+  border-color: var(--color-accent);
+  background: rgba(0, 198, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.18);
+}
+.no-has .styleCardPicker.isChecked .radioMark::after {
+  background: var(--color-accent);
+  transform: scale(1);
+}

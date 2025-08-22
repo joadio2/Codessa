@@ -1,0 +1,41 @@
+---
+const { title, content, imageUrl } = Astro.props;
+---
+<section class="content-section philosophy-section">
+    <div class="philosophy-image-wrapper">
+        <img src={imageUrl} alt="Ingredientes naturales y texturas de maquillaje" class="philosophy-image"/>
+    </div>
+    <div class="philosophy-content">
+        <h2 class="section-title">{title}</h2>
+        <p>{content}</p>
+        <a href="/e-commerce/shop" class="cta-button-secondary">Conoce Más</a>
+    </div>
+</section>
+
+<style>
+    .philosophy-section {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        text-align: left;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .philosophy-content { flex: 1; }
+    .philosophy-image-wrapper { flex: 1; }
+    .philosophy-image {
+        width: 100%;
+        border-radius: 1rem;
+        max-height: 800px;
+        mask-image: radial-gradient(circle, black 20%, transparent 100%);
+        -webkit-mask-image: radial-gradient(circle, black 20%, transparent 100%);
+    }
+    .philosophy-section .section-title { text-align: left; }
+    @media (max-width: 992px) {
+        .philosophy-section {
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+        .philosophy-section .section-title { text-align: center; }
+    }
+</style>

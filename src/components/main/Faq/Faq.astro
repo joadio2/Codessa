@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from "../../../i18n/utils"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-<section id="faq" class:list={['container', styles.faqSection]}>
+<section id="faq" class={ styles.faqSection}>
     <h2>{t('faq.title')}</h2>
     <p class={styles.subtitle}>{t('faq.subtitle')}</p>
     <div class={styles.faqGrid}>

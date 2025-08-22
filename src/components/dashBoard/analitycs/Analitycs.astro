@@ -1,0 +1,808 @@
+---
+import Layout from '../../../layouts/LayoutDashboard.astro'
+import Sidebar from '../Sidebar.astro';
+import Header from '../Header.astro';
+
+---
+
+<Layout title="Analytics - SaaS Dashboard">
+  <div class="dashboard-layout">
+    <Sidebar />
+    <div class="main-content">
+      <Header />
+      
+      <main class="dashboard-main">
+        <div class="dashboard-container">
+          <!-- Analytics Header -->
+          <section class="page-header">
+            <div class="header-content">
+              <h1 class="page-title">Analytics Dashboard</h1>
+              <p class="page-subtitle">
+                Deep insights into your business performance and user behavior
+              </p>
+            </div>
+            <div class="header-actions">
+              <select class="time-selector">
+                <option value="7d">Last 7 days</option>
+                <option value="30d" selected>Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+                <option value="1y">Last year</option>
+              </select>
+              <button class="export-button">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8.5 1.5A1.5 1.5 0 0110 0h4a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V2a2 2 0 012-2h4a1.5 1.5 0 011.5 1.5v7.793l2.146-2.147a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 01.708-.708L8.5 9.293V1.5z"/>
+                </svg>
+                Export Report
+              </button>
+            </div>
+          </section>
+
+          <!-- Key Metrics -->
+          <section class="metrics-overview">
+            <div class="metrics-grid">
+              <div class="metric-card large">
+                <div class="metric-header">
+                  <h3>Total Sessions</h3>
+                  <div class="metric-trend positive">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                    </svg>
+                    +24.5%
+                  </div>
+                </div>
+                <div class="metric-value">847,392</div>
+                <div class="metric-chart">
+                  <svg width="100%" height="80" viewBox="0 0 300 80">
+                    <defs>
+                      <linearGradient id="sessionsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,60 Q30,45 60,50 T120,35 T180,40 T240,25 T300,30" stroke="#3b82f6" stroke-width="3" fill="none"/>
+                    <path d="M0,60 Q30,45 60,50 T120,35 T180,40 T240,25 T300,30 L300,80 L0,80 Z" fill="url(#sessionsGradient)"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-header">
+                  <h3>Page Views</h3>
+                  <div class="metric-trend positive">+18.2%</div>
+                </div>
+                <div class="metric-value">2.4M</div>
+                <div class="metric-description">vs last month</div>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-header">
+                  <h3>Bounce Rate</h3>
+                  <div class="metric-trend negative">-5.3%</div>
+                </div>
+                <div class="metric-value">32.4%</div>
+                <div class="metric-description">vs last month</div>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-header">
+                  <h3>Avg. Session</h3>
+                  <div class="metric-trend positive">+12.8%</div>
+                </div>
+                <div class="metric-value">4:32</div>
+                <div class="metric-description">vs last month</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Charts Section -->
+          <section class="charts-section">
+            <div class="charts-grid">
+              <!-- Traffic Sources -->
+              <div class="chart-card">
+                <div class="chart-header">
+                  <h3>Traffic Sources</h3>
+                  <div class="chart-legend">
+                    <div class="legend-item">
+                      <div class="legend-color" style="background: #3b82f6;"></div>
+                      <span>Organic Search</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color" style="background: #10b981;"></div>
+                      <span>Direct</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color" style="background: #f59e0b;"></div>
+                      <span>Social Media</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color" style="background: #8b5cf6;"></div>
+                      <span>Referral</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="donut-chart">
+                  <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#f1f5f9" stroke-width="20"/>
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#3b82f6" stroke-width="20" 
+                            stroke-dasharray="157 314" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="20" 
+                            stroke-dasharray="94 314" stroke-dashoffset="-157" transform="rotate(-90 100 100)"/>
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="20" 
+                            stroke-dasharray="63 314" stroke-dashoffset="-251" transform="rotate(-90 100 100)"/>
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#8b5cf6" stroke-width="20" 
+                            stroke-dasharray="31 314" stroke-dashoffset="-314" transform="rotate(-90 100 100)"/>
+                    <text x="100" y="95" text-anchor="middle" class="chart-center-text">Total</text>
+                    <text x="100" y="115" text-anchor="middle" class="chart-center-value">847K</text>
+                  </svg>
+                </div>
+                <div class="traffic-stats">
+                  <div class="traffic-item">
+                    <span class="traffic-source">Organic Search</span>
+                    <span class="traffic-percentage">45.2%</span>
+                  </div>
+                  <div class="traffic-item">
+                    <span class="traffic-source">Direct</span>
+                    <span class="traffic-percentage">28.7%</span>
+                  </div>
+                  <div class="traffic-item">
+                    <span class="traffic-source">Social Media</span>
+                    <span class="traffic-percentage">16.3%</span>
+                  </div>
+                  <div class="traffic-item">
+                    <span class="traffic-source">Referral</span>
+                    <span class="traffic-percentage">9.8%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- User Behavior -->
+              <div class="chart-card">
+                <div class="chart-header">
+                  <h3>User Behavior Flow</h3>
+                </div>
+                <div class="behavior-flow">
+                  <div class="flow-step">
+                    <div class="step-header">Landing Pages</div>
+                    <div class="step-items">
+                      <div class="step-item">
+                        <span class="item-name">Homepage</span>
+                        <span class="item-value">42.3%</span>
+                      </div>
+                      <div class="step-item">
+                        <span class="item-name">Product Page</span>
+                        <span class="item-value">28.1%</span>
+                      </div>
+                      <div class="step-item">
+                        <span class="item-name">Blog</span>
+                        <span class="item-value">18.7%</span>
+                      </div>
+                      <div class="step-item">
+                        <span class="item-name">Other</span>
+                        <span class="item-value">10.9%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flow-arrow">→</div>
+                  <div class="flow-step">
+                    <div class="step-header">Actions</div>
+                    <div class="step-items">
+                      <div class="step-item">
+                        <span class="item-name">Sign Up</span>
+                        <span class="item-value">15.2%</span>
+                      </div>
+                      <div class="step-item">
+                        <span class="item-name">Contact</span>
+                        <span class="item-value">8.4%</span>
+                      </div>
+                      <div class="step-item">
+                        <span class="item-name">Download</span>
+                        <span class="item-value">12.1%</span>
+                      </div>
+                      <div class="step-item">
+                        <span class="item-name">Exit</span>
+                        <span class="item-value">64.3%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Geographic Data -->
+          <section class="geo-section">
+            <div class="geo-card">
+              <div class="chart-header">
+                <h3>Geographic Distribution</h3>
+                <div class="view-toggle">
+                  <button class="toggle-btn active">Countries</button>
+                  <button class="toggle-btn">Cities</button>
+                </div>
+              </div>
+              <div class="geo-content">
+                <div class="geo-map">
+                  <div class="map-placeholder">
+                    <svg width="100%" height="300" viewBox="0 0 800 300">
+                      <!-- Simplified world map representation -->
+                      <rect width="800" height="300" fill="#f8fafc" stroke="#e2e8f0"/>
+                      <circle cx="200" cy="100" r="8" fill="#3b82f6" opacity="0.8"/>
+                      <circle cx="400" cy="120" r="12" fill="#3b82f6" opacity="0.9"/>
+                      <circle cx="600" cy="80" r="6" fill="#3b82f6" opacity="0.7"/>
+                      <circle cx="150" cy="180" r="4" fill="#3b82f6" opacity="0.6"/>
+                      <circle cx="500" cy="200" r="10" fill="#3b82f6" opacity="0.8"/>
+                      <text x="400" y="160" text-anchor="middle" class="map-label">Interactive Map Visualization</text>
+                    </svg>
+                  </div>
+                </div>
+                <div class="geo-stats">
+                  <div class="geo-item">
+                    <div class="country-info">
+                      <img src="https://flagcdn.com/w20/us.png" alt="US" class="country-flag"/>
+                      <span class="country-name">United States</span>
+                    </div>
+                    <div class="country-stats">
+                      <span class="country-sessions">324,891</span>
+                      <span class="country-percentage">38.4%</span>
+                    </div>
+                  </div>
+                  <div class="geo-item">
+                    <div class="country-info">
+                      <img src="https://flagcdn.com/w20/gb.png" alt="UK" class="country-flag"/>
+                      <span class="country-name">United Kingdom</span>
+                    </div>
+                    <div class="country-stats">
+                      <span class="country-sessions">156,234</span>
+                      <span class="country-percentage">18.4%</span>
+                    </div>
+                  </div>
+                  <div class="geo-item">
+                    <div class="country-info">
+                      <img src="https://flagcdn.com/w20/ca.png" alt="CA" class="country-flag"/>
+                      <span class="country-name">Canada</span>
+                    </div>
+                    <div class="country-stats">
+                      <span class="country-sessions">98,567</span>
+                      <span class="country-percentage">11.6%</span>
+                    </div>
+                  </div>
+                  <div class="geo-item">
+                    <div class="country-info">
+                      <img src="https://flagcdn.com/w20/de.png" alt="DE" class="country-flag"/>
+                      <span class="country-name">Germany</span>
+                    </div>
+                    <div class="country-stats">
+                      <span class="country-sessions">87,432</span>
+                      <span class="country-percentage">10.3%</span>
+                    </div>
+                  </div>
+                  <div class="geo-item">
+                    <div class="country-info">
+                      <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="country-flag"/>
+                      <span class="country-name">France</span>
+                    </div>
+                    <div class="country-stats">
+                      <span class="country-sessions">72,891</span>
+                      <span class="country-percentage">8.6%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f8fafc;
+  }
+  
+  .main-content {
+    flex: 1;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .dashboard-main {
+    margin-top: 72px;
+    padding: 32px 24px 24px;
+  }
+  
+  .dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Page Header */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding: 24px 0;
+  }
+  
+  .header-content {
+    flex: 1;
+  }
+  
+  .page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+  
+  .page-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .time-selector {
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+  }
+  
+  .export-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .export-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Metrics Overview */
+  .metrics-overview {
+    margin-bottom: 32px;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .metric-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .metric-card.large {
+    grid-row: span 1;
+  }
+  
+  .metric-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .metric-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+  
+  .metric-trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .metric-trend.positive {
+    background: #dcfce7;
+    color: #166534;
+  }
+  
+  .metric-trend.negative {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+  
+  .metric-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  
+  .metric-description {
+    font-size: 13px;
+    color: #64748b;
+  }
+  
+  .metric-chart {
+    margin-top: 16px;
+    height: 80px;
+  }
+
+  /* Charts Section */
+  .charts-section {
+    margin-bottom: 32px;
+  }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .chart-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  
+  .chart-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+  }
+  
+  .chart-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #64748b;
+  }
+  
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .donut-chart {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .chart-center-text {
+    font-size: 12px;
+    fill: #64748b;
+    font-weight: 500;
+  }
+  
+  .chart-center-value {
+    font-size: 18px;
+    fill: #1e293b;
+    font-weight: 700;
+  }
+  
+  .traffic-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .traffic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  
+  .traffic-source {
+    font-size: 14px;
+    color: #374151;
+  }
+  
+  .traffic-percentage {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  /* Behavior Flow */
+  .behavior-flow {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .flow-step {
+    flex: 1;
+  }
+  
+  .step-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .step-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .step-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+  }
+  
+  .item-name {
+    font-size: 13px;
+    color: #374151;
+  }
+  
+  .item-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .flow-arrow {
+    font-size: 24px;
+    color: #cbd5e1;
+    font-weight: bold;
+  }
+
+  /* Geographic Section */
+  .geo-section {
+    margin-bottom: 32px;
+  }
+  
+  .geo-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .view-toggle {
+    display: flex;
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 4px;
+  }
+  
+  .toggle-btn {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .toggle-btn.active {
+    background: white;
+    color: #1e293b;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .geo-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+  }
+  
+  .map-placeholder {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .map-label {
+    font-size: 14px;
+    fill: #64748b;
+    font-weight: 500;
+  }
+  
+  .geo-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .geo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .geo-item:last-child {
+    border-bottom: none;
+  }
+  
+  .country-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .country-flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+  }
+  
+  .country-name {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+  }
+  
+  .country-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  
+  .country-sessions {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .country-percentage {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .metrics-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .geo-content {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+    
+    .dashboard-main {
+      padding: 24px 16px;
+    }
+    
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    
+    .header-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+    
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .page-title {
+      font-size: 24px;
+    }
+    
+    .behavior-flow {
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .flow-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* Animations */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .page-header,
+  .metrics-overview,
+  .charts-section,
+  .geo-section {
+    animation: slideInUp 0.6s ease-out;
+  }
+  
+  .metrics-overview {
+    animation-delay: 0.1s;
+  }
+  
+  .charts-section {
+    animation-delay: 0.2s;
+  }
+  
+  .geo-section {
+    animation-delay: 0.3s;
+  }
+</style>

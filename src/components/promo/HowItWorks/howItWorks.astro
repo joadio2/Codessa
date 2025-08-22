@@ -3,6 +3,7 @@
 import { getLangFromUrl, useTranslations } from "../../../i18n/utilsPromo"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
 ---
 <section id="proceso">
     <h2>{t("process.title")}</h2>
@@ -61,16 +62,16 @@ const t = useTranslations(lang);
     </div>
 </section>
 
-<style>
-    @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
+<style >
+   
     #proceso {
-        padding: 6rem 0;
+        padding:  0 0 2rem;
         text-align: center;
-        overflow-x: hidden; 
+        background: linear-gradient(
+            180deg,
+            var(--color-primary) 30%,
+            #020617 90%
+        );
     }
     h2 {
         font-size: 2.8rem;
@@ -170,13 +171,40 @@ const t = useTranslations(lang);
         color: var(--color-light-text);
         line-height: 1.6;
     }
+     h2,svg,.planet-wrapper,.planet,.journey-container {
+        animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @supports (animation-timeline: view()) {
+        h2,svg,.planet-wrapper, .planet,.journey-container {
+            animation-timeline: view();
+            animation-range: entry 0% cover 15%;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+    h2,svg, .planet-wrapper,.planet,.journey-container{
+        animation: none;
+    }
+    }
+     @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 
     /* Responsive */
     @media (max-width: 1024px) {
+        #proceso {
+            padding: 0 1rem 2rem;
+            text-align: center;
+        }
         .journey-container {
             flex-wrap: wrap;
             justify-content: center;
             gap: 4rem 2rem;
+            
         }
         .journey-step {
             width: 45%;

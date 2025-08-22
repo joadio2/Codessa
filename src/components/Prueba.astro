@@ -1,0 +1,577 @@
+---
+// Portfolio.astro
+import { getLangFromUrl, useTranslations } from "../i18n/utilsPromo"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const projects = [
+  {
+    id: 1,
+    title: "E-commerce Moderno",
+    description: "Tienda online completa con carrito de compras, pagos seguros y panel administrativo.",
+    url: "modernshop.com",
+    image: "/src/assets/ecommerce.png", 
+    tech: ["React", "Node.js", "Stripe", "MongoDB"],
+    category: "E-commerce",
+    status: "live",
+    redirect: `/e-commerce`
+  },
+  {
+    id: 2,
+    title: "App de Fitness",
+    description: "Aplicación web progresiva para seguimiento de ejercicios y nutrición con dashboard interactivo.",
+    url: "fittracker.app",
+    image: "/src/assets/dashboard.png",
+    tech: ["Vue.js", "Firebase", "PWA", "Chart.js"],
+    category: "Aplicación Web",
+    status: "live",
+    redirect: `/dashboard`
+
+  },
+  {
+    id: 3,
+    title: "Portfolio Creativo",
+    description: "Sitio web personalizado para artista con galería interactiva y animaciones fluidas.",
+    url: "artistportfolio.com",
+    image: "/src/assets/lawyer.png",
+    tech: ["Astro", "GSAP", "Tailwind", "Netlify"],
+    category: "Portfolio",
+    status: "live",
+    redirect: `/lawyer`
+
+  },
+  {
+    id: 4,
+    title: "SaaS Dashboard",
+    description: "Panel de control completo para gestión empresarial con analytics en tiempo real.",
+    url: "businessdash.co",
+    image: "/src/assets/restaurant.png",
+    tech: ["Next.js", "PostgreSQL", "Redis", "Docker"],
+    category: "SaaS",
+    status: "development",
+    redirect: `/restaurant`
+
+  },
+  
+];
+
+---
+
+<section class="portfolio-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{t("portafolio.sectionTitle")}</h2>
+      <p class="section-subtitle">
+        {t("portafolio.sectionSubtitle")}
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+      {projects.map((project) => (
+        <article class="portfolio-item" data-category={project.category}>
+          <div class="browser-mockup">
+            <div class="browser-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="url-bar">
+              <span class="protocol">https://</span>
+              <span class="domain">{project.url}</span>
+            </div>
+            <div class="browser-actions">
+              <span class="status-indicator" data-status={project.status}></span>
+            </div>
+          </div>
+
+          <div class="website-preview">
+            {project.image ? (
+              <img 
+                src={project.image} 
+                alt={`Preview de ${project.title}`}
+                class="preview-image"
+                loading="lazy"
+              />
+            ) : (
+              <div class="preview-placeholder">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16ZM5 8H19V16H5V8Z" fill="currentColor"/>
+                  <path d="M7 10H17V12H7V10Z" fill="currentColor"/>
+                  <path d="M7 13H13V15H7V13Z" fill="currentColor"/>
+                </svg>
+              </div>
+            )}
+            <div class="preview-overlay">
+              <astro-link class="view-project-btn" data-url={project.redirect}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" fill="currentColor"/>
+                </svg>
+                {t("portafolio.viewProject")}
+              </astro-link>
+            </div>
+          </div>
+
+          <div class="portfolio-info">
+            <div class="project-header">
+              <h3 class="project-title">{project.title}</h3>
+              <span class="project-category">{project.category}</span>
+            </div>
+            <p class="project-description">{project.description}</p>
+            
+            <div class="tech-stack">
+              {project.tech.map((tech) => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+
+            <div class="project-actions">
+              <button class="btn-primary" data-url={project.redirect}>
+                {t("portafolio.viewSite")}
+              </button>
+              <button class="btn-secondary">
+                {t("portafolio.details")}
+              </button>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="section-footer">
+      <p class="footer-text">{t("portafolio.footerText")}</p>
+      <button class="cta-button">
+        {t("portafolio.ctaButton")}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-url]");
+    if (btn) {
+      const url = btn.getAttribute("data-url");
+      if (url) window.location.href = url;
+    }
+  });
+</script>
+<style>
+  .portfolio-section {
+    padding: 1rem 2rem;
+    background: linear-gradient(
+    180deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 70%
+  );
+  }
+
+  .portfolio-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .portfolio-item {
+    background: var(--color-primary);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition: all 0.4s ease;
+    position: relative;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .portfolio-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(48, 197, 155, 0.2);
+    border-color: var(--color-accent);
+  }
+
+  .browser-mockup {
+    background: var(--color-secondary);
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+
+  .portfolio-item:hover .dot {
+    transform: scale(1.2);
+  }
+
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green { background: #28ca42; }
+
+  .url-bar {
+    flex: 1;
+    background: var(--color-dark);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .protocol {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  .domain {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .browser-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .status-indicator[data-status="live"] {
+    background: var(--color-accent);
+  }
+
+  .status-indicator[data-status="development"] {
+    background: #ffbd2e;
+  }
+
+  .website-preview {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-dark));
+  }
+
+  .preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .portfolio-item:hover .preview-image {
+    transform: scale(1.08);
+  }
+
+  .preview-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-accent);
+    opacity: 0.7;
+  }
+
+  .preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .portfolio-item:hover .preview-overlay {
+    opacity: 1;
+  }
+
+  .view-project-btn {
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+  }
+
+  .portfolio-item:hover .view-project-btn {
+    transform: translateY(0);
+    background: var(--color-accent-hover);
+  }
+
+  .portfolio-info {
+    padding: 1.75rem;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+
+  .project-category {
+    background: rgba(48, 197, 155, 0.1);
+    color: var(--color-accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(48, 197, 155, 0.2);
+  }
+
+  .project-description {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-tag {
+    background: var(--color-secondary);
+    color: var(--color-text);
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+  }
+
+  .tech-tag:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .project-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  /* Botones */
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;              /* inline para respetar el flujo */
+    align-items: center;               /* centra verticalmente todo */
+    justify-content: center;
+    gap: 0.5rem;                        /* espacio entre texto y svg */
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 0.9rem;
+    line-height: 1;                     /* evita saltos verticales en SVG */
+  }
+
+  /* Íconos dentro del botón */
+  .btn-primary svg,
+  .btn-secondary svg {
+    display: block;                     /* evita el espacio fantasma inline */
+    width: 1em;                          /* se adapta al tamaño del texto */
+    height: 1em;
+    flex-shrink: 0;                      /* no se deforma en flex */
+  }
+
+  /* Botón principal */
+  .btn-primary {
+    background: var(--color-accent);
+    color: white;
+    flex: 1;
+  }
+  .btn-primary:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(48, 197, 155, 0.3);
+  }
+
+  /* Botón secundario */
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .section-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-text {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .cta-button {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-flex;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(48, 197, 155, 0.2);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(48, 197, 155, 0.4);
+  }
+  .cta-button svg{
+    vertical-align: middle;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .portfolio-item {
+      margin: 0 auto;
+      max-width: 400px;
+    }
+
+    .project-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .project-actions {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .portfolio-section {
+      padding:1rem 1rem 2rem;
+    }
+
+    .url-bar {
+      font-size: 0.8rem;
+    }
+
+    .browser-mockup {
+      padding: 0.75rem 1rem;
+    }
+  }
+</style>
+

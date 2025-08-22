@@ -1,0 +1,75 @@
+<div class="testimonial-bubble">
+    <img src="/avatars/maria.jpg" alt="María" class="tb-avatar" />
+    <div class="tb-text">
+      “Profesional y rápido. Pasamos de boceto a ventas en días.”
+      <span class="tb-name">María, Fundadora de Aurora</span>
+    </div>
+  </div>
+
+  <style>
+   .contentInfo { position: relative; }
+
+/* Estado inicial: oculta y ligeramente desplazada */
+.testimonial-bubble {
+  position: absolute;
+  bottom: -50px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  max-width: 320px;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.88);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+  backdrop-filter: blur(6px);
+
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
+  will-change: opacity, transform, filter;
+}
+
+/* Aparece al acercar el mouse a .contentInfo */
+.contentInfo:hover .testimonial-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Aparece cuando entra en viewport (clase gestionada por JS) */
+.testimonial-bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Efecto sutil al pasar directamente por la burbuja */
+.testimonial-bubble:hover {
+  filter: brightness(1.08);
+}
+
+/* Accesibilidad: reduce movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-bubble {
+    transition: opacity 120ms linear;
+    transform: none;
+  }
+  .contentInfo:hover .testimonial-bubble,
+  .testimonial-bubble.is-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .testimonial-bubble {
+    position: static;
+    margin-top: 1rem;
+    opacity: 0;              /* sigue oculta al inicio */
+    transform: translateY(8px);
+  }
+  .contentInfo:hover .testimonial-bubble {
+    /* en mobile el hover no aplica; la clase is-visible lo manejará */
+  }
+}

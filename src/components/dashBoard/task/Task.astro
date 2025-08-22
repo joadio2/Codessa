@@ -1,0 +1,1032 @@
+---
+import Layout from '../../../layouts/LayoutDashboard.astro'
+import Sidebar from '../Sidebar.astro';
+import Header from '../Header.astro';
+
+
+const tasks = [
+  {
+    id: 1,
+    title: 'Design mobile app wireframes',
+    description: 'Create low-fidelity wireframes for the mobile app redesign project',
+    status: 'In Progress',
+    priority: 'High',
+    assignee: {
+      name: 'Sarah Chen',
+      avatar: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=64&h=64&dpr=1'
+    },
+    project: 'Mobile App Redesign',
+    dueDate: '2024-02-15',
+    tags: ['Design', 'Wireframes', 'Mobile'],
+    subtasks: [
+      { id: 1, title: 'User flow mapping', completed: true },
+      { id: 2, title: 'Screen layouts', completed: true },
+      { id: 3, title: 'Navigation structure', completed: false },
+      { id: 4, title: 'Component library', completed: false }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Implement payment gateway',
+    description: 'Integrate Stripe payment processing for the e-commerce platform',
+    status: 'Todo',
+    priority: 'High',
+    assignee: {
+      name: 'Mike Johnson',
+      avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=64&h=64&dpr=1'
+    },
+    project: 'E-commerce Platform',
+    dueDate: '2024-02-20',
+    tags: ['Backend', 'Payment', 'API'],
+    subtasks: [
+      { id: 1, title: 'Setup Stripe account', completed: true },
+      { id: 2, title: 'API integration', completed: false },
+      { id: 3, title: 'Webhook handling', completed: false },
+      { id: 4, title: 'Error handling', completed: false }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Write API documentation',
+    description: 'Create comprehensive documentation for the REST API endpoints',
+    status: 'In Review',
+    priority: 'Medium',
+    assignee: {
+      name: 'David Kim',
+      avatar: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=64&h=64&dpr=1'
+    },
+    project: 'API Integration Hub',
+    dueDate: '2024-02-18',
+    tags: ['Documentation', 'API', 'Backend'],
+    subtasks: [
+      { id: 1, title: 'Endpoint specifications', completed: true },
+      { id: 2, title: 'Authentication guide', completed: true },
+      { id: 3, title: 'Code examples', completed: true },
+      { id: 4, title: 'Error codes reference', completed: false }
+    ]
+  },
+  {
+    id: 4,
+    title: 'User testing sessions',
+    description: 'Conduct usability testing with 10 target users for the dashboard',
+    status: 'Completed',
+    priority: 'Medium',
+    assignee: {
+      name: 'Emma Davis',
+      avatar: 'https://images.pexels.com/photos/3586798/pexels-photo-3586798.jpeg?auto=compress&cs=tinysrgb&w=64&h=64&dpr=1'
+    },
+    project: 'Dashboard Analytics',
+    dueDate: '2024-02-10',
+    tags: ['UX', 'Testing', 'Research'],
+    subtasks: [
+      { id: 1, title: 'Recruit participants', completed: true },
+      { id: 2, title: 'Prepare test scenarios', completed: true },
+      { id: 3, title: 'Conduct sessions', completed: true },
+      { id: 4, title: 'Analyze results', completed: true }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Brand guidelines document',
+    description: 'Create comprehensive brand guidelines including logo usage, colors, and typography',
+    status: 'Todo',
+    priority: 'Low',
+    assignee: {
+      name: 'Alex Rodriguez',
+      avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=64&h=64&dpr=1'
+    },
+    project: 'Brand Identity System',
+    dueDate: '2024-03-01',
+    tags: ['Branding', 'Design', 'Guidelines'],
+    subtasks: [
+      { id: 1, title: 'Logo variations', completed: false },
+      { id: 2, title: 'Color palette', completed: false },
+      { id: 3, title: 'Typography system', completed: false },
+      { id: 4, title: 'Usage examples', completed: false }
+    ]
+  }
+];
+
+const statusColors = {
+  'Todo': 'status-todo',
+  'In Progress': 'status-progress',
+  'In Review': 'status-review',
+  'Completed': 'status-completed'
+};
+
+const priorityColors = {
+  'High': 'priority-high',
+  'Medium': 'priority-medium',
+  'Low': 'priority-low'
+};
+---
+
+<Layout title="Tasks - SaaS Dashboard">
+  <div class="dashboard-layout">
+    <Sidebar />
+    <div class="main-content">
+      <Header />
+      
+      <main class="dashboard-main">
+        <div class="dashboard-container">
+          <!-- Tasks Header -->
+          <section class="page-header">
+            <div class="header-content">
+              <h1 class="page-title">Tasks</h1>
+              <p class="page-subtitle">
+                Manage and track all your tasks across projects
+              </p>
+            </div>
+            <div class="header-actions">
+              <select class="filter-select">
+                <option value="all">All Tasks</option>
+                <option value="my">My Tasks</option>
+                <option value="high">High Priority</option>
+                <option value="overdue">Overdue</option>
+              </select>
+              <button class="create-button">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"/>
+                </svg>
+                New Task
+              </button>
+            </div>
+          </section>
+
+          <!-- Task Stats -->
+          <section class="stats-section">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-icon blue">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                  </svg>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value">47</div>
+                  <div class="stat-label">Total Tasks</div>
+                </div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon orange">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value">12</div>
+                  <div class="stat-label">In Progress</div>
+                </div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon green">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                  </svg>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value">28</div>
+                  <div class="stat-label">Completed</div>
+                </div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-icon red">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                  </svg>
+                </div>
+                <div class="stat-content">
+                  <div class="stat-value">3</div>
+                  <div class="stat-label">Overdue</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Kanban Board -->
+          <section class="kanban-section">
+            <div class="section-header">
+              <h2>Task Board</h2>
+              <div class="view-controls">
+                <button class="view-btn active">Board</button>
+                <button class="view-btn">List</button>
+                <button class="view-btn">Calendar</button>
+              </div>
+            </div>
+            
+            <div class="kanban-board">
+              <!-- Todo Column -->
+              <div class="kanban-column">
+                <div class="column-header">
+                  <div class="column-title">
+                    <div class="column-indicator todo"></div>
+                    <span>To Do</span>
+                    <span class="task-count">2</span>
+                  </div>
+                  <button class="add-task-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="column-content">
+                  {tasks.filter(task => task.status === 'Todo').map((task) => (
+                    <div class="task-card">
+                      <div class="task-header">
+                        <span class={`priority-badge ${priorityColors[task.priority as keyof typeof priorityColors]}`}>
+                          {task.priority}
+                        </span>
+                        <button class="task-menu">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+                          </svg>
+                        </button>
+                      </div>
+                      <h3 class="task-title">{task.title}</h3>
+                      <p class="task-description">{task.description}</p>
+                      <div class="task-project">{task.project}</div>
+                      <div class="task-tags">
+                        {task.tags.slice(0, 2).map((tag) => (
+                          <span class="tag">{tag}</span>
+                        ))}
+                        {task.tags.length > 2 && (
+                          <span class="tag-more">+{task.tags.length - 2}</span>
+                        )}
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-info">
+                          <span class="progress-text">
+                            {task.subtasks.filter(st => st.completed).length}/{task.subtasks.length} subtasks
+                          </span>
+                          <span class="progress-percentage">
+                            {Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%
+                          </span>
+                        </div>
+                        <div class="progress-bar">
+                          <div 
+                            class="progress-fill"
+                            style={`width: ${Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%`}
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="task-footer">
+                        <div class="task-assignee">
+                          <img src={task.assignee.avatar} alt={task.assignee.name} class="assignee-avatar"/>
+                          <span class="assignee-name">{task.assignee.name}</span>
+                        </div>
+                        <div class="task-due-date">{task.dueDate}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- In Progress Column -->
+              <div class="kanban-column">
+                <div class="column-header">
+                  <div class="column-title">
+                    <div class="column-indicator progress"></div>
+                    <span>In Progress</span>
+                    <span class="task-count">1</span>
+                  </div>
+                  <button class="add-task-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="column-content">
+                  {tasks.filter(task => task.status === 'In Progress').map((task) => (
+                    <div class="task-card">
+                      <div class="task-header">
+                        <span class={`priority-badge ${priorityColors[task.priority as keyof typeof priorityColors]}`}>
+                          {task.priority}
+                        </span>
+                        <button class="task-menu">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+                          </svg>
+                        </button>
+                      </div>
+                      <h3 class="task-title">{task.title}</h3>
+                      <p class="task-description">{task.description}</p>
+                      <div class="task-project">{task.project}</div>
+                      <div class="task-tags">
+                        {task.tags.slice(0, 2).map((tag) => (
+                          <span class="tag">{tag}</span>
+                        ))}
+                        {task.tags.length > 2 && (
+                          <span class="tag-more">+{task.tags.length - 2}</span>
+                        )}
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-info">
+                          <span class="progress-text">
+                            {task.subtasks.filter(st => st.completed).length}/{task.subtasks.length} subtasks
+                          </span>
+                          <span class="progress-percentage">
+                            {Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%
+                          </span>
+                        </div>
+                        <div class="progress-bar">
+                          <div 
+                            class="progress-fill"
+                            style={`width: ${Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%`}
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="task-footer">
+                        <div class="task-assignee">
+                          <img src={task.assignee.avatar} alt={task.assignee.name} class="assignee-avatar"/>
+                          <span class="assignee-name">{task.assignee.name}</span>
+                        </div>
+                        <div class="task-due-date">{task.dueDate}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- In Review Column -->
+              <div class="kanban-column">
+                <div class="column-header">
+                  <div class="column-title">
+                    <div class="column-indicator review"></div>
+                    <span>In Review</span>
+                    <span class="task-count">1</span>
+                  </div>
+                  <button class="add-task-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="column-content">
+                  {tasks.filter(task => task.status === 'In Review').map((task) => (
+                    <div class="task-card">
+                      <div class="task-header">
+                        <span class={`priority-badge ${priorityColors[task.priority as keyof typeof priorityColors]}`}>
+                          {task.priority}
+                        </span>
+                        <button class="task-menu">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+                          </svg>
+                        </button>
+                      </div>
+                      <h3 class="task-title">{task.title}</h3>
+                      <p class="task-description">{task.description}</p>
+                      <div class="task-project">{task.project}</div>
+                      <div class="task-tags">
+                        {task.tags.slice(0, 2).map((tag) => (
+                          <span class="tag">{tag}</span>
+                        ))}
+                        {task.tags.length > 2 && (
+                          <span class="tag-more">+{task.tags.length - 2}</span>
+                        )}
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-info">
+                          <span class="progress-text">
+                            {task.subtasks.filter(st => st.completed).length}/{task.subtasks.length} subtasks
+                          </span>
+                          <span class="progress-percentage">
+                            {Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%
+                          </span>
+                        </div>
+                        <div class="progress-bar">
+                          <div 
+                            class="progress-fill"
+                            style={`width: ${Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%`}
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="task-footer">
+                        <div class="task-assignee">
+                          <img src={task.assignee.avatar} alt={task.assignee.name} class="assignee-avatar"/>
+                          <span class="assignee-name">{task.assignee.name}</span>
+                        </div>
+                        <div class="task-due-date">{task.dueDate}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Completed Column -->
+              <div class="kanban-column">
+                <div class="column-header">
+                  <div class="column-title">
+                    <div class="column-indicator completed"></div>
+                    <span>Completed</span>
+                    <span class="task-count">1</span>
+                  </div>
+                  <button class="add-task-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="column-content">
+                  {tasks.filter(task => task.status === 'Completed').map((task) => (
+                    <div class="task-card completed">
+                      <div class="task-header">
+                        <span class={`priority-badge ${priorityColors[task.priority as keyof typeof priorityColors]}`}>
+                          {task.priority}
+                        </span>
+                        <button class="task-menu">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+                          </svg>
+                        </button>
+                      </div>
+                      <h3 class="task-title">{task.title}</h3>
+                      <p class="task-description">{task.description}</p>
+                      <div class="task-project">{task.project}</div>
+                      <div class="task-tags">
+                        {task.tags.slice(0, 2).map((tag) => (
+                          <span class="tag">{tag}</span>
+                        ))}
+                        {task.tags.length > 2 && (
+                          <span class="tag-more">+{task.tags.length - 2}</span>
+                        )}
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-info">
+                          <span class="progress-text">
+                            {task.subtasks.filter(st => st.completed).length}/{task.subtasks.length} subtasks
+                          </span>
+                          <span class="progress-percentage">
+                            {Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%
+                          </span>
+                        </div>
+                        <div class="progress-bar">
+                          <div 
+                            class="progress-fill completed"
+                            style={`width: ${Math.round((task.subtasks.filter(st => st.completed).length / task.subtasks.length) * 100)}%`}
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="task-footer">
+                        <div class="task-assignee">
+                          <img src={task.assignee.avatar} alt={task.assignee.name} class="assignee-avatar"/>
+                          <span class="assignee-name">{task.assignee.name}</span>
+                        </div>
+                        <div class="task-due-date">{task.dueDate}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f8fafc;
+  }
+  
+  .main-content {
+    flex: 1;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .dashboard-main {
+    margin-top: 72px;
+    padding: 32px 24px 24px;
+  }
+  
+  .dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Page Header */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding: 24px 0;
+  }
+  
+  .header-content {
+    flex: 1;
+  }
+  
+  .page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+  
+  .page-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .filter-select {
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+  }
+  
+  .create-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .create-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin-bottom: 32px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .stat-icon.blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  }
+  
+  .stat-icon.orange {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  }
+  
+  .stat-icon.green {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
+  
+  .stat-icon.red {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+  
+  .stat-content {
+    flex: 1;
+  }
+  
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  /* Kanban Section */
+  .kanban-section {
+    margin-bottom: 32px;
+  }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+  }
+  
+  .view-controls {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 8px;
+  }
+  
+  .view-btn {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .view-btn.active {
+    background: white;
+    color: #1e293b;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .kanban-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    min-height: 600px;
+  }
+  
+  .kanban-column {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #f1f5f9;
+  }
+  
+  .column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .column-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .column-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .column-indicator.todo {
+    background: #94a3b8;
+  }
+  
+  .column-indicator.progress {
+    background: #3b82f6;
+  }
+  
+  .column-indicator.review {
+    background: #f59e0b;
+  }
+  
+  .column-indicator.completed {
+    background: #10b981;
+  }
+  
+  .task-count {
+    background: #e2e8f0;
+    color: #64748b;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .add-task-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .add-task-btn:hover {
+    background: #e2e8f0;
+    color: #3b82f6;
+  }
+  
+  .column-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .task-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #e2e8f0;
+  }
+  
+  .task-card.completed {
+    opacity: 0.8;
+  }
+  
+  .task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  
+  .priority-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .priority-high {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+  
+  .priority-medium {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  
+  .priority-low {
+    background: #dcfce7;
+    color: #166534;
+  }
+  
+  .task-menu {
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .task-menu:hover {
+    background: #f1f5f9;
+    color: #3b82f6;
+  }
+  
+  .task-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+  
+  .task-description {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .task-project {
+    font-size: 12px;
+    color: #3b82f6;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  
+  .task-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  
+  .tag {
+    padding: 3px 8px;
+    background: #f1f5f9;
+    color: #64748b;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  
+  .tag-more {
+    padding: 3px 8px;
+    background: #e2e8f0;
+    color: #64748b;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  
+  .task-progress {
+    margin-bottom: 16px;
+  }
+  
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  
+  .progress-text {
+    font-size: 12px;
+    color: #64748b;
+  }
+  
+  .progress-percentage {
+    font-size: 12px;
+    color: #1e293b;
+    font-weight: 600;
+  }
+  
+  .progress-bar {
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-fill.completed {
+    background: linear-gradient(90deg, #10b981, #059669);
+  }
+  
+  .task-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .task-assignee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .assignee-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f1f5f9;
+  }
+  
+  .assignee-name {
+    font-size: 12px;
+    color: #374151;
+    font-weight: 500;
+  }
+  
+  .task-due-date {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .kanban-board {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+    
+    .dashboard-main {
+      padding: 24px 16px;
+    }
+    
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    
+    .header-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+    
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .kanban-board {
+      grid-template-columns: 1fr;
+    }
+    
+    .page-title {
+      font-size: 24px;
+    }
+  }
+
+  /* Animations */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .page-header,
+  .stats-section,
+  .kanban-section {
+    animation: slideInUp 0.6s ease-out;
+  }
+  
+  .stats-section {
+    animation-delay: 0.1s;
+  }
+  
+  .kanban-section {
+    animation-delay: 0.2s;
+  }
+</style>

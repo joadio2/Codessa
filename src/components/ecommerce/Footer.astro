@@ -1,0 +1,262 @@
+---
+---
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">Face</a></li>
+                        <li><a href="#">Eyes</a></li>
+                        <li><a href="#">Lips</a></li>
+                        <li><a href="#">Tools & Brushes</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <div class="newsletter">
+                        <h3>Beauty Updates</h3>
+                        <p>Get the latest trends, tips, and exclusive offers delivered to your inbox.</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 BeautyBrand. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="TikTok">🎵</a>
+                    <a href="#" aria-label="YouTube">📹</a>
+                    <a href="#" aria-label="Pinterest">📌</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <style>
+
+         .footer {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: #f9fafb;
+            padding: 3rem 0 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ec4899, transparent);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1.2fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+            color: #ec4899;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ec4899;
+            transform: translateX(3px);
+        }
+        
+        .newsletter {
+            background: rgba(17, 24, 39, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+        }
+        
+        .newsletter h3 {
+            margin-bottom: 0.75rem;
+        }
+        
+        .newsletter p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid rgba(75, 85, 99, 0.5);
+            border-radius: 8px;
+            background: rgba(17, 24, 39, 0.8);
+            color: #f9fafb;
+            font-size: 0.875rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .newsletter-input::placeholder {
+            color: #6b7280;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+        
+        .newsletter-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .newsletter-btn:hover {
+            background: linear-gradient(135deg, #be185d, #9d174d);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(75, 85, 99, 0.3);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-bottom p {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d1d5db;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #ec4899;
+            border-color: #ec4899;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .footer {
+                padding: 2rem 0 1rem;
+            }
+            
+            .footer-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>

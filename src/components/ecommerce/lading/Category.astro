@@ -1,0 +1,72 @@
+---
+// Data for categories. Could be passed as props in the future.
+const categories = [
+    { name: "Labiales", href: "#", imageUrl: "https://images.unsplash.com/photo-1631214524049-0ebbbe6d81aa?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+    { name: "Sombras", href: "#", imageUrl: "https://images.unsplash.com/photo-1583241800518-8aec2693fe53?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+    { name: "Bases", href: "#", imageUrl: "https://plus.unsplash.com/premium_photo-1684407616442-8d5a1b7c978e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+    { name: "Ingredientes", href: "#", imageUrl: "https://images.unsplash.com/photo-1597225244660-1cd128c64284?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+];
+---
+<section class="content-section">
+    <h2 class="section-title">Explora por Categoría</h2>
+    <div class="category-grid">
+        {categories.map(category => (
+            <a href={category.href} class="category-item">
+                <img src={category.imageUrl} alt={category.name}>
+                <h2>{category.name}</h2>
+            </a>
+        ))}
+    </div>
+</section>
+
+<style>
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 4rem auto 0;
+    }
+    .category-item {
+        position: relative;
+        height: 400px;
+        border-radius: 1rem;
+        overflow: hidden;
+        display: block;
+        text-decoration: none;
+        transition: all 0.4s ease-out;
+    }
+    .category-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease-out;
+    }
+    .category-item h2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 2.5rem 1.5rem;
+        color: white;
+        font-family: var(--font-secondary);
+        font-size: 2rem;
+        font-weight: 500;
+        text-align: left;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+        transition: all 0.3s ease;
+    }
+    .category-item:hover img { transform: scale(1.05); }
+    .category-grid:hover .category-item:not(:hover) {
+        opacity: 0.6;
+        transform: scale(0.98);
+    }
+    .category-grid .category-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    @media (max-width: 768px) {
+        .category-grid { grid-template-columns: 1fr; }
+    }
+</style>

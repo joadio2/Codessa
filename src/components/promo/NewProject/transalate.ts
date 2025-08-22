@@ -50,7 +50,7 @@ export const translationsBriefing = {
     nav: {
       atras: "Atrás",
       siguiente: "Siguiente",
-      enviar: "Enviar y Continuar al Pago",
+      enviar: "Pagar",
       enviando: "Enviando...",
     },
     advanced: {
@@ -138,7 +138,7 @@ export const translationsBriefing = {
     nav: {
       atras: "Back",
       siguiente: "Next",
-      enviar: "Send and Continue to Payment",
+      enviar: "Payment",
       enviando: "Sending...",
     },
     advanced: {
@@ -226,7 +226,7 @@ export const translationsBriefing = {
     nav: {
       atras: "Voltar",
       siguiente: "Seguinte",
-      enviar: "Enviar e Continuar para Pagamento",
+      enviar: "Pagamento",
       enviando: "A Enviar...",
     },
     advanced: {

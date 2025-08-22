@@ -1,0 +1,243 @@
+---
+import ProductGrid from './ProductGrid.astro';
+import ProductFilters from './ProductFilters.astro';
+import ProductSort from './ProductSort.astro';
+
+const { category = 'all', sortBy = 'featured' } = Astro.props;
+---
+
+<section class="shop">
+  <div class="container">
+    <!-- Header de la tienda -->
+    <div class="shop-header">
+      <div class="shop-title-section">
+        <h1 class="shop-title">Nuestra Colección</h1>
+        <p class="shop-subtitle">
+          Descubre productos de maquillaje premium para realzar tu belleza natural
+        </p>
+      </div>
+      
+      <div class="shop-stats">
+        <span class="products-count">124 productos</span>
+      </div>
+    </div>
+
+    <!-- Filtros y ordenamiento -->
+    <div class="shop-controls">
+      <ProductFilters />
+      <ProductSort />
+    </div>
+
+    <!-- Grid de productos -->
+    <ProductGrid category={category} sortBy={sortBy} />
+
+    <!-- Paginación -->
+    <div class="pagination">
+      <button class="pagination-btn prev" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        Anterior
+      </button>
+      
+      <div class="pagination-numbers">
+        <button class="pagination-number active">1</button>
+        <button class="pagination-number">2</button>
+        <button class="pagination-number">3</button>
+        <span class="pagination-dots">...</span>
+        <button class="pagination-number">8</button>
+      </div>
+      
+      <button class="pagination-btn next">
+        Siguiente
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shop {
+    padding: 2rem 0 5rem;
+    background: #fefefe;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+  }
+
+  .shop-title-section {
+    flex: 1;
+  }
+
+  .shop-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .shop-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 500px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .shop-stats {
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .products-count {
+    background: rgba(255, 107, 157, 0.1);
+    color: #c44569;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .shop-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+  }
+
+  /* Paginación */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 107, 157, 0.1);
+  }
+
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    color: #666;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .pagination-btn:hover:not(:disabled) {
+    border-color: #c44569;
+    color: #c44569;
+  }
+
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .pagination-numbers {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pagination-number {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #666;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .pagination-number:hover {
+    background: rgba(255, 107, 157, 0.1);
+    color: #c44569;
+  }
+
+  .pagination-number.active {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+  }
+
+  .pagination-dots {
+    color: #999;
+    padding: 0 0.5rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .shop {
+      padding: 1rem 0 3rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .shop-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .shop-controls {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pagination-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .pagination-numbers {
+      order: -1;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pagination-btn .pagination-btn-text {
+      display: none;
+    }
+
+    .pagination-number {
+      width: 35px;
+      height: 35px;
+      font-size: 0.9rem;
+    }
+  }
+</style>

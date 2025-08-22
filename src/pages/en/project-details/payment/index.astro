@@ -1,0 +1,9 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import Scheduler from "../../../../components/promo/Schedule/schedule.astro";
+const basePath = Astro.url.pathname
+
+---
+<Layout title="Payment">
+  <Scheduler basePath={basePath} />
+</Layout>

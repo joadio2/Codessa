@@ -1,0 +1,115 @@
+---
+import Navbar from "../components/ecommerce/Navbar.astro"
+import Footer from "../components/ecommerce/Footer.astro"
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>E-commerce</title>
+	</head>
+	<body>
+		<Navbar />
+		<slot />
+		<Footer />
+	</body>
+</html>
+
+<style is:global>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		
+	}
+	/* ========= VARIABLES Y ESTILOS GLOBALES ========= */
+	:root {
+		--color-bg: #FDFBF9;
+		--color-text: #333;
+		--color-accent: #D4A373;
+		--color-light-accent: #F5E9E2;
+		--font-primary: 'Montserrat', sans-serif;
+		--font-secondary: 'Playfair Display', serif;
+	}
+
+	body {
+		font-family: var(--font-primary);
+		background-color: var(--color-bg);
+		color: var(--color-text);
+		overflow-x: hidden;
+	}
+
+	/* ========= BOTONES CTA ========= */
+	.cta-button, .cta-button-secondary {
+		display: inline-block;
+		padding: 12px 28px;
+		border-radius: 50px;
+		font-weight: 600;
+		text-decoration: none;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		border: 2px solid transparent;
+	}
+	.cta-button {
+		background-color: var(--color-accent);
+		color: white;
+	}
+	.cta-button-secondary {
+		background-color: transparent;
+		color: var(--color-accent);
+		border-color: var(--color-accent);
+	}
+	.cta-button:hover, .cta-button-secondary:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+	}
+
+	/* ========= ESTRUCTURA DE SECCIONES ========= */
+	.content-section {
+		padding: 1rem 2rem;
+	}
+	.section-title {
+		font-family: var(--font-secondary);
+		font-size: 2.5rem;
+		margin-bottom: 1.5rem;
+		font-weight: 500;
+		text-align: center;
+	}
+
+	/* ========= ANIMACIÓN DE SCROLL ========= */
+	.content-section, .hero-section {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@supports (animation-timeline: view()) {
+		.content-section, .hero-section {
+			animation: fadeIn 0.6s ease-out forwards;
+			animation-timeline: view();
+			animation-range: entry 10% cover 40%;
+		}
+	}
+	@supports not (animation-timeline: view()) {
+		.content-section, .hero-section {
+			animation: fadeIn 1s ease-out forwards;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.content-section, .hero-section {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+	}
+</style>

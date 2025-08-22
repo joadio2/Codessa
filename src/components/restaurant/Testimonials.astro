@@ -1,0 +1,304 @@
+---
+const testimonials = [
+  {
+    id: 1,
+    name: "María González",
+    role: "Cliente Frecuente",
+    content:
+      "La experiencia en Bella Vista supera todas las expectativas. Cada visita es un viaje culinario único que despierta todos los sentidos. El servicio es impecable y la comida simplemente extraordinaria.",
+    rating: 5,
+    avatar: "MG",
+  },
+  {
+    id: 2,
+    name: "Carlos Mendoza",
+    role: "Crítico Gastronómico",
+    content:
+      "Bella Vista ha logrado ese equilibrio perfecto entre innovación y tradición. La presentación de los platos es artística y los sabores son una sinfonía que permanece en la memoria mucho después de la cena.",
+    rating: 5,
+    avatar: "CM",
+  },
+  {
+    id: 3,
+    name: "Ana Rodríguez",
+    role: "Celebración Aniversario",
+    content:
+      "Celebramos nuestro aniversario aquí y fue perfecto. El ambiente romántico, la atención personalizada del chef y cada detalle cuidadosamente pensado hicieron de esta noche algo verdaderamente especial.",
+    rating: 5,
+    avatar: "AR",
+  },
+];
+---
+
+<section id="testimonios" class="testimonials-section">
+  <div class="container">
+    <div class="intro">
+      <h2 class="title">Lo Que Dicen Nuestros Clientes</h2>
+      <p class="subtitle">
+        Cada testimonio es un reflejo de nuestro compromiso con la excelencia y la
+        satisfacción de quienes nos visitan
+      </p>
+    </div>
+
+    <div class="grid">
+      {testimonials.map((t, index) => (
+        <article class="card animate-fade-in" style={`animation-delay: ${index * 0.2}s`}>
+          <div class="card-content">
+            <!-- Icono de comillas -->
+            <div class="quote-icon" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6v-6H4.83A3 3 0 0 1 7.17 6Zm9.66 0A5.17 5.17 0 0 0 12 11.17V18h6v-6h-3.17A3 3 0 0 1 16.83 6Z" fill="currentColor" />
+              </svg>
+            </div>
+
+            <!-- Rating -->
+            <div class="rating">
+              {Array.from({ length: t.rating }).map((_v, i) => (
+                <span class="star" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.897l-7.335 3.869 1.401-8.168L.132 9.211l8.2-1.193L12 .587z"/>
+                  </svg>
+                </span>
+              ))}
+              <span class="sr-only">{t.rating} de 5</span>
+            </div>
+
+            <!-- Contenido -->
+            <p class="content">"{t.content}"</p>
+
+            <!-- Autor -->
+            <div class="author">
+              <div class="avatar" aria-hidden="true">{t.avatar}</div>
+              <div class="author-meta">
+                <h4 class="name">{t.name}</h4>
+                <p class="role">{t.role}</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Indicadores de confianza -->
+    <div class="trust">
+      <div class="trust-group">
+        <div class="trust-item">
+          <span class="star trust-star" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.787 1.401 8.168L12 18.897l-7.335 3.869 1.401-8.168L.132 9.211l8.2-1.193L12 .587z"/>
+            </svg>
+          </span>
+          <span class="strong">4.9/5</span>
+          <span>Rating Promedio</span>
+        </div>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="trust-item">
+          <span class="strong">500+</span>
+          <span>Reseñas Positivas</span>
+        </div>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="trust-item">
+          <span class="strong">100%</span>
+          <span>Recomendación</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --container-max: 1100px;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e6e6e6;
+    --primary: #7c3aed;
+    --primary-contrast: #ffffff;
+
+    --card-bg: #ffffff;
+    --card-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+    --card-shadow-hover: 0 16px 40px rgba(17, 24, 39, 0.12);
+  }
+
+  .testimonials-section {
+    padding: 80px 0;
+    background: linear-gradient(180deg, var(--card-bg) 10%, #faf9ff 100%);
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .intro {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .title {
+    margin: 0 0 12px;
+    color: var(--text);
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+    letter-spacing: 0.2px;
+  }
+
+  .subtitle {
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: clamp(1.125rem, 0.6vw + 1rem, 1.25rem);
+    max-width: 42rem;
+    line-height: 1.7;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 220ms ease, box-shadow 240ms ease;
+    border: 0;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .card-content {
+    position: relative;
+    padding: 32px;
+  }
+
+  .quote-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: rgba(124, 58, 237, 0.2); /* primary/20 */
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    color: var(--primary);
+  }
+
+  .star svg {
+    display: block;
+  }
+
+  .content {
+    color: var(--muted);
+    margin: 0 0 20px;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    color: var(--primary-contrast);
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-right: 16px;
+    transition: background-color 160ms ease;
+  }
+
+  .card:hover .avatar {
+    background: #5b21b6; /* tono más oscuro del primary */
+  }
+
+  .author-meta .name {
+    margin: 0;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .author-meta .role {
+    margin: 2px 0 0 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .trust {
+    margin-top: 56px;
+    text-align: center;
+  }
+
+  .trust-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .trust-item .strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .trust-star {
+    color: var(--primary);
+  }
+
+  .divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+  }
+
+  /* Animación de aparición */
+  .animate-fade-in {
+    animation: fadeInUp 520ms ease both;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Accesibilidad */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+</style>

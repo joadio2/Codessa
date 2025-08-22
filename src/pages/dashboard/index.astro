@@ -1,0 +1,529 @@
+---
+import Layout from '../../layouts/LayoutDashboard.astro';
+import Sidebar from '../../components/dashBoard/Sidebar.astro';
+import Header from '../../components/dashBoard/Header.astro';
+import MetricCard from '../../components/dashBoard/MetriCard.astro';
+import DataTable from '../../components/dashBoard/DataTable.astro';
+
+---
+
+<Layout>
+  <div class="dashboard-layout">
+    <Sidebar />
+    <div class="main-content">
+      <Header />
+      
+      <main class="dashboard-main">
+        <div class="dashboard-container">
+          <!-- Welcome Section -->
+          <section class="welcome-section">
+            <div class="welcome-content">
+              <h1 class="welcome-title">Welcome back, Alex! 👋</h1>
+              <p class="welcome-subtitle">
+                Here's what's happening with your projects today
+              </p>
+            </div>
+            <div class="quick-actions">
+              <button class="quick-action-button primary">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                </svg>
+                New Project
+              </button>
+              <button class="quick-action-button secondary">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                  <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a2 2 0 00-2 2v6a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5z"/>
+                </svg>
+                Import Data
+              </button>
+            </div>
+          </section>
+
+          <!-- Metrics Grid -->
+          <section class="metrics-section">
+            <div class="metrics-grid">
+              <MetricCard 
+                title="Total Revenue"
+                value="$47,382"
+                change={12.5}
+                icon="revenue"
+                color="blue"
+                trend="up"
+              />
+              <MetricCard 
+                title="Active Users"
+                value="2,847"
+                change={8.2}
+                icon="users"
+                color="green"
+                trend="up"
+              />
+              <MetricCard 
+                title="Orders"
+                value="1,423"
+                change={-2.4}
+                icon="orders"
+                color="orange"
+                trend="down"
+              />
+              <MetricCard 
+                title="Conversion Rate"
+                value="3.24%"
+                change={15.3}
+                icon="conversion"
+                color="purple"
+                trend="up"
+              />
+            </div>
+          </section>
+
+          <!-- Charts Section -->
+          <section class="charts-section">
+            <div class="charts-grid">
+              <div class="chart-card">
+                <div class="chart-header">
+                  <h3>Revenue Overview</h3>
+                  <div class="chart-tabs">
+                    <button class="chart-tab active">7 days</button>
+                    <button class="chart-tab">30 days</button>
+                    <button class="chart-tab">90 days</button>
+                  </div>
+                </div>
+                <div class="chart-content">
+                  <div class="chart-placeholder">
+                    <svg width="100%" height="240" viewBox="0 0 400 240">
+                      <defs>
+                        <linearGradient id="revenueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+                          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path 
+                        d="M0,200 Q50,160 100,140 T200,120 T300,100 T400,80" 
+                        stroke="#3b82f6" 
+                        stroke-width="3" 
+                        fill="none"
+                        stroke-linecap="round"
+                      />
+                      <path 
+                        d="M0,200 Q50,160 100,140 T200,120 T300,100 T400,80 L400,240 L0,240 Z" 
+                        fill="url(#revenueGradient)"
+                      />
+                      <!-- Data points -->
+                      <circle cx="100" cy="140" r="4" fill="#3b82f6"/>
+                      <circle cx="200" cy="120" r="4" fill="#3b82f6"/>
+                      <circle cx="300" cy="100" r="4" fill="#3b82f6"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stats-card">
+                <div class="stats-header">
+                  <h3>Performance Stats</h3>
+                </div>
+                <div class="stats-list">
+                  <div class="stat-item">
+                    <div class="stat-info">
+                      <span class="stat-label">Page Views</span>
+                      <span class="stat-value">24,847</span>
+                    </div>
+                    <div class="stat-change positive">+12%</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-info">
+                      <span class="stat-label">Unique Visitors</span>
+                      <span class="stat-value">8,392</span>
+                    </div>
+                    <div class="stat-change positive">+8%</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-info">
+                      <span class="stat-label">Bounce Rate</span>
+                      <span class="stat-value">34.2%</span>
+                    </div>
+                    <div class="stat-change negative">-5%</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-info">
+                      <span class="stat-label">Avg. Session</span>
+                      <span class="stat-value">4:23</span>
+                    </div>
+                    <div class="stat-change positive">+15%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Data Table Section -->
+          <section class="table-section">
+            <DataTable />
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f8fafc;
+  }
+  
+  .main-content {
+    flex: 1;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .dashboard-main {
+    margin-top: 72px;
+    padding: 32px 24px 24px;
+  }
+  
+  .dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  /* Welcome Section */
+  .welcome-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding: 24px 0;
+  }
+  
+  .welcome-content {
+    flex: 1;
+  }
+  
+  .welcome-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+  
+  .welcome-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0;
+  }
+  
+  .quick-actions {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .quick-action-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .quick-action-button.primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+  }
+  
+  .quick-action-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  }
+  
+  .quick-action-button.secondary {
+    background: white;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .quick-action-button.secondary:hover {
+    background: #f8fafc;
+    border-color: #3b82f6;
+    color: #3b82f6;
+    transform: translateY(-1px);
+  }
+  
+  /* Metrics Section */
+  .metrics-section {
+    margin-bottom: 32px;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  /* Charts Section */
+  .charts-section {
+    margin-bottom: 32px;
+  }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+  }
+  
+  .chart-card,
+  .stats-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-header,
+  .stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  
+  .chart-header h3,
+  .stats-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+  }
+  
+  .chart-tabs {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 8px;
+  }
+  
+  .chart-tab {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .chart-tab.active {
+    background: white;
+    color: #1e293b;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-placeholder {
+    width: 100%;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+  
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    color: #64748b;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .stat-change {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  
+  .stat-change.positive {
+    background: #dcfce7;
+    color: #166534;
+  }
+  
+  .stat-change.negative {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+  
+  /* Table Section */
+  .table-section {
+    margin-bottom: 24px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+    
+    .dashboard-main {
+      padding: 24px 16px;
+    }
+    
+    .welcome-section {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    
+    .quick-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+    
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .welcome-title {
+      font-size: 24px;
+    }
+    
+    .chart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+
+  /* Animation */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .welcome-section,
+  .metrics-section,
+  .charts-section,
+  .table-section {
+    animation: slideInUp 0.6s ease-out;
+  }
+  
+  .metrics-section {
+    animation-delay: 0.1s;
+  }
+  
+  .charts-section {
+    animation-delay: 0.2s;
+  }
+  
+  .table-section {
+    animation-delay: 0.3s;
+  }
+</style>
+</Layout>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    color: #1e293b;
+    background: #f8fafc;
+  }
+  
+  button {
+    font-family: inherit;
+  }
+  
+  input {
+    font-family: inherit;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

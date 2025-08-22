@@ -1,0 +1,451 @@
+---
+const contactInfo = [
+  {
+    icon: "map",
+    title: "Ubicación",
+    info: "Av. Gourmet 123, Centro Histórico",
+    subInfo: "Ciudad de México, CDMX",
+  },
+  {
+    icon: "phone",
+    title: "Teléfono",
+    info: "+52 55 1234 5678",
+    subInfo: "WhatsApp: +52 55 9876 5432",
+  },
+  {
+    icon: "clock",
+    title: "Horarios",
+    info: "Lun - Dom: 1:00 PM - 11:00 PM",
+    subInfo: "Cocina cierra: 10:30 PM",
+  },
+  {
+    icon: "mail",
+    title: "Email",
+    info: "reservas@bellavista.com",
+    subInfo: "info@bellavista.com",
+  },
+];
+
+
+---
+
+<section id="contacto" class="contact-section">
+  <div class="container">
+    <div class="intro">
+      <h2 class="title">Reserva Tu Mesa</h2>
+      <p class="subtitle">
+        Estamos listos para ofrecerte una experiencia gastronómica inolvidable.
+        Contáctanos para hacer tu reserva
+      </p>
+    </div>
+
+    <div class="grid">
+      <!-- Información de contacto -->
+      <div class="info-col">
+        <h3 class="section-subtitle">Información de Contacto</h3>
+
+        {contactInfo.map((item, index) => (
+          <article class="info-card animate-fade-in" style={`animation-delay: ${index * 0.1}s`}>
+            <div class="info-card-content">
+              <div class="info-icon">
+                <span class="icon">
+                  
+                </span>
+              </div>
+              <div class="info-texts">
+                <h4 class="info-title">{item.title}</h4>
+                <p class="info-line">{item.info}</p>
+                <p class="info-sub">{item.subInfo}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+
+        <!-- Social Proof / Aviso -->
+        <div class="notice animate-glow">
+          <h4 class="notice-title">¡Reserva con Anticipación!</h4>
+          <p class="notice-text">
+            Debido a nuestra alta demanda, recomendamos reservar con al menos 48 horas de anticipación,
+            especialmente para fines de semana y ocasiones especiales.
+          </p>
+          <div class="notice-bullets">
+            <span>✓ Confirmación inmediata</span>
+            <span>✓ Sin costo de reserva</span>
+            <span>✓ Cancelación flexible</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <article class="form-card animate-scale-in">
+        <div class="form-card-content">
+          <h3 class="section-subtitle">Formulario de Reserva</h3>
+
+          <form class="form">
+            <div class="grid-2">
+              <div class="field">
+                <label class="label">Nombre Completo</label>
+                <input type="text" class="input" placeholder="Tu nombre" />
+              </div>
+              <div class="field">
+                <label class="label">Teléfono</label>
+                <input type="tel" class="input" placeholder="+52 55 1234 5678" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Email</label>
+              <input type="email" class="input" placeholder="tu@email.com" />
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label class="label">Fecha</label>
+                <input type="date" class="input" />
+              </div>
+              <div class="field">
+                <label class="label">Hora</label>
+                <select class="input select">
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>19:00</option>
+                  <option>20:00</option>
+                  <option>21:00</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Número de Personas</label>
+              <select class="input select">
+                <option>2 personas</option>
+                <option>3 personas</option>
+                <option>4 personas</option>
+                <option>5 personas</option>
+                <option>6+ personas</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="label">Comentarios Especiales</label>
+              <textarea rows="4" class="input textarea" placeholder="Ocasión especial, alergias alimentarias, preferencias..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-hero btn-lg shadow-glow btn-block">
+              Confirmar Reserva
+            </button>
+          </form>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+ /* Layout general */
+.contact-section {
+  padding: 80px 0;
+  background: var(--bg-section);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+/* Tipografía e intro */
+.intro {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+}
+
+.subtitle {
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(1.125rem, 0.6vw + 1rem, 1.25rem);
+  max-width: 42rem;
+  line-height: 1.7;
+}
+
+/* Columna izquierda (info) */
+.section-subtitle {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.info-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform 200ms ease, box-shadow 220ms ease;
+  border: 0;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.info-card + .info-card {
+  margin-top: 16px;
+}
+
+.info-card-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+}
+
+.info-icon {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-flex;
+}
+
+.icon { display: inline-flex; }
+
+.info-title {
+  margin: 0 0 4px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.info-line {
+  margin: 0;
+  color: var(--muted);
+}
+
+.info-sub {
+  margin: 4px 0 0 0;
+  color: #858da1;
+  font-size: 14px;
+}
+
+.notice {
+  margin-top: 20px;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(124, 58, 237, 0.25);
+}
+
+.notice-title {
+  margin: 0 0 8px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.notice-text {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.notice-bullets {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+/* Columna derecha (form) */
+.form-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(17, 24, 39, 0.18);
+  border: 0;
+}
+
+.form-card-content {
+  padding: 32px;
+}
+
+/* Formulario: correcciones clave */
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+/* Dos columnas solo en pantallas medianas+; en móvil 1 columna */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+.field {
+  /* Evita que el grid intente span no soportado */
+  /* column-span no es estándar aquí; mejor no usarlo */
+}
+
+/* Etiquetas */
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* Inputs base: altura consistente y mejores estados */
+.input,
+.select,
+.textarea {
+  width: 100%;
+  border: 1.5px solid var(--input);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 180ms ease, background-color 160ms ease;
+  font: inherit;
+  line-height: 1.4;
+}
+
+/* Alturas y paddings específicos para consistencia visual */
+.input[type="text"],
+.input[type="tel"],
+.input[type="email"],
+.input[type="date"],
+.select {
+  padding: 12px 16px;
+  height: 44px;
+  border: 2px solid #cdcccc;
+  box-sizing: border-box;
+}
+
+/* Textarea */
+.textarea {
+  padding: 12px 0px;
+  padding-left: 10px;
+  min-height: 120px;
+  resize: vertical;
+  border: 2px solid #cdcccc;
+}
+
+/* Focus accesible y consistente */
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+/* Select: flecha y espacio para que no tape el texto */
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #888 50%),
+    linear-gradient(135deg, #888 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(50% - 3px),
+    calc(100% - 11px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  height: 44px;
+  padding: 10px;
+}
+
+/* Corrige el icono del date en algunos navegadores */
+.input[type="date"] {
+  /* en Safari/Chrome el icono respeta el padding, ok */
+}
+
+/* Botón */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 200ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
+
+.btn-block { width: 100%; }
+
+.btn-lg {
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.btn-hero {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  box-shadow: 0 10px 22px rgba(124, 58, 237, 0.32);
+}
+
+.btn-hero:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(124, 58, 237, 0.42);
+}
+
+.shadow-glow {
+  box-shadow:
+    0 0 0 2px rgba(124, 58, 237, 0.15) inset,
+    0 10px 22px rgba(124, 58, 237, 0.35);
+}
+
+/* Animaciones */
+.animate-fade-in { animation: fadeInUp 520ms ease both; }
+.animate-scale-in { animation: scaleIn 420ms ease both; }
+.animate-glow { animation: glow 1800ms ease-in-out infinite alternate; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 10px 22px rgba(124, 58, 237, 0.25); }
+  to { box-shadow: 0 16px 28px rgba(124, 58, 237, 0.35); }
+}
+</style>

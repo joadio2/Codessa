@@ -1,0 +1,122 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import SideBar from '../../../components/dashBoard/sideBar.astro';
+import TopBar from '../../../components/dashBoard/Topbar.astro';
+import RevenueChart from '../../../components/dashBoard/RevenueChart.astro';
+---
+
+<Layout title="RestaurantOS - Dashboard">
+  <div class="dashboard-container">
+    <SideBar />
+    
+    <main class="main-content">
+      <TopBar />
+      
+      <div class="dashboard-content">
+        <div class="content-header">
+          <h1 class="page-title">Dashboard General</h1>
+          <p class="page-subtitle">Resumen de tu restaurante en tiempo real</p>
+        </div>
+
+        
+
+          <div class="chart-section">
+            <RevenueChart />
+          </div>
+
+          
+
+         
+
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background: var(--color-dark);
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .dashboard-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary) 100%);
+  }
+
+  .content-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--color-accent), #4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2rem;
+    grid-template-areas: 
+      "stats stats stats"
+      "chart chart actions"
+      "orders orders notifications";
+  }
+
+  .stats-section { grid-area: stats; }
+  .chart-section { grid-area: chart; }
+  .orders-section { grid-area: orders; }
+  .actions-section { grid-area: actions; }
+  .notifications-section { grid-area: notifications; }
+
+  @media (max-width: 1200px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+        "stats stats"
+        "chart chart"
+        "orders actions"
+        "notifications notifications";
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-content {
+      padding: 1rem;
+    }
+    
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "stats"
+        "chart"
+        "actions"
+        "orders"
+        "notifications";
+    }
+  }
+</style>

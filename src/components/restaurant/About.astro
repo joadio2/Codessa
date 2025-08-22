@@ -1,0 +1,346 @@
+<section id="nosotros" class="about-section">
+  <div class="container">
+    <div class="grid">
+      <!-- Content -->
+      <div class="content animate-fade-in">
+        <h2 class="title">Nuestra Historia</h2>
+        <p class="lead">
+          Bella Vista nació del sueño de crear un espacio donde la gastronomía de alta
+          calidad se encuentre con la calidez del servicio familiar. Desde 2010, hemos
+          sido pioneros en fusionar técnicas culinarias modernas con sabores tradicionales,
+          creando una experiencia gastronómica inolvidable.
+        </p>
+        <p class="lead">
+          Nuestro compromiso con la excelencia se refleja en cada detalle: desde la
+          selección de ingredientes frescos y locales hasta la presentación artística
+          de cada plato que sale de nuestra cocina.
+        </p>
+
+        <!-- Features Grid -->
+        <div class="features">
+          <!-- Render dinámico (ejemplo) -->
+          <!--
+          {features.map((f, index) => (
+            <article class="feature-card animate-scale-in" style={`animation-delay: ${index * 0.1}s`}>
+              <div class="icon-wrap">
+                <span class="icon"></span>
+              </div>
+              <h3 class="feature-title">{f.title}</h3>
+              <p class="feature-desc">{f.description}</p>
+            </article>
+          ))}
+          -->
+
+          <!-- Ejemplo estático si no usas framework -->
+          <article class="feature-card animate-scale-in" style="animation-delay: 0s">
+            <div class="icon-wrap">
+              <span class="icon">👨‍🍳</span>
+            </div>
+            <h3 class="feature-title">Chef Ejecutivo</h3>
+            <p class="feature-desc">Nuestro chef cuenta con más de 15 años de experiencia en cocina internacional</p>
+          </article>
+
+          <article class="feature-card animate-scale-in" style="animation-delay: 0.1s">
+            <div class="icon-wrap">
+              <span class="icon">🏆</span>
+            </div>
+            <h3 class="feature-title">Reconocimientos</h3>
+            <p class="feature-desc">Galardonados con múltiples premios por excelencia culinaria y servicio</p>
+          </article>
+
+          <article class="feature-card animate-scale-in" style="animation-delay: 0.2s">
+            <div class="icon-wrap">
+              <span class="icon">❤️</span>
+            </div>
+            <h3 class="feature-title">Pasión por Cocinar</h3>
+            <p class="feature-desc">Cada plato es preparado con amor y dedicación para crear experiencias únicas</p>
+          </article>
+
+          <article class="feature-card animate-scale-in" style="animation-delay: 0.3s">
+            <div class="icon-wrap">
+              <span class="icon">👪</span>
+            </div>
+            <h3 class="feature-title">Tradición Familiar</h3>
+            <p class="feature-desc">Un restaurante familiar que ha mantenido sus recetas tradicionales por generaciones</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="image-col animate-fade-in">
+        <div class="image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Interior elegante del restaurante Bella Vista"
+            class="image"
+          />
+          <div class="image-overlay" aria-hidden="true"></div>
+        </div>
+
+        <!-- Floating Stats -->
+        <div class="stat stat-primary">
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Clientes Satisfechos</div>
+        </div>
+
+        <div class="stat stat-secondary" style="animation-delay: 1s;">
+          <div class="stat-value">13</div>
+          <div class="stat-label">Años de Experiencia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --container-max: 1100px;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #7c3aed;
+    --secondary: #22c55e;
+    --bg: #ffffff;
+
+    --card-bg: #ffffff;
+    --card-radius: 16px;
+    --card-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+    --card-shadow-hover: 0 16px 40px rgba(17, 24, 39, 0.12);
+
+    --stat-text: #ffffff;
+  }
+
+  .about-section {
+    padding: 80px 0;
+    background: var(--bg);
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+
+  .title {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+  }
+
+  .lead {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 0 0 20px;
+  }
+
+  /* Features */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media (min-width: 640px) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--card-bg);
+    border-radius: var(--card-radius);
+    border: 1px solid rgba(17, 24, 39, 0.06);
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    padding: 16px;
+    transition:
+      transform 220ms ease,
+      box-shadow 240ms ease,
+      border-color 240ms ease,
+      background-color 240ms ease;
+    will-change: transform, box-shadow;
+  }
+
+  /* Glow radial que sigue el mouse */
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(120px 120px at var(--mx, 50%) var(--my, 50%), rgba(124, 58, 237, 0.14), transparent 60%);
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+    pointer-events: none;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 44px rgba(17, 24, 39, 0.16);
+    border-color: rgba(124, 58, 237, 0.25);
+    background-color: #ffffff;
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+
+  .icon-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .icon {
+    color: var(--primary);
+    display: inline-flex;
+    transition: transform 220ms ease, color 220ms ease, text-shadow 220ms ease;
+  }
+
+  .feature-card:hover .icon {
+    transform: translateY(-2px) scale(1.05);
+    color: var(--primary);
+    text-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+  }
+
+  .feature-title {
+    margin: 0 0 6px;
+    color: var(--text);
+    font-weight: 600;
+    transition: color 200ms ease, letter-spacing 200ms ease;
+  }
+
+  .feature-card:hover .feature-title {
+    color: #111827;
+    letter-spacing: 0.2px;
+  }
+
+  .feature-desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    transition: color 200ms ease;
+  }
+
+  .feature-card:hover .feature-desc {
+    color: #4b5563;
+  }
+
+  /* Image column */
+  .image-col {
+    position: relative;
+  }
+
+  .image-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 16px 36px rgba(17, 24, 39, 0.18);
+  }
+
+  .image {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(124, 58, 237, 0.2), transparent);
+    pointer-events: none;
+  }
+
+  /* Floating stats */
+  .stat {
+    position: absolute;
+    padding: 24px;
+    border-radius: 16px;
+    color: var(--stat-text);
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.12) inset,
+      0 10px 22px rgba(0, 0, 0, 0.25);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .stat-primary {
+    left: -32px;
+    bottom: -32px;
+    background: var(--primary);
+  }
+
+  .stat-secondary {
+    right: -32px;
+    top: -32px;
+    background: var(--secondary);
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    opacity: 0.9;
+    text-align: center;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 520ms ease both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 420ms ease both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+</style>
+
+<script>
+  // Glow que sigue el mouse en cada feature-card
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', x + '%');
+      card.style.setProperty('--my', y + '%');
+    });
+  });
+</script>

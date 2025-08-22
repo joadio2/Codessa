@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 import styles from "./BriefingForm.module.css";
 import { translationsBriefing } from "./transalate";
+
 const ServiceIcon = ({ type }) => {
   const icons = {
     cart: (
@@ -49,6 +51,10 @@ const ServiceIcon = ({ type }) => {
   );
 };
 
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 export default function BriefingForm({ basePath }) {
   const lang = basePath.split("/")[1];
   const t = translationsBriefing[lang] || translationsBriefing["es"];
@@ -58,18 +64,37 @@ export default function BriefingForm({ basePath }) {
     descripcion: "",
     estilo_elegido: "",
     colores: "",
-    logo: null,
     referencias: "",
     email_contacto: "",
     terminos: false,
     comunicaciones: false,
+    plan: "",
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+
+  useEffect(() => {
+    const savedPlan = sessionStorage.getItem("planElegido");
+    if (savedPlan) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        plan: savedPlan,
+      }));
+    }
+  }, []);
+
+  const goPayment = () => {
+    let newLink = "";
+    if (lang === "es") newLink = `/${lang}/proyecto-web/pago`;
+    else if (lang === "pt") newLink = `/${lang}/projeto-web/pagamento`;
+    else newLink = `/${lang}/project-details/payment`;
+    window.location.href = newLink;
+  };
 
   const stepsConfig = [
     { requiredFields: ["nombre_negocio"] },
-    { requiredFields: [] }, // Ningún campo requerido en el paso 2
+    { requiredFields: [] },
     { requiredFields: ["email_contacto", "terminos"] },
   ];
 
@@ -80,7 +105,6 @@ export default function BriefingForm({ basePath }) {
       [name]:
         type === "checkbox" ? checked : type === "file" ? files[0] : value,
     }));
-    // Limpiar el error cuando el usuario empieza a corregirlo
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
@@ -121,16 +145,31 @@ export default function BriefingForm({ basePath }) {
     if (!validateCurrentStep()) return;
 
     setIsSubmitting(true);
-    const data = new FormData();
-    for (const key in formData) {
-      data.append(key, formData[key]);
-    }
+    setSubmitError(null);
 
     try {
-      window.location.href = "newProject/payment";
+      const payload = { ...formData };
+      const res = await fetch("http://127.0.0.1:54321/functions/v1/pre-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0`, // <-- aquí
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error("Function error:", res.status, err);
+        throw new Error("Function call failed");
+      }
+      const data = await res.json();
+      localStorage.setItem("public_order_id", data.public_code);
+
+      goPayment();
     } catch (error) {
-      const e = t.errors.submit;
-      alert(e);
+      const errorMessage = t.errors.submit;
+      setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -178,7 +217,6 @@ export default function BriefingForm({ basePath }) {
             </div>
 
             <form onSubmit={handleSubmit} noValidate>
-              {/* Paso 1 */}
               {currentStep === 0 && (
                 <div className={`${styles.formStep} ${styles.active}`}>
                   <div className={styles.formGroup}>
@@ -210,22 +248,29 @@ export default function BriefingForm({ basePath }) {
                 </div>
               )}
 
-              {/* Paso 2 */}
               {currentStep === 1 && (
                 <div className={`${styles.formStep} ${styles.active}`}>
                   <div className={styles.formGroup}>
                     <label>{t.step2.estilo_label}</label>
                     <div className={styles.stylePicker}>
                       {t.step2.estilos.map((style) => (
-                        <label key={style.value}>
+                        <label
+                          key={style.value}
+                          className={styles.styleCardPicker}
+                        >
                           <input
                             type="radio"
+                            className={styles.hiddenRadio}
                             name="estilo_elegido"
                             value={style.value}
                             checked={formData.estilo_elegido === style.value}
                             onChange={handleChange}
                           />
-                          <div>
+                          <span
+                            className={styles.radioMark}
+                            aria-hidden="true"
+                          ></span>
+                          <div className={styles.cardContentPicker}>
                             <h3>{style.title}</h3>
                             <p>{style.desc}</p>
                           </div>
@@ -247,20 +292,8 @@ export default function BriefingForm({ basePath }) {
                 </div>
               )}
 
-              {/* Paso 3 */}
               {currentStep === 2 && (
                 <div className={`${styles.formStep} ${styles.active}`}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="logo">{t.step3.logo}</label>
-                    <input
-                      type="file"
-                      id="logo"
-                      name="logo"
-                      onChange={handleChange}
-                      className={styles.fileInput}
-                      accept=".png,.jpg,.jpeg,.svg"
-                    />
-                  </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="referencias">{t.step3.referencias}</label>
                     <input
@@ -326,7 +359,9 @@ export default function BriefingForm({ basePath }) {
                   </div>
                 </div>
               )}
-
+              {submitError && (
+                <p className={styles.submitError}>{submitError}</p>
+              )}
               <div className={styles.formNavigation}>
                 <button
                   type="button"
@@ -418,7 +453,7 @@ export default function BriefingForm({ basePath }) {
             </div>
           </div>
           <a
-            href={`/en/contact`}
+            href={`/${lang}/contact`}
             className={`${styles.ctaButton} ${styles.secondary}`}
           >
             {t.advanced.cta}

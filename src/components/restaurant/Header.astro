@@ -1,0 +1,238 @@
+---
+let isMenuOpen = false;
+---
+
+<header class="site-header">
+  <div class="container">
+    <div class="bar">
+      <!-- Logo -->
+      <div class="logo">
+        <h1 class="brand">Bella Vista</h1>
+      </div>
+
+      <!-- Navegación escritorio -->
+      <nav class="nav nav-desktop" aria-label="Navegación principal">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#menu" class="nav-link">Menú</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#testimonios" class="nav-link">Testimonios</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <!-- CTA escritorio -->
+      <div class="cta-desktop">
+        <button class="btn btn-hero btn-lg">Reservar Mesa</button>
+      </div>
+
+      <!-- Botón menú móvil -->
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="icon" id="iconOpen" aria-hidden="true">
+          <!-- Menu (hamburguesa) -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="icon hidden" id="iconClose" aria-hidden="true">
+          <!-- Close (X) -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <!-- Navegación móvil -->
+    <nav id="mobile-nav" class="nav-mobile" hidden>
+      <div class="nav-mobile-col">
+        <a href="#inicio" class="nav-link nav-mobile-link">Inicio</a>
+        <a href="#menu" class="nav-link nav-mobile-link">Menú</a>
+        <a href="#nosotros" class="nav-link nav-mobile-link">Nosotros</a>
+        <a href="#testimonios" class="nav-link nav-mobile-link">Testimonios</a>
+        <a href="#contacto" class="nav-link nav-mobile-link">Contacto</a>
+        <button class="btn btn-hero btn-lg mt-16">Reservar Mesa</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  const toggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+
+  const setOpen = (open) => {
+    mobileNav.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    if (open) {
+      mobileNav.classList.add('fade-in');
+    } else {
+      mobileNav.classList.remove('fade-in');
+    }
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    setOpen(open);
+  });
+
+  // Cerrar al hacer clic en un enlace móvil
+  document.querySelectorAll('.nav-mobile-link').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+</script>
+
+<style>
+  :root {
+    --bg: rgba(255, 255, 255, 0.95);
+    --border: #e6e6e6;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #7c3aed; /* púrpura */
+    --btn-text: #ffffff;
+    --container-max: 1100px;
+  }
+
+  .site-header {
+    font-family: "Nunito", sans-serif;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: var(--bg);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .logo .brand {
+    margin: 0;
+    font-size: 24px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.2px;
+  }
+
+  /* Nav escritorio */
+  .nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 160ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--primary);
+  }
+
+  /* CTA escritorio */
+  .cta-desktop {
+    display: none;
+  }
+
+  /* Botón menú móvil */
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: color 160ms ease;
+  }
+
+  .menu-toggle:hover {
+    color: var(--primary);
+  }
+
+  .icon.hidden { display: none; }
+
+  /* Nav móvil */
+  .nav-mobile {
+    margin-top: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-mobile-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mt-16 { margin-top: 16px; }
+
+  .fade-in {
+    animation: fadeIn 180ms ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Botón genérico */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .btn-hero {
+    background: var(--primary);
+    color: var(--btn-text);
+    box-shadow: 0 6px 14px rgba(124, 58, 237, 0.28);
+    transition: transform 120ms ease, box-shadow 160ms ease, background 160ms ease;
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(124, 58, 237, 0.34);
+  }
+
+  .btn-lg {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  /* Breakpoints */
+  @media (min-width: 768px) {
+    .nav-desktop { display: flex; }
+    .cta-desktop { display: block; }
+    .menu-toggle { display: none; }
+    .nav-mobile { display: none !important; }
+  }
+</style>

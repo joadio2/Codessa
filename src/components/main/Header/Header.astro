@@ -3,15 +3,18 @@ import { getLangFromUrl, useTranslations } from "../../../i18n/utils"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 import styles from './Header.module.css';
+
+const homeHref = `/${lang}/`;
 ---
+
 <header class={styles.header}>
-  <a href="promo" class={styles.promoBanner}>
+  <a href={`${homeHref}promo`} class={styles.promoBanner}>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class={styles.promoIcon}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-    ¡Oferta Especial! Tu Landing Page Profesional por solo 50€
+    {t("banner.title")}
   </a>
   <div class={styles.container}>
     <div class={styles.logo}>
-      <a href={`/${lang}/`} class={styles.logoLink}>
+      <a href={homeHref} class={styles.logoLink}>
         <span class={styles.logoBracket}>&lt;</span>
         Codessa
         <span class={styles.logoBracket}>/&gt;</span>
@@ -26,11 +29,10 @@ import styles from './Header.module.css';
     </label>
 
     <nav class={styles.nav}>
-      <a href="#philosophy">{t('nav.philosophy')}</a>
-      <a href="#services">{t('nav.services')}</a>
-      <a href="#process">{t('nav.process')}</a>
-      <a href="#faq">{t('nav.faq')}</a>
-      <a href="#cta">{t('nav.cta')}</a>
+      <a href={`${homeHref}#services`}>{t('nav.services')}</a>
+      <a href={`${homeHref}#process`}>{t('nav.process')}</a>
+      <a href={`${homeHref}#faq`}>{t('nav.faq')}</a>
+      <a href={`${homeHref}#cta`}>{t('nav.cta')}</a>
     </nav>
   </div>
 </header>

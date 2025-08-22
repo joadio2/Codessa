@@ -1,0 +1,388 @@
+---
+import { products } from "../../../data/product";
+function getProduct(id: number) {
+  return `/e-commerce/shop/product/${id}`;
+}
+---
+
+<section class="bestsellers">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Más vendidos</span>
+      <h2 class="section-title">Productos favoritos</h2>
+      <p class="section-description">
+        Los productos que nuestras clientas aman y recomiendan
+      </p>
+    </div>
+
+    <div class="products-grid">
+      {products.map((product) => (
+        <div class="product-card">
+          {product.bestseller && (
+            <div class="bestseller-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              Best Seller
+            </div>
+          )}
+          
+          <div class="product-image">
+            <img src={product.image} alt={product.name} />
+            <div class="product-overlay">
+              <a class="quick-view-btn" href={getProduct(product.id)}>Vista rápida</a>
+              <button class="add-to-cart-btn">Agregar al carrito</button>
+            </div>
+          </div>
+
+          <div class="product-info">
+            <span class="product-category">{product.category}</span>
+            <h3 class="product-name">{product.name}</h3>
+            
+            <div class="product-rating">
+              <div class="stars">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <svg 
+                    class={`star ${i < Math.floor(product.rating) ? 'filled' : ''}`}
+                    width="14" 
+                    height="14" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+              <span class="rating-text">{product.rating} ({product.reviews})</span>
+            </div>
+
+            <div class="color-options">
+              {product.colors.map((color) => (
+                <button 
+                  class="color-swatch" 
+                  style={`background-color: ${color}`}
+                  title="Color disponible"
+                ></button>
+              ))}
+            </div>
+
+            <div class="product-price">
+              <span class="current-price">${product.price}</span>
+              {product.originalPrice && (
+                <span class="original-price">${product.originalPrice}</span>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="section-footer">
+      <a href="/e-commerce/shop" class="view-all-btn">
+        Ver todos los productos
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bestsellers {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #fdf7f0 0%, #f8f1eb 100%);
+    position: relative;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-description {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .bestseller-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .product-image {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+
+  .quick-view-btn, .add-to-cart-btn {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .quick-view-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .quick-view-btn:hover {
+    background: white;
+    color: #2c2c2c;
+  }
+
+  .add-to-cart-btn {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    border: 2px solid transparent;
+  }
+
+  .add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+  }
+
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-category {
+    color: #999;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  .product-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin: 0.5rem 0;
+    line-height: 1.3;
+  }
+
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .star {
+    color: #ddd;
+    transition: color 0.2s ease;
+  }
+
+  .star.filled {
+    color: #ffc107;
+  }
+
+  .rating-text {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .color-options {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .color-swatch:hover {
+    transform: scale(1.1);
+    border-color: #c44569;
+  }
+
+  .product-price {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .current-price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #c44569;
+  }
+
+  .original-price {
+    font-size: 1rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .section-footer {
+    text-align: center;
+  }
+
+  .view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: #c44569;
+    border: 2px solid #c44569;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .view-all-btn:hover {
+    background: #c44569;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .bestsellers {
+      padding: 3rem 0;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .product-overlay {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quick-view-btn, .add-to-cart-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>

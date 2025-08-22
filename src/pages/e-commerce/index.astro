@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/LayoutEcommerce.astro';
+
+// Importamos todos nuestros nuevos componentes
+import Hero from '../../components/ecommerce/lading/Hero.astro';
+import FeaturedProducts from '../../components/ecommerce/lading/FeaturedProducts.astro';
+import Coupon from '../../components/ecommerce/lading/Coupon.astro';
+import Philosophy from '../../components/ecommerce/lading/Philosophy.astro';
+import CategoryGrid from '../../components/ecommerce/lading/Category.astro';
+import Testimonials from '../../components/ecommerce/lading/Testimonials.astro';
+import NewsletterCTA from '../../components/ecommerce/lading/Newsletter.astro';
+
+// Los datos de la página ahora viven aquí, listos para ser pasados
+const heroData = {
+  title: "Belleza que Respira.",
+  subtitle: "Descubre nuestra colección de maquillaje formulada con ingredientes puros que cuidan tu piel. Menos es más.",
+  ctaText: "Explorar Colección",
+  imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+};
+
+const featuredProducts = [
+  { name: "Base 'Luz de Seda'", description: "Cobertura ligera y acabado luminoso.", price: "32,00 €", imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { name: "Labial 'Pétalo Mate'", description: "Color intenso y aterciopelado.", price: "24,00 €", imageUrl: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { name: "Sombra 'Duna Dorada'", description: "Pigmentos minerales radiantes.", price: "19,50 €", imageUrl: "https://images.unsplash.com/photo-1512496015851-a90138ba0ea5?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+];
+
+const philosophyData = {
+    title: "Ingredientes que tu Piel Amará",
+    content: "Creemos en la belleza consciente. Por eso, cada producto está libre de parabenos, es 100% vegano y nunca ha sido testado en animales. Fórmulas limpias para un resultado impecable y una conciencia tranquila.",
+    imageUrl: "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+};
+
+const testimonials = [
+    { quote: "La base es increíble, parece que no llevo nada pero mi piel se ve perfecta. ¡Mi nuevo imprescindible!", author: "Ana G." },
+    { quote: "Por fin un labial mate que no reseca. El color dura horas y es súper cómodo de llevar.", author: "Lucía M." }
+];
+---
+<Layout title="Aura Cosmetics - Belleza que Respira">
+	<main class="main">
+		<Hero {...heroData} />
+		<FeaturedProducts products={featuredProducts} />
+		<Coupon />
+		<Philosophy {...philosophyData} />
+		<CategoryGrid />
+		<Testimonials testimonials={testimonials} />
+		<NewsletterCTA />
+	</main>
+</Layout>
+<style>
+	.main{
+		padding-top: 50px;
+	}
+</style>

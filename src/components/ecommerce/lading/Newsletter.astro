@@ -1,0 +1,41 @@
+---
+// No props needed
+---
+<section class="content-section final-cta-section">
+    <h2 class="section-title">Despierta tu Brillo.</h2>
+    <p>Únete a nuestra comunidad y obtén un 15% de descuento en tu primer pedido.</p>
+    <form class="newsletter-form">
+        <input type="email" placeholder="Tu correo electrónico" required />
+        <button type="submit" class="cta-button">Suscribirme</button>
+    </form>
+</section>
+
+<style>
+    .final-cta-section {
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .final-cta-section p { margin-bottom: 2rem; }
+    .newsletter-form {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .newsletter-form input {
+        padding: 14px 20px;
+        border-radius: 50px;
+        border: 1px solid #ddd;
+        min-width: 300px;
+    }
+    @media (max-width: 768px) {
+        .newsletter-form {
+            flex-direction: column;
+            align-items: center;
+        }
+        .newsletter-form input {
+            width: 100%;
+            max-width: 350px;
+        }
+    }
+</style>

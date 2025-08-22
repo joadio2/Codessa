@@ -1,0 +1,347 @@
+---
+// CouponSection.astro - Componente de cupón mejorado
+---
+
+<section class="coupon-section">
+  <div class="container">
+    <div class="coupon-card">
+      <div class="coupon-header">
+        <div class="gift-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-2 .89-2 2v1c0 1.11.89 2 2 2v8c0 1.11.89 2 2 2h12c1.11 0 2-.89 2-2v-8c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
+          </svg>
+        </div>
+        <h2 class="coupon-title">¡Regalo Especial!</h2>
+        <p class="coupon-subtitle">
+          Obtén un descuento exclusivo en tu primera compra
+        </p>
+      </div>
+
+      <div class="discount-display">
+        <div class="discount-amount">20%</div>
+        <div class="discount-text">DESCUENTO</div>
+      </div>
+
+      <div class="coupon-code-section">
+        <p class="code-label">Usa el código:</p>
+        <div class="coupon-code">
+          <span class="code-text" id="coupon-text">BELLEZA20</span>
+          <button class="copy-button" onclick="copyCode()" title="Copiar código">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="copy-feedback" id="copy-feedback">¡Código copiado!</div>
+      </div>
+
+      <div class="coupon-footer">
+        <a href="/productos" class="shop-button">
+          Comprar Ahora
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <p class="expiry-text">*Válido hasta fin de mes</p>
+      </div>
+
+      <!-- Decorative elements -->
+      <div class="decorative-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+  .coupon-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f8f1eb 0%, #fdf7f0 100%);
+    position: relative;
+  }
+
+  .coupon-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b9d' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .coupon-card {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    border-radius: 25px;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(255, 107, 157, 0.3);
+    transform: perspective(1000px) rotateX(5deg);
+    transition: transform 0.3s ease;
+  }
+
+  .coupon-card:hover {
+    transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+    box-shadow: 0 25px 50px rgba(255, 107, 157, 0.4);
+  }
+
+  .coupon-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  .coupon-header {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 2rem;
+  }
+
+  .gift-icon {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .coupon-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .coupon-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .discount-display {
+    position: relative;
+    z-index: 2;
+    margin: 2rem 0;
+  }
+
+  .discount-amount {
+    font-size: clamp(4rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #fff, #f8f8f8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .discount-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    opacity: 0.9;
+  }
+
+  .coupon-code-section {
+    position: relative;
+    z-index: 2;
+    margin: 2.5rem 0;
+  }
+
+  .code-label {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .coupon-code {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .coupon-code:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .code-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .copy-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .copy-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .copy-feedback {
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .copy-feedback.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .coupon-footer {
+    position: relative;
+    z-index: 2;
+  }
+
+  .shop-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: #c44569;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .shop-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background: #f8f8f8;
+  }
+
+  .expiry-text {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .decorative-dots {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  .dot:nth-child(4) { animation-delay: 0.6s; }
+  .dot:nth-child(5) { animation-delay: 0.8s; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.2); }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .coupon-section {
+      padding: 3rem 0;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .coupon-card {
+      padding: 2rem 1.5rem;
+      transform: none;
+    }
+
+    .coupon-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .coupon-code {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .code-text {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+    }
+
+    .shop-button {
+      width: 100%;
+      justify-content: center;
+      max-width: 280px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .coupon-card {
+      padding: 1.5rem 1rem;
+    }
+
+    .decorative-dots {
+      display: none;
+    }
+  }
+</style>

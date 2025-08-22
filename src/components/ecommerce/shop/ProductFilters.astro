@@ -1,0 +1,518 @@
+---
+// ProductFilters.astro - Componente de filtros de productos
+---
+
+<div class="product-filters">
+  <button class="filters-toggle" id="filters-toggle">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>
+    </svg>
+    Filtros
+  </button>
+
+  <div class="filters-panel" id="filters-panel">
+    <div class="filters-header">
+      <h3>Filtrar productos</h3>
+      <button class="filters-close" id="filters-close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="filters-content">
+      <!-- Categorías -->
+      <div class="filter-group">
+        <h4 class="filter-title">Categoría</h4>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="checkbox" name="category" value="all" checked>
+            <span class="checkmark"></span>
+            Todos los productos
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="category" value="rostro">
+            <span class="checkmark"></span>
+            Rostro
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="category" value="ojos">
+            <span class="checkmark"></span>
+            Ojos
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="category" value="labios">
+            <span class="checkmark"></span>
+            Labios
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="category" value="accesorios">
+            <span class="checkmark"></span>
+            Accesorios
+          </label>
+        </div>
+      </div>
+
+      <!-- Rango de precios -->
+      <div class="filter-group">
+        <h4 class="filter-title">Precio</h4>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input type="number" placeholder="Min" class="price-input" id="price-min">
+            <span class="price-separator">-</span>
+            <input type="number" placeholder="Max" class="price-input" id="price-max">
+          </div>
+          <div class="price-slider">
+            <input type="range" min="0" max="100" value="0" class="slider" id="slider-min">
+            <input type="range" min="0" max="100" value="100" class="slider" id="slider-max">
+          </div>
+          <div class="price-labels">
+            <span>$0</span>
+            <span>$100+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marca -->
+      <div class="filter-group">
+        <h4 class="filter-title">Marca</h4>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="checkbox" name="brand" value="belleza">
+            <span class="checkmark"></span>
+            Belleza Pro
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="brand" value="glamour">
+            <span class="checkmark"></span>
+            Glamour Elite
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="brand" value="luxury">
+            <span class="checkmark"></span>
+            Luxury Beauty
+          </label>
+        </div>
+      </div>
+
+      <!-- Calificación -->
+      <div class="filter-group">
+        <h4 class="filter-title">Calificación</h4>
+        <div class="rating-filters">
+          <label class="rating-option">
+            <input type="radio" name="rating" value="5">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+            <span class="rating-text">5 estrellas</span>
+          </label>
+          <label class="rating-option">
+            <input type="radio" name="rating" value="4">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star">★</span>
+            </div>
+            <span class="rating-text">4+ estrellas</span>
+          </label>
+          <label class="rating-option">
+            <input type="radio" name="rating" value="3">
+            <div class="stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <span class="rating-text">3+ estrellas</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-actions">
+      <button class="clear-filters">Limpiar filtros</button>
+      <button class="apply-filters">Aplicar filtros</button>
+    </div>
+  </div>
+
+  <div class="filters-overlay" id="filters-overlay"></div>
+</div>
+
+<script>
+  // Toggle filters panel
+  const filtersToggle = document.getElementById('filters-toggle');
+  const filtersPanel = document.getElementById('filters-panel');
+  const filtersClose = document.getElementById('filters-close');
+  const filtersOverlay = document.getElementById('filters-overlay');
+
+  function openFilters() {
+    filtersPanel?.classList.add('active');
+    filtersOverlay?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFilters() {
+    filtersPanel?.classList.remove('active');
+    filtersOverlay?.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  filtersToggle?.addEventListener('click', openFilters);
+  filtersClose?.addEventListener('click', closeFilters);
+  filtersOverlay?.addEventListener('click', closeFilters);
+
+  // Price range sliders
+  const sliderMin = document.getElementById('slider-min');
+  const sliderMax = document.getElementById('slider-max');
+  const priceMin = document.getElementById('price-min');
+  const priceMax = document.getElementById('price-max');
+
+  function updatePriceInputs() {
+    if (sliderMin && sliderMax && priceMin && priceMax) {
+      priceMin.value = sliderMin.value;
+      priceMax.value = sliderMax.value;
+    }
+  }
+
+  sliderMin?.addEventListener('input', updatePriceInputs);
+  sliderMax?.addEventListener('input', updatePriceInputs);
+
+  // Clear filters
+  document.querySelector('.clear-filters')?.addEventListener('click', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const radios = document.querySelectorAll('input[type="radio"]');
+    
+    checkboxes.forEach(cb => cb.checked = false);
+    radios.forEach(radio => radio.checked = false);
+    
+    if (sliderMin && sliderMax) {
+      sliderMin.value = 0;
+      sliderMax.value = 100;
+      updatePriceInputs();
+    }
+  });
+</script>
+
+<style>
+  .product-filters {
+    position: relative;
+  }
+
+  .filters-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    color: #666;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .filters-toggle:hover {
+    border-color: #c44569;
+    color: #c44569;
+  }
+
+  .filters-panel {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    z-index: 1001;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .filters-panel.active {
+    left: 0;
+  }
+
+  .filters-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .filters-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+  }
+
+  .filters-header h3 {
+    margin: 0;
+    color: #2c2c2c;
+    font-weight: 500;
+  }
+
+  .filters-close {
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .filters-close:hover {
+    background: rgba(255, 107, 157, 0.1);
+    color: #c44569;
+  }
+
+  .filters-content {
+    padding: 2rem;
+  }
+
+  .filter-group {
+    margin-bottom: 2rem;
+  }
+
+  .filter-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+  }
+
+  .filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+
+  .filter-option:hover {
+    color: #2c2c2c;
+  }
+
+  .filter-option input[type="checkbox"] {
+    display: none;
+  }
+
+  .checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .filter-option input[type="checkbox"]:checked + .checkmark {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    border-color: #c44569;
+  }
+
+  .filter-option input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* Price Range */
+  .price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .price-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
+  .price-input:focus {
+    outline: none;
+    border-color: #c44569;
+  }
+
+  .price-separator {
+    color: #999;
+  }
+
+  .price-slider {
+    position: relative;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+  }
+
+  .slider {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 6px;
+    background: transparent;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .price-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #999;
+  }
+
+  /* Rating Filters */
+  .rating-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .rating-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+  }
+
+  .rating-option input[type="radio"] {
+    display: none;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .star {
+    color: #ddd;
+    font-size: 1rem;
+  }
+
+  .star.filled {
+    color: #ffc107;
+  }
+
+  .rating-text {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .rating-option input[type="radio"]:checked ~ .rating-text {
+    color: #c44569;
+    font-weight: 500;
+  }
+
+  /* Filter Actions */
+  .filters-actions {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(255, 107, 157, 0.1);
+  }
+
+  .clear-filters, .apply-filters {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .clear-filters {
+    background: transparent;
+    border: 2px solid #e0e0e0;
+    color: #666;
+  }
+
+  .clear-filters:hover {
+    border-color: #c44569;
+    color: #c44569;
+  }
+
+  .apply-filters {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    border: 2px solid transparent;
+    color: white;
+  }
+
+  .apply-filters:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .filters-panel {
+      width: 100vw;
+      left: -100vw;
+    }
+
+    .filters-panel.active {
+      left: 0;
+    }
+
+    .filters-content {
+      padding: 1.5rem;
+    }
+
+    .filters-actions {
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+    }
+  }
+</style>

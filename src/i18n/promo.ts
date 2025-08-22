@@ -139,6 +139,21 @@ export const ui = {
       tagline: "Engineered with Logic, Powered by Creativity.",
       copyright: "All rights reserved.",
     },
+    schedule: {
+      title: "You're at the right step to start",
+      subtitle:
+        "Secure your spot for the initial consultation. Here we’ll define the strategy for your project.",
+    },
+    portafolio: {
+      sectionTitle: "Our Work",
+      sectionSubtitle:
+        "Discover the web projects we’ve built for our clients. Each site is crafted with modern technologies and a focus on user experience.",
+      viewProject: "View Project",
+      viewSite: "Visit Site",
+      details: "Details",
+      footerText: "Do you have a project in mind?",
+      ctaButton: "Let’s talk about your idea",
+    },
   },
   es: {
     hero: {
@@ -272,6 +287,21 @@ export const ui = {
       tagline: "Diseñado con Lógica, Impulsado por Creatividad.",
       copyright: "Todos los derechos reservados.",
     },
+    schedule: {
+      title: "Estás a un Paso de Empezar",
+      subtitle:
+        "Asegura tu espacio para la consulta inicial. Aquí definiremos la estrategia para tu proyecto.",
+    },
+    portafolio: {
+      sectionTitle: "Nuestros Trabajos",
+      sectionSubtitle:
+        "Descubre los proyectos web que hemos creado para nuestros clientes. Cada sitio está diseñado con tecnologías modernas y enfoque en la experiencia del usuario.",
+      viewProject: "Ver Proyecto",
+      viewSite: "Ver Sitio",
+      details: "Detalles",
+      footerText: "¿Tienes un proyecto en mente?",
+      ctaButton: "Hablemos de tu idea",
+    },
   },
   pt: {
     hero: {
@@ -404,6 +434,21 @@ export const ui = {
     footer: {
       tagline: "Concebido com Lógica, Impulsionado pela Criatividade.",
       copyright: "Todos os direitos reservados.",
+    },
+    schedule: {
+      title: "Está a um Passo de Começar",
+      subtitle:
+        "Garanta o seu lugar para a consulta inicial. Aqui iremos definir a estratégia para o seu projeto.",
+    },
+    portafolio: {
+      sectionTitle: "Nossos Trabalhos",
+      sectionSubtitle:
+        "Descubra os projetos web que criamos para nossos clientes. Cada site é feito com tecnologias modernas e focado na experiência do usuário.",
+      viewProject: "Ver Projeto",
+      viewSite: "Visitar Site",
+      details: "Detalhes",
+      footerText: "Você tem um projeto em mente?",
+      ctaButton: "Vamos falar sobre sua ideia",
     },
   },
 };

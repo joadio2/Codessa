@@ -1,0 +1,613 @@
+---
+const { contactImage } = Astro.props;
+---
+
+<section class="contact">
+  <div class="contact-container">
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="section-header">
+          <h2 class="contact-title">
+            Hablemos de
+            <span class="highlight">belleza</span>
+          </h2>
+          <p class="contact-subtitle">
+            Estamos aquí para ayudarte a encontrar tu look perfecto
+          </p>
+        </div>
+
+        <div class="contact-methods">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-details">
+              <h3>Email</h3>
+              <p>hola@tutienda.com</p>
+              <span class="response-time">Respuesta en 24h</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-details">
+              <h3>WhatsApp</h3>
+              <p>+34 123 456 789</p>
+              <span class="response-time">Respuesta inmediata</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-details">
+              <h3>Ubicación</h3>
+              <p>Madrid, España</p>
+              <span class="response-time">Envíos a toda España</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">⏰</div>
+            <div class="contact-details">
+              <h3>Horario</h3>
+              <p>Lun - Vie: 9:00 - 18:00</p>
+              <span class="response-time">Soporte personalizado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <h3>Síguenos</h3>
+          <div class="social-icons">
+            <a href="#" class="social-link instagram">
+              <span>📷</span>
+            </a>
+            <a href="#" class="social-link tiktok">
+              <span>🎵</span>
+            </a>
+            <a href="#" class="social-link youtube">
+              <span>📺</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-section">
+        <div class="form-container">
+          <div class="form-header">
+            <h3>Envíanos un mensaje</h3>
+            <p>¿Tienes alguna pregunta? Nos encantaría ayudarte</p>
+          </div>
+
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Asunto</label>
+              <select id="subject" name="subject" required>
+                <option value="">Selecciona un tema</option>
+                <option value="productos">Consulta sobre productos</option>
+                <option value="pedido">Estado de mi pedido</option>
+                <option value="tutorial">Ayuda con maquillaje</option>
+                <option value="colaboracion">Colaboraciones</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Mensaje</label>
+              <textarea id="message" name="message" placeholder="Cuéntanos cómo podemos ayudarte..." rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              Enviar mensaje
+              <span class="btn-icon">💕</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="contact-visual">
+          <div class="image-container">
+            <img 
+              src="https://plus.unsplash.com/premium_photo-1702902232929-d85dd78030df?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+              alt="Contacta con nosotros"
+              class="contact-img"
+            />
+            <div class="image-overlay"></div>
+          </div>
+          
+          <div class="floating-elements">
+            <div class="floating-item item-1"></div>
+            <div class="floating-item item-2"></div>
+            <div class="floating-item item-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <h3 class="faq-title">
+        Preguntas <span class="highlight">frecuentes</span>
+      </h3>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>¿Hacéis envíos internacionales?</h4>
+          <p>Actualmente enviamos a toda España. Próximamente ampliaremos a Europa.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Puedo devolver un producto?</h4>
+          <p>Sí, tienes 30 días para devolver cualquier producto sin usar.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Ofrecéis asesoramiento personalizado?</h4>
+          <p>¡Por supuesto! Nuestro equipo te ayuda a encontrar tu look ideal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #fdf7f0 0%, #f8f1eb 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -30%;
+    width: 60%;
+    height: 140%;
+    background: linear-gradient(45deg, rgba(255, 182, 193, 0.06) 0%, rgba(255, 218, 185, 0.06) 100%);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 5rem;
+  }
+
+  .contact-info {
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .contact-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #2c2c2c;
+    letter-spacing: -0.02em;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 400;
+  }
+
+  .contact-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  .contact-methods {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 182, 193, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .contact-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.15);
+  }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    border-radius: 50%;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .contact-details h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .contact-details p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .response-time {
+    font-size: 0.85rem;
+    color: #999;
+    font-style: italic;
+  }
+
+  .social-links {
+    text-align: center;
+  }
+
+  .social-links h3 {
+    font-size: 1.2rem;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+  }
+
+  .social-link:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+  }
+
+  .contact-form-section {
+    position: relative;
+    animation: fadeInRight 1s ease-out 0.3s both;
+  }
+
+  .form-container {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 25px;
+    padding: 2.5rem;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 182, 193, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .form-header h3 {
+    font-size: 1.5rem;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-header p {
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 1rem;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #ff6b9d;
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+  }
+
+  .btn-primary {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+  }
+
+  .contact-visual {
+    position: absolute;
+    top: -2rem;
+    right: -2rem;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+  }
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 107, 157, 0.2), rgba(196, 69, 105, 0.2));
+  }
+
+  .floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .floating-item {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(196, 69, 105, 0.4));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .item-1 {
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    left: -10px;
+    animation-delay: 0s;
+  }
+
+  .item-2 {
+    width: 15px;
+    height: 15px;
+    bottom: -5px;
+    right: 20px;
+    animation-delay: 2s;
+  }
+
+  .item-3 {
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    left: -15px;
+    animation-delay: 4s;
+  }
+
+  .faq-section {
+    text-align: center;
+    padding: 4rem 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 182, 193, 0.2);
+  }
+
+  .faq-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    color: #2c2c2c;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    text-align: left;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 182, 193, 0.2);
+  }
+
+  .faq-item h4 {
+    color: #2c2c2c;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .faq-item p {
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(180deg);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact {
+      padding: 4rem 0;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .contact-methods {
+      gap: 1rem;
+    }
+
+    .contact-item {
+      padding: 1.2rem;
+    }
+
+    .form-container {
+      padding: 2rem;
+    }
+
+    .contact-visual {
+      display: none;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .faq-section {
+      padding: 3rem 1rem;
+      margin: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-container {
+      padding: 0 1rem;
+    }
+
+    .contact-item {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .form-container {
+      padding: 1.5rem;
+    }
+
+    .social-icons {
+      gap: 0.8rem;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+    }
+  }
+</style>
