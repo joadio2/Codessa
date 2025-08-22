@@ -1,0 +1,354 @@
+---
+---
+
+<div class="chart-container">
+  <div class="chart-header">
+    <div class="chart-title-section">
+      <h3 class="chart-title">Ingresos Semanales</h3>
+      <p class="chart-subtitle">Comparación vs semana anterior</p>
+    </div>
+    <div class="chart-actions">
+      <select class="chart-selector">
+        <option>7 días</option>
+        <option>30 días</option>
+        <option>90 días</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="chart-content">
+    <div class="chart-stats">
+      <div class="current-period">
+        <span class="period-label">Esta semana</span>
+        <span class="period-value">$18,247</span>
+      </div>
+      <div class="comparison">
+        <span class="comparison-label">vs anterior</span>
+        <span class="comparison-value positive">+15.3%</span>
+      </div>
+    </div>
+
+    <div class="chart-area" id="revenueChart">
+      <div class="chart-bars">
+        <div class="chart-bar" style="height: 45%"><span class="bar-value">$1,850</span></div>
+        <div class="chart-bar" style="height: 60%"><span class="bar-value">$2,400</span></div>
+        <div class="chart-bar" style="height: 80%"><span class="bar-value">$3,200</span></div>
+        <div class="chart-bar active" style="height: 95%"><span class="bar-value">$3,800</span></div>
+        <div class="chart-bar" style="height: 70%"><span class="bar-value">$2,800</span></div>
+        <div class="chart-bar" style="height: 55%"><span class="bar-value">$2,200</span></div>
+        <div class="chart-bar" style="height: 85%"><span class="bar-value">$3,400</span></div>
+      </div>
+      <div class="chart-labels">
+        <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+      </div>
+    </div>
+
+    <div class="chart-insights">
+      <div class="insight-item">
+        <span class="insight-icon">📈</span>
+        <span class="insight-text">Mejor día: Jueves ($3,800)</span>
+      </div>
+      <div class="insight-item">
+        <span class="insight-icon">⏰</span>
+        <span class="insight-text">Pico: 7-9 PM</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chart-container {
+    background: var(--color-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    height: fit-content;
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .chart-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .chart-subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .chart-selector {
+    background: var(--color-dark);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .chart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .chart-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(48, 197, 155, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(48, 197, 155, 0.1);
+  }
+
+  .period-label, .comparison-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .period-value {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .comparison-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .comparison-value.positive {
+    color: #22c55e;
+  }
+
+  .chart-area {
+    position: relative;
+  }
+
+  .chart-bars {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: 200px;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .chart-bar
+---
+const stats = [
+  {
+    title: 'Ventas Hoy',
+    value: '$2,847',
+    change: '+12.5%',
+    changeType: 'positive',
+    icon: '💰',
+    color: 'accent'
+  },
+  {
+    title: 'Órdenes',
+    value: '127',
+    change: '+8.2%',
+    changeType: 'positive',
+    icon: '📋',
+    color: 'blue'
+  },
+  {
+    title: 'Clientes',
+    value: '89',
+    change: '-2.1%',
+    changeType: 'negative',
+    icon: '👥',
+    color: 'purple'
+  },
+  {
+    title: 'Promedio Orden',
+    value: '$22.41',
+    change: '+5.8%',
+    changeType: 'positive',
+    icon: '📊',
+    color: 'orange'
+  }
+];
+---
+
+<div class="stats-container">
+  {stats.map(stat => (
+    <div class={`stat-card stat-card--${stat.color}`}>
+      <div class="stat-header">
+        <span class="stat-icon">{stat.icon}</span>
+        <span class={`stat-change stat-change--${stat.changeType}`}>
+          {stat.change}
+        </span>
+      </div>
+      <div class="stat-body">
+        <h3 class="stat-value">{stat.value}</h3>
+        <p class="stat-title">{stat.title}</p>
+      </div>
+      <div class="stat-footer">
+        <div class="stat-progress">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--color-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-accent);
+  }
+
+  .stat-card--blue::before {
+    background: #4facfe;
+  }
+
+  .stat-card--purple::before {
+    background: #a855f7;
+  }
+
+  .stat-card--orange::before {
+    background: #f97316;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-accent);
+  }
+
+  .stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(48, 197, 155, 0.3));
+  }
+
+  .stat-change {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  .stat-change--positive {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+  }
+
+  .stat-change--negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+
+  .stat-body {
+    margin-bottom: 1rem;
+  }
+
+  .stat-value {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-title {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .stat-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--color-accent);
+    width: 70%;
+    border-radius: 2px;
+    animation: progressLoad 2s ease-out;
+  }
+
+  .stat-card--blue .progress-bar {
+    background: #4facfe;
+  }
+
+  .stat-card--purple .progress-bar {
+    background: #a855f7;
+  }
+
+  .stat-card--orange .progress-bar {
+    background: #f97316;
+  }
+
+  @keyframes progressLoad {
+    from { width: 0; }
+    to { width: 70%; }
+  }
+
+  @media (max-width: 768px) {
+    .stats-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-card {
+      padding: 1.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,254 @@
+---
+---
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <div class="search-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+        <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <input type="text" placeholder="Buscar órdenes, clientes...">
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <div class="quick-stats">
+      <div class="stat-item">
+        <span class="stat-value">12</span>
+        <span class="stat-label">Órdenes Activas</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">$2,847</span>
+        <span class="stat-label">Hoy</span>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button class="notification-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 8C18 6.4087 17.3679 4.88258 16.2426 3.75736C15.1174 2.63214 13.5913 2 12 2C10.4087 2 8.88258 2.63214 7.75736 3.75736C6.63214 4.88258 6 6.4087 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M13.73 21C13.5542 21.3031 13.3019 21.5547 12.9982 21.7295C12.6946 21.9044 12.3504 21.9965 12 21.9965C11.6496 21.9965 11.3054 21.9044 11.0018 21.7295C10.6981 21.5547 10.4458 21.3031 10.27 21" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+
+      <div class="user-menu">
+        <img src="/avatar.jpg" alt="Usuario" class="user-avatar">
+        <div class="user-info">
+          <span class="user-name">María González</span>
+          <span class="user-role">Administrador</span>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .topbar {
+    height: 80px;
+    background: var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .menu-toggle span {
+    width: 24px;
+    height: 3px;
+    background: var(--color-text);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: var(--color-dark);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+    min-width: 350px;
+    transition: all 0.3s ease;
+  }
+
+  .search-box:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(48, 197, 155, 0.1);
+  }
+
+  .search-box svg {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .search-box input {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    width: 100%;
+    outline: none;
+  }
+
+  .search-box input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .quick-stats {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .stat-value {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-accent);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .notification-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .notification-btn:hover {
+    background: var(--color-dark);
+    color: var(--color-text);
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #ff5f57;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+
+  .user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-dark);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .user-menu:hover {
+    border-color: var(--color-accent);
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-accent);
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-name {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .user-role {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .topbar {
+      padding: 0 1rem;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .search-box {
+      display: none;
+    }
+
+    .quick-stats {
+      display: none;
+    }
+
+    .user-info {
+      display: none;
+    }
+  }
+</style>
