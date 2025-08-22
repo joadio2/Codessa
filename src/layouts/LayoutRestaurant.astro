@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import Header from '../components/restaurant/Header.astro';
+import Header from '../components/restaurant/Header';
 ---
 
 <!doctype html>
@@ -31,5 +31,7 @@ import Header from '../components/restaurant/Header.astro';
 	html {
 		scroll-behavior: smooth;
 		font-family: "Nunito", sans-serif;
+		padding: 0;
+		margin: 0;
 	}
 </style>

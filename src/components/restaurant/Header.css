@@ -1,0 +1,165 @@
+:root {
+  --bg: rgba(255, 255, 255, 0.95);
+  --border: #e6e6e6;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #7c3aed; /* púrpura */
+  --btn-text: #ffffff;
+  --container-max: 1100px;
+}
+
+.site-header {
+  font-family: "Nunito", sans-serif;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--bg);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+  box-sizing: content-box;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo .brand {
+  margin: 0;
+  font-size: 24px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.2px;
+}
+
+/* Nav escritorio */
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 160ms ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+/* CTA escritorio */
+.cta-desktop {
+  display: none;
+}
+
+/* Botón menú móvil */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.menu-toggle:hover {
+  color: var(--primary);
+}
+
+.icon.hidden {
+  display: none;
+}
+
+/* Nav móvil */
+.nav-mobile {
+  margin-top: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+
+.nav-mobile-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.fade-in {
+  animation: fadeIn 180ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón genérico */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.btn-hero {
+  background: var(--primary);
+  color: var(--btn-text);
+  box-shadow: 0 6px 14px rgba(124, 58, 237, 0.28);
+  transition: transform 120ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.btn-hero:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(124, 58, 237, 0.34);
+}
+
+.btn-lg {
+  padding: 12px 20px;
+  font-size: 15px;
+}
+
+/* Breakpoints */
+@media (min-width: 768px) {
+  .nav-desktop {
+    display: flex;
+  }
+  .cta-desktop {
+    display: block;
+  }
+  .menu-toggle {
+    display: none;
+  }
+  .nav-mobile {
+    display: none !important;
+  }
+}
