@@ -1,22 +1,4 @@
 ---
-// ProductDetail.astro
-export interface Props {
-  product: {
-    id: number;
-    name: string;
-    category: string;
-    price: number;
-    originalPrice: number;
-    image: string;
-    rating: number;
-    reviews: number;
-    bestseller: boolean;
-    colors: string[];
-    description: string;
-  }
-}
-
-
 const { product } = Astro.props;
 ---
 
