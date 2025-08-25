@@ -3,56 +3,168 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utilsPromo"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const projects = [
-  {
-    id: 1,
-    title: "E-commerce Moderno",
-    description: "Tienda online completa con carrito de compras, pagos seguros y panel administrativo.",
-    url: "modernshop.com",
-    image: "/src/assets/ecommerce.png", 
-    tech: ["React", "Node.js", "Stripe", "MongoDB"],
-    category: "E-commerce",
-    status: "live",
-    redirect: `/e-commerce`
-  },
-  {
-    id: 2,
-    title: "App de Fitness",
-    description: "Aplicación web progresiva para seguimiento de ejercicios y nutrición con dashboard interactivo.",
-    url: "fittracker.app",
-    image: "/src/assets/dashboard.png",
-    tech: ["Vue.js", "Firebase", "PWA", "Chart.js"],
-    category: "Aplicación Web",
-    status: "live",
-    redirect: `/dashboard`
+import Image from "astro/components/Image.astro";
+import Restaurant from "../assets/restaurant.png"
+import Lawyer from "../assets/lawyer.png"
+import Dashboard from "../assets/dashboard.png"
+        
 
+const projectsByLang = {
+  en: {
+    projects: [
+      {
+        id: 1,
+        title: "Modern E‑commerce",
+        description: "Full online store with cart, secure payments, and an admin panel.",
+        url: "modernshop.com",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/ecommerce.png",
+        tech: ["React", "Node.js", "Stripe", "MongoDB"],
+        category: "E-commerce",
+        status: "live",
+        redirect: "/e-commerce"
+      },
+      {
+        id: 2,
+        title: "SaaS Dashboard",
+        description:
+          "SaaS application with a real-time analytics dashboard: key metrics, cohorts, funnels, and exportable reports. User and role management, Stripe billing, notifications, and a modular admin panel with advanced filters and interactive charts.",
+        url: "fittracker.app",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/dashboard.png",
+        tech: ["Vue.js", "Firebase", "PWA", "Chart.js"],
+        category: "Web App",
+        status: "live",
+        redirect: "/dashboard"
+      },
+      {
+        id: 3,
+        title: "Law Firm Website",
+        description:
+          "Professional website for a law firm focused on trust and conversion: practice areas, attorney profiles, client testimonials, and clear calls to action. Includes inquiry form, legal blog, local SEO, and an accessible, responsive design.",
+        url: "artistportfolio.com",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/lawyer.png",
+        tech: ["Astro", "GSAP", "Tailwind", "Netlify"],
+        category: "Portfolio",
+        status: "live",
+        redirect: "/lawyer"
+      },
+      {
+        id: 4,
+        title: "Modern Restaurant",
+        description:
+          "Restaurant website with digital menu, online reservations, takeout ordering, and payment gateway. Google Maps integration, dynamic hours, dish gallery, and a panel to manage tables, availability, and promotions. Responsive and optimized for local SEO.",
+        url: "restaurant.example",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/restaurant.png",
+        tech: ["Next.js", "PostgreSQL", "Redis", "Docker"],
+        category: "Restaurant",
+        status: "development",
+        redirect: "/restaurant"
+      }
+    ]
   },
-  {
-    id: 3,
-    title: "Portfolio Creativo",
-    description: "Sitio web personalizado para artista con galería interactiva y animaciones fluidas.",
-    url: "artistportfolio.com",
-    image: "/src/assets/lawyer.png",
-    tech: ["Astro", "GSAP", "Tailwind", "Netlify"],
-    category: "Portfolio",
-    status: "live",
-    redirect: `/lawyer`
-
+  es: {
+    projects: [
+      {
+        id: 1,
+        title: "E‑commerce Moderno",
+        description: "Tienda online completa con carrito de compras, pagos seguros y panel administrativo.",
+        url: "modernshop.com",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/ecommerce.png",
+        tech: ["React", "Node.js", "Stripe", "MongoDB"],
+        category: "E-commerce",
+        status: "live",
+        redirect: "/e-commerce"
+      },
+      {
+        id: 2,
+        title: "SaaS Dashboard",
+        description:
+          "Aplicación SaaS con dashboard analítico en tiempo real: métricas clave, cohortes, embudos y reportes exportables. Gestión de usuarios y roles, facturación con Stripe, notificaciones y panel administrativo modular con filtros avanzados y gráficos interactivos.",
+        url: "fittracker.app",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/dashboard.png",
+        tech: ["Vue.js", "Firebase", "PWA", "Chart.js"],
+        category: "Aplicación Web",
+        status: "live",
+        redirect: "/dashboard"
+      },
+      {
+        id: 3,
+        title: "Estudio Jurídico",
+        description:
+          "Sitio profesional para estudio jurídico con enfoque en confianza y conversión: áreas de práctica, perfiles de abogados, testimonios, blog legal y llamadas a la acción claras. Incluye formulario de consulta, SEO local y diseño accesible y responsive.",
+        url: "artistportfolio.com",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/lawyer.png",
+        tech: ["Astro", "GSAP", "Tailwind", "Netlify"],
+        category: "Portfolio",
+        status: "live",
+        redirect: "/lawyer"
+      },
+      {
+        id: 4,
+        title: "Restaurante Moderno",
+        description:
+          "Sitio web para restaurante con menú digital, reservas online, pedidos para llevar y pasarela de pago. Integración con Google Maps, horarios dinámicos, galería de platos y panel para gestionar mesas, disponibilidad y promociones. Diseño responsive y optimizado para SEO local.",
+        url: "restaurant.example",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/restaurant.png",
+        tech: ["Next.js", "PostgreSQL", "Redis", "Docker"],
+        category: "Restaurante",
+        status: "development",
+        redirect: "/restaurant"
+      }
+    ]
   },
-  {
-    id: 4,
-    title: "SaaS Dashboard",
-    description: "Panel de control completo para gestión empresarial con analytics en tiempo real.",
-    url: "businessdash.co",
-    image: "/src/assets/restaurant.png",
-    tech: ["Next.js", "PostgreSQL", "Redis", "Docker"],
-    category: "SaaS",
-    status: "development",
-    redirect: `/restaurant`
-
-  },
-  
-];
+  pt: {
+    projects: [
+      {
+        id: 1,
+        title: "E‑commerce Moderno",
+        description: "Loja online completa com carrinho, pagamentos seguros e painel administrativo.",
+        url: "modernshop.com",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/ecommerce.png",
+        tech: ["React", "Node.js", "Stripe", "MongoDB"],
+        category: "E-commerce",
+        status: "live",
+        redirect: "/e-commerce"
+      },
+      {
+        id: 2,
+        title: "Painel SaaS",
+        description:
+          "Aplicativo SaaS com painel analítico em tempo real: métricas-chave, coortes, funis e relatórios exportáveis. Gestão de usuários e papéis, cobrança com Stripe, notificações e painel administrativo modular com filtros avançados e gráficos interativos.",
+        url: "fittracker.app",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/dashboard.png",
+        tech: ["Vue.js", "Firebase", "PWA", "Chart.js"],
+        category: "Aplicação Web",
+        status: "live",
+        redirect: "/dashboard"
+      },
+      {
+        id: 3,
+        title: "Site de Advocacia",
+        description:
+          "Site profissional para escritório de advocacia com foco em confiança e conversão: áreas de atuação, perfis dos advogados, depoimentos de clientes e CTAs claras. Inclui formulário de contato, blog jurídico, SEO local e design acessível e responsivo.",
+        url: "artistportfolio.com",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/lawyer.png",
+        tech: ["Astro", "GSAP", "Tailwind", "Netlify"],
+        category: "Portfolio",
+        status: "live",
+        redirect: "/lawyer"
+      },
+      {
+        id: 4,
+        title: "Restaurante Moderno",
+        description:
+          "Site para restaurante com menu digital, reservas online, pedidos para retirada e gateway de pagamento. Integração com Google Maps, horários dinâmicos, galeria de pratos e painel para gerenciar mesas, disponibilidade e promoções. Design responsivo e otimizado para SEO local.",
+        url: "restaurant.example",
+        image: "https://venser.nyc3.cdn.digitaloceanspaces.com/htmlCodessa/restaurant.png",
+        tech: ["Next.js", "PostgreSQL", "Redis", "Docker"],
+        category: "Restaurante",
+        status: "development",
+        redirect: "/restaurant"
+      }
+    ]
+  }
+} as const;
+const projects = (projectsByLang as any)[lang]?.projects ?? projectsByLang.en.projects;
 
 ---
 

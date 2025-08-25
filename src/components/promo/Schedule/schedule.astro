@@ -3,7 +3,8 @@ import Scheduler from "./schedule.tsx"
 import { getLangFromUrl, useTranslations } from "../../../i18n/utilsPromo"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { basePath } = Astro.props;
+const { basePath,  } = Astro.props;
+
 ---
 
 <div class="page-container">

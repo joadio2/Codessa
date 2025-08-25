@@ -16,7 +16,8 @@ import { loadStripe } from "@stripe/stripe-js";
 type ValuePiece = Date | null;
 type CalendarValue = ValuePiece | [ValuePiece, ValuePiece];
 
-const stripePromise = loadStripe(import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const api_url = import.meta.env.PUBLIC_SUPABASE_URL;
+const token = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 export default function Scheduler({ basePath }: { basePath: string }) {
   const lang = basePath.split("/")[1];
@@ -31,6 +32,7 @@ export default function Scheduler({ basePath }: { basePath: string }) {
 
   useEffect(() => {
     const storedPlan = sessionStorage.getItem("planElegido");
+    const public_order_id = sessionStorage.getItem("public_order_id");
     setPlan(storedPlan || "mensual");
   }, []);
 
@@ -71,7 +73,7 @@ export default function Scheduler({ basePath }: { basePath: string }) {
 
   const handlePayment = async () => {
     if (!selectedSlot) return;
-    let order_id = "ORD-20250821-O2LNW3";
+    let order_id = sessionStorage.getItem("public_order_id");
     const payload = {
       public_order_id: order_id,
       plan: plan,
@@ -79,17 +81,14 @@ export default function Scheduler({ basePath }: { basePath: string }) {
     };
     console.log("payload:", payload);
     try {
-      const res = await fetch(
-        "http://127.0.0.1:54321/functions/v1/payment-received",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0`, // <-- aquí
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(`${api_url}/payment-received`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // <-- aquí
+        },
+        body: JSON.stringify(payload),
+      });
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
@@ -97,12 +96,13 @@ export default function Scheduler({ basePath }: { basePath: string }) {
           "Error create-checkout-session:",
           data?.error || res.statusText
         );
-        // Muestra un toast o mensaje al usuario
         return;
       }
 
       if (!data?.url) {
         console.error("La respuesta no contiene url:", data);
+        window.location.href = `/${lang}/problem`;
+
         return;
       }
 

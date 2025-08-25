@@ -51,9 +51,8 @@ const ServiceIcon = ({ type }) => {
   );
 };
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const api_url = import.meta.env.PUBLIC_SUPABASE_URL;
+const token = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 export default function BriefingForm({ basePath }) {
   const lang = basePath.split("/")[1];
@@ -149,22 +148,21 @@ export default function BriefingForm({ basePath }) {
 
     try {
       const payload = { ...formData };
-      const res = await fetch("http://127.0.0.1:54321/functions/v1/pre-order", {
+      const res = await fetch(`${api_url}/pre-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0`, // <-- aquí
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        console.error("Function error:", res.status, err);
-        throw new Error("Function call failed");
-      }
       const data = await res.json();
-      localStorage.setItem("public_order_id", data.public_code);
+
+      if (!res.ok || !data.public_code) {
+        console.error("Function error:", res.status, data);
+        throw new Error(`Function call failed: ${res.status}`);
+      }
+      sessionStorage.setItem("public_order_id", data.public_code);
 
       goPayment();
     } catch (error) {
