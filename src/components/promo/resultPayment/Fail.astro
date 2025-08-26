@@ -7,6 +7,7 @@ const t = useTranslations(lang);
 ---  
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
 </head>
 <main class="mainContainer" >
@@ -38,115 +39,140 @@ const t = useTranslations(lang);
 
 </main>
 <style>
-    /* Estilo para el contenedor principal */
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
 
-.mainContainer {
-    background-color: #0d1117;
-  position: relative;
-  width: 100%;
-  height: 100vh; /* vh (viewport height) reemplaza a h-screen */
-  overflow: hidden;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-/* Fondo con gradiente animado */
-
-/* Contenedor para centrar el contenido */
-.contentWrapper {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-/* La tarjeta de agradecimiento */
-.thankYouCard {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.titleContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-/* Título principal */
-.title {
-  font-size: 3rem; /* 48px, text-5xl */
-  font-weight: 700; /* bold */
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reemplaza a drop-shadow-lg */
-  margin-bottom: 1rem; /* 16px, mb-4 */
-}
-.highlight {
-  color: red;
-}
-.lottie {
-  width: 2%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-bottom-left-radius: 11px;
-  border-bottom-right-radius: 11px;
-}
-/* Media query para hacer el título más grande en pantallas medianas y superiores */
-@media (min-width: 768px) {
-  .title {
-    font-size: 3.75rem; /* 60px, md:text-6xl */
+  html, body {
+    padding: 0;
+    margin: 0;
   }
-}
 
-/* Subtítulo o párrafo */
-.subtitle {
-  text-align: center;
-  font-size: 1.125rem; /* 18px, text-lg */
-  color: #e4e4e7; /* color zinc-200 */
-  margin-bottom: 2rem; /* 32px, mb-8 */
-}
-
-/* Botón para volver al inicio */
-.homeButton {
-  background-color: #30c59b;
-  color: #0d1117;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  display: inline-block;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  margin-top: 1rem;
-  align-self: center;
-}
-
-.homeButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.2);
-}
-@media screen and (max-width: 900px) {
   .mainContainer {
+    background-color: #0d1117;
     width: 100%;
-    height: 90vh;
-
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-      sans-serif;
+    min-height: 100svh; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    padding: 1rem;
+    box-sizing: border-box;
   }
-}
+
+  .contentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: inherit;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .thankYouCard {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; 
+    padding: 1rem;
+    gap: 1rem; 
+  }
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .title  {
+    font-size: 3rem; 
+    font-weight: 700;
+    color: white;
+    line-height: 1.2; 
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+  }
+
+  .highlight {
+    color: red;
+  }
+
+  .lottie {
+    width: 80px;
+    height: 80px;
+  }
+
+  .subtitle {
+    font-size: 1.7rem; 
+    color: #e4e4e7;
+    margin: 0;
+  }
+
+  /* Botón */
+  .homeButton {
+    background-color: #30c59b;
+    color: #0d1117;
+    padding: 0.875rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  /* Hover botón */
+  .homeButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 198, 255, 0.2);
+  }
+
+  /* Tablet (≥768px) */
+  @media (min-width: 768px) {
+    .titleContainer {
+      align-items: center; /* centra vertical */
+      gap: 1.5rem;
+    }
+    .title {
+      font-size: 3rem;
+      text-align: left;
+    }
+    .subtitle {
+      font-size: 1.4rem;
+    }
+    .lottie {
+      width: 100px;
+      height: 100px;
+    }
+    .homeButton {
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+    }
+  }
+
+  /* Desktop (≥1024px) */
+  @media (min-width: 1024px) {
+    .title {
+      font-size: 3.75rem;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+    }
+    .lottie {
+      width: 120px;
+      height: 120px;
+    }
+    .homeButton {
+      font-size: 1.2rem;
+      padding: 1.125rem 2.25rem;
+    }
+  }
 
 </style>

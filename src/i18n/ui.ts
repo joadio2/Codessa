@@ -181,7 +181,7 @@ export const ui = {
       buttonText: "Back to Home",
     },
     banner: {
-      title: "Special Offer! Your Professional Landing Page for only €50",
+      title: "Special Offer! Your Professional Landing Page for only 59€",
     },
     successPage: {
       title: "Thank You for Your Payment",
@@ -371,7 +371,7 @@ export const ui = {
     },
 
     banner: {
-      title: "¡Oferta Especial! Tu Landing Page Profesional por solo 50€",
+      title: "¡Oferta Especial! Tu Landing Page Profesional por solo 59€",
     },
     successPage: {
       title: "Gracias por tu pago",
@@ -562,7 +562,7 @@ export const ui = {
       buttonText: "Voltar ao Início",
     },
     banner: {
-      title: "Oferta Especial! A sua Landing Page Profissional por apenas 50€",
+      title: "Oferta Especial! A sua Landing Page Profissional por apenas 59€",
     },
     successPage: {
       title: "Obrigado por sua compra",

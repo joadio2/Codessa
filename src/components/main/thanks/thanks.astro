@@ -7,12 +7,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---  
 <main class={styles.mainContainer}>
-    <!-- 1. El Fondo Animado -->
-
-    <!-- 2. El Contenido Centrado -->
+  
     <div class={styles.contentWrapper}>
       
-      <!-- 3. La Tarjeta de Agradecimiento -->
       <div class={styles.thankYouCard}>
         <div class={styles.titleContainer}>
           <h1 class={styles.title}>
@@ -20,8 +17,8 @@ const t = useTranslations(lang);
           </h1>
           <div class={styles.lottie}>
             <LottieHero client:only="react" item={Avion}
-              width={70}
-              height={70}
+              width={100}
+              height={100}
             />
           </div>
         </div>
@@ -35,5 +32,4 @@ const t = useTranslations(lang);
       </div>
     </div>
 
-    <!-- 4. El Componente de Confeti (Isla de Astro) -->
 </main>
