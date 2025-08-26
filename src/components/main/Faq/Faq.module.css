@@ -1,6 +1,10 @@
 .faqSection {
   text-align: center;
-  background-color: #020617;
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 5%,
+    var(--color-secondary) 100%
+  );
   padding: 1rem 2rem 3rem;
 }
 

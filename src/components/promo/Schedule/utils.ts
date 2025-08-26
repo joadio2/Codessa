@@ -64,3 +64,49 @@ export const getAvailableTimeSlots = (date: Date): TimeSlot[] => {
 
   return slots;
 };
+
+function formatYmdInMadrid(date: Date) {
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Madrid",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  return fmt.format(date);
+}
+
+export const getBusySchedule = async (date: Date | string) => {
+  const d = new Date(date);
+
+  const dayStr = formatYmdInMadrid(d);
+
+  const api = import.meta.env.PUBLIC_SUPABASE_URL;
+  const token = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+  const res = await fetch(`${api}/busy-schedule?date=${dayStr}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err?.error || `HTTP ${res.status}`);
+  }
+
+  const data = await res.json();
+  const busyTimes: string[] = Array.isArray(data?.busyTimes)
+    ? data.busyTimes
+    : [];
+
+  const normalized = busyTimes
+    .map((t) => {
+      const [h, m] = String(t).split(":");
+      if (h == null || m == null) return null;
+      return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+    })
+    .filter(Boolean) as string[];
+  return new Set(normalized);
+};

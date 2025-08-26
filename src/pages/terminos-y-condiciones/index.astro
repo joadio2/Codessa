@@ -1,0 +1,222 @@
+---
+// src/pages/terminos-y-privacidad.astro
+const pageTitle = "Términos, Condiciones y Política de Privacidad – Codessa";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{pageTitle}</title>
+    
+    <!-- Importación de Fuentes desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset Básico y Estilos Globales --- */
+        body {
+            font-family: "Inter", system-ui, sans-serif; /* Fuente para el cuerpo */
+            background-color: #010409; /* color-secondary */
+            color: #c9d1d9; /* color-text */
+            line-height: 1.8;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        /* --- Contenedor Principal --- */
+        main {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 50px;
+            background-color: #0d1117; /* color-dark */
+            border: 1px solid #334155; /* color-border */
+            border-radius: 12px;
+        }
+
+        /* --- Tipografía y Encabezados --- */
+        h1, h2, h3 {
+            font-family: "Poppins", system-ui, sans-serif; /* Fuente para encabezados */
+            line-height: 1.4;
+            font-weight: 600;
+            color: #c9d1d9; /* color-text */
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155; /* color-border */
+        }
+
+        h2 {
+            font-size: 2.1rem;
+            margin-top: 50px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #334155; /* color-border */
+        }
+        
+        h2::before {
+            content: '📄';
+            margin-right: 12px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #30c59b; /* color-accent */
+            margin-top: 35px;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: #c9d1d9; /* color-text */
+        }
+
+        strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* --- Elementos de la UI --- */
+        a {
+            color: #30c59b; /* color-accent */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #27a07e; /* color-accent-hover */
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 25px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        li::before {
+            content: '›';
+            position: absolute;
+            left: -20px;
+            color: #30c59b; /* color-accent */
+            font-weight: 700;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #334155; /* color-border */
+            margin: 60px 0;
+        }
+
+        .last-updated {
+            font-style: italic;
+            color: #8b949e; /* color-text-muted */
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+        
+        /* --- Responsividad para móviles --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            main {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Términos, Condiciones y Privacidad</h1>
+
+        <!-- TÉRMINOS Y CONDICIONES -->
+        <section>
+            <h2>Términos y Condiciones</h2>
+            <p class="last-updated"><strong>Última actualización:</strong> 2025-08-26</p>
+            <p>Bienvenido a <strong>Codessa</strong>. Al utilizar nuestros servicios de creación de páginas web y software, aceptas los siguientes Términos y Condiciones. Por favor, léelos con atención.</p>
+
+            <h3>1. ¿Quiénes somos?</h3>
+            <p>Codessa  ofrece servicios de desarrollo de <strong>landing pages simples</strong> y software bajo suscripción. Nuestro sitio oficial es <a href="http://www.codessa.app" target="_blank" rel="noopener noreferrer">www.codessa.app</a>.</p>
+
+            <h3>2. Planes y Pagos</h3>
+            <ul>
+                <li><strong>Plan Mensual:</strong> €109 al mes.</li>
+                <li><strong>Plan Anual:</strong> €708 en un solo pago, equivalente a €59 al mes.</li>
+            </ul>
+            <p>Los pagos se realizan de forma anticipada mediante los métodos de pago habilitados. Todos los precios incluyen impuestos, salvo que se indique lo contrario.</p>
+
+            <h3>3. Renovación y Cancelación</h3>
+            <ul>
+                <li>El <strong>Plan Mensual</strong> se renueva automáticamente cada mes. Puedes cancelarlo notificando al menos <strong>15 días antes del siguiente cobro</strong>.</li>
+                <li>El <strong>Plan Anual</strong> se paga por adelantado y cubre 12 meses de servicio.</li>
+            </ul>
+
+            <h3>4. Reembolsos</h3>
+            <ul>
+                <li><strong>No se realizan reembolsos al momento de suscribirse</strong>, ni en el Plan Mensual ni en el Plan Anual.</li>
+                <li>En el Plan Anual, una vez realizado el pago, no hay cancelación parcial ni reembolso.</li>
+                <li>Solo se revisarán casos en los que el servicio entregado no corresponda a lo ofrecido en la descripción.</li>
+            </ul>
+
+            <h3>5. Propiedad Intelectual</h3>
+            <ul>
+                <li>Todo el software, diseños, plantillas y contenidos generados por Codessa son propiedad de la empresa.</li>
+                <li>El cliente obtiene únicamente un <strong>derecho de uso</strong> del servicio contratado.</li>
+                <li>No está permitido modificar, copiar, redistribuir o revender los servicios de Codessa.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- POLÍTICA DE PRIVACIDAD -->
+        <section>
+            <h2>Política de Privacidad</h2>
+            <p class="last-updated"><strong>Última actualización:</strong> 2025-08-26</p>
+            <p>En <strong>Codessa</strong> respetamos tu privacidad y protegemos tus datos personales conforme al <strong>Reglamento General de Protección de Datos (GDPR – UE 2016/679)</strong>.</p>
+
+            <h3>1. Responsable del Tratamiento</h3>
+            <ul>
+                <li><strong>Empresa:</strong> Codessa </li>
+                <li><strong>Correo:</strong> admin@codessa.app</li>
+            </ul>
+
+            <h3>2. Datos que Recopilamos</h3>
+            <ul>
+                <li>Nombre y apellidos.</li>
+                <li>Email y teléfono de contacto.</li>
+                <li>Datos de facturación y pago.</li>
+                <li>Datos técnicos de navegación (ej. dirección IP, logs).</li>
+            </ul>
+
+            <h3>3. Finalidad del Tratamiento</h3>
+            <p>Usamos tus datos para prestar los servicios contratados, emitir facturas, contactarte sobre actualizaciones y, con tu consentimiento, enviar información comercial.</p>
+
+            <h3>4. Tus Derechos (ARCO-POL)</h3>
+            <p>Puedes solicitar en cualquier momento el acceso, rectificación, supresión, limitación, oposición o portabilidad de tus datos escribiéndonos a <strong>admin@codessa.app</strong>.</p>
+            
+            <h3>5. Cesión y Transferencia de Datos</h3>
+            <ul>
+                <li>No vendemos tus datos a terceros.</li>
+                <li>Solo compartimos información con proveedores tecnológicos (hosting, pasarelas de pago, etc.) bajo estrictos contratos de protección de datos.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

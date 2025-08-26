@@ -2,11 +2,10 @@ import { useState } from "react";
 import styles from "./SelectPlan.module.css";
 import { translations } from "./translations";
 export default function SelectPlanPage({ basePath, onChangePlan }) {
-  const [selectedPlan, setSelectedPlan] = useState("anual"); // 'anual' por defecto
+  const [selectedPlan, setSelectedPlan] = useState("anual");
   const newProjectUrl = `${basePath}/newProject`;
   const lang = basePath.split("/")[1];
   const t = translations[lang];
-  console.log("wwww", t.period);
   const handleSelectPlan = (plan) => {
     sessionStorage.setItem("planElegido", plan);
     onChangePlan(plan);
@@ -27,7 +26,7 @@ export default function SelectPlanPage({ basePath, onChangePlan }) {
           </div>
           <div className={styles.priceInfo}>
             <p className={styles.price}>
-              99<span className={styles.currency}>€</span>
+              109<span className={styles.currency}>€</span>
               <span className={styles.period}>{t.period}</span>
             </p>
             <p className={styles.note}>{t.monthly.note}</p>
@@ -39,6 +38,10 @@ export default function SelectPlanPage({ basePath, onChangePlan }) {
             <li>{t.features.item4}</li>
             <li>{t.features.item5}</li>
             <li>{t.features.item6}</li>
+            <li className={styles.desactivado}>{t.features.item7}</li>
+            <li className={styles.desactivado}>{t.features.item8}</li>
+            <li className={styles.desactivado}>{t.features.item9}</li>
+            <li className={styles.desactivado}>{t.features.item10}</li>
           </ul>
           <button
             onClick={() => handleSelectPlan("mensual")}
@@ -56,7 +59,7 @@ export default function SelectPlanPage({ basePath, onChangePlan }) {
           </div>
           <div className={styles.priceInfo}>
             <p className={styles.price}>
-              50<span className={styles.currency}>€</span>
+              59<span className={styles.currency}>€</span>
               <span className={styles.period}>{t.period}</span>
             </p>
             <p className={styles.note}>
@@ -70,6 +73,10 @@ export default function SelectPlanPage({ basePath, onChangePlan }) {
             <li>{t.features.item4}</li>
             <li>{t.features.item5}</li>
             <li>{t.features.item6}</li>
+            <li>{t.features.item7}</li>
+            <li>{t.features.item8}</li>
+            <li>{t.features.item9}</li>
+            <li>{t.features.item10}</li>
           </ul>
           <button
             onClick={() => handleSelectPlan("anual")}

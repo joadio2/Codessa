@@ -134,6 +134,9 @@
 .features li {
   font-weight: 500;
 }
+.features li.desactivado {
+  color: #7c889a96;
+}
 
 .cta {
   background-color: var(--color-accent);

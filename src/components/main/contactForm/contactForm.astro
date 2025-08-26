@@ -3,6 +3,8 @@ import styles from './ContactForm.module.css';
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const api = import.meta.env.PUBLIC_SUPABASE_URL;            // solo servidor
+const token = import.meta.env.PUBLIC_SUPABASE_ANON_KEY; // cliente/servidor
 ---
 
 <section id="contacto" class={styles.contactSection}>
@@ -34,12 +36,43 @@ const t = useTranslations(lang);
     </form>
 </section>
 
-<script type="module" is:inline define:vars={{ lang }}>
+<script type="module" is:inline define:vars={{ lang, api, token }}>
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
-    form.addEventListener('submit', function(e) {
+
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      window.location.href = `/${lang}/thanks`;
+
+      const formData = new FormData(form);
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        idea: formData.get('idea'),
+        lang: lang,
+      };
+
+      try {
+        const res = await fetch(`${api}/enterprise_project`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          const error = await res.json().catch(() => ({}));
+          console.error('Form error:', error);
+          alert(error?.message || 'Hubo un problema al enviar el formulario.');
+          return;
+        }
+
+        window.location.href = `/${lang}/thanks`;
+      } catch (err) {
+        console.error('Network error:', err);
+        alert('No se pudo enviar el formulario. Intenta de nuevo.');
+      }
     });
   });
 </script>

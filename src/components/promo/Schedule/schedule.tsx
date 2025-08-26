@@ -2,13 +2,10 @@ import { useState, useMemo, useEffect } from "react";
 import Calendar from "react-calendar";
 import { translationsScheduler } from "./translate";
 import {
-  MY_AVAILABLE_HOURS,
-  MY_TIME_ZONE,
-  BOOKING_BUFFER_HOURS,
   isWeekend,
   getBookingCutoff,
-  getOffsetInHours,
   getAvailableTimeSlots,
+  getBusySchedule, // Debe devolver Promise<Set<string>> con horas "HH:mm" en la TZ elegida
 } from "./utils";
 import type { TimeSlot } from "./utils";
 import { loadStripe } from "@stripe/stripe-js";
@@ -30,37 +27,80 @@ export default function Scheduler({ basePath }: { basePath: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [plan, setPlan] = useState<string | null>(null);
 
+  // Estado para horarios ocupados del día (formato "HH:mm")
+  const [busyTimeSet, setBusyTimeSet] = useState<Set<string>>(new Set());
+  const [busyLoading, setBusyLoading] = useState(false);
+  const [busyError, setBusyError] = useState<string | null>(null);
+
   useEffect(() => {
     const storedPlan = sessionStorage.getItem("planElegido");
-    const public_order_id = sessionStorage.getItem("public_order_id");
+    // const public_order_id = sessionStorage.getItem("public_order_id");
     setPlan(storedPlan || "mensual");
   }, []);
 
+  // Detalles de precio (tal cual tu lógica original)
   const priceDetails = useMemo(() => {
     if (plan === "anual") {
       return {
         planName: t.pricePlanAnnual,
-        displayPrice: "50.00 €",
+        displayPrice: "59.00 €",
         billingCycle: t.billingCycleMonthly,
         note: t.priceNoteAnnual,
-        amountCents: 60000,
+        amountCents: 70800,
       };
     }
     return {
       planName: t.pricePlanMonthly,
-      displayPrice: "99.00 €",
+      displayPrice: "109.00 €",
       billingCycle: t.billingCycleMonthly,
       note: t.priceNoteMonthly,
-      amountCents: 9900,
+      amountCents: 10900,
     };
   }, [plan]);
 
-  const availableTimeSlots = useMemo(() => {
+  // Cargar horarios ocupados cuando cambia el día seleccionado
+  useEffect(() => {
+    if (!(selectedDate instanceof Date)) {
+      setBusyTimeSet(new Set());
+      return;
+    }
+    let cancelled = false;
+
+    (async () => {
+      try {
+        setBusyLoading(true);
+        setBusyError(null);
+
+        // getBusySchedule debe devolver Set<"HH:mm"> en la TZ que uses para comparar
+        const res = await getBusySchedule(selectedDate);
+        if (!cancelled) setBusyTimeSet(res || new Set());
+      } catch (e: any) {
+        if (!cancelled) {
+          setBusyError(e?.message || "Error al cargar disponibilidad");
+          setBusyTimeSet(new Set());
+        }
+      } finally {
+        if (!cancelled) setBusyLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedDate]);
+
+  const baseAvailableTimeSlots = useMemo(() => {
     if (selectedDate instanceof Date) {
       return getAvailableTimeSlots(selectedDate);
     }
     return [];
   }, [selectedDate]);
+
+  const availableTimeSlots = useMemo(() => {
+    if (!baseAvailableTimeSlots.length) return [];
+    if (!busyTimeSet.size) return baseAvailableTimeSlots;
+    return baseAvailableTimeSlots.filter((s) => !busyTimeSet.has(s.spainTime));
+  }, [baseAvailableTimeSlots, busyTimeSet]);
 
   const handleDateChange = (value: CalendarValue) => {
     setSelectedDate(value);
@@ -73,43 +113,42 @@ export default function Scheduler({ basePath }: { basePath: string }) {
 
   const handlePayment = async () => {
     if (!selectedSlot) return;
-    let order_id = sessionStorage.getItem("public_order_id");
-    const payload = {
-      public_order_id: order_id,
-      plan: plan,
-      lang: lang,
-    };
-    console.log("payload:", payload);
+    setIsLoading(true);
     try {
+      const order_id = sessionStorage.getItem("public_order_id");
+      const payload = {
+        public_order_id: order_id,
+        plan: plan,
+        lang: lang,
+        diaReunion: selectedSlot,
+      };
+
       const res = await fetch(`${api_url}/payment-received`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // <-- aquí
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        console.error(
-          "Error create-checkout-session:",
-          data?.error || res.statusText
-        );
+        window.location.href = `/${lang}/problem`;
         return;
       }
 
       if (!data?.url) {
         console.error("La respuesta no contiene url:", data);
         window.location.href = `/${lang}/problem`;
-
         return;
       }
 
       window.location.href = data.url;
     } catch (err) {
-      console.log("Network/Fetch error:", err);
-      // Muestra un toast o mensaje al usuario
+      window.location.href = `/${lang}/problem`;
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -117,7 +156,6 @@ export default function Scheduler({ basePath }: { basePath: string }) {
 
   return (
     <div className="scheduler-layout">
-      {/* Calendario y selección de horarios */}
       <div className="calendar-column">
         <h2>{t.step1Title}</h2>
         <div className="calendar-container">
@@ -170,6 +208,14 @@ export default function Scheduler({ basePath }: { basePath: string }) {
             <div className="time-slots-header">
               <h3>{t.availableSlotsTitle}</h3>
             </div>
+
+            {busyLoading && <p>{t.loading || "Cargando disponibilidad..."}</p>}
+            {busyError && (
+              <p className="error">
+                {t.errorLoading || "Error al cargar disponibilidad"}
+              </p>
+            )}
+
             <div className="time-slots-grid">
               {availableTimeSlots.length > 0 ? (
                 availableTimeSlots.map((slot) => (
@@ -179,6 +225,7 @@ export default function Scheduler({ basePath }: { basePath: string }) {
                       selectedSlot?.isoDate === slot.isoDate ? "active" : ""
                     }`}
                     onClick={() => handleTimeSelect(slot)}
+                    disabled={busyLoading}
                   >
                     <span className="client-time">{slot.clientTime}</span>
                     <span className="spain-time">{slot.spainTime} CET</span>
@@ -192,7 +239,6 @@ export default function Scheduler({ basePath }: { basePath: string }) {
         )}
       </div>
 
-      {/* Resumen y botón de pago */}
       <div className={`payment-column ${!selectedSlot ? "disabled" : ""}`}>
         <h2>{t.step2Title}</h2>
         <div className="summary-card">
@@ -236,7 +282,7 @@ export default function Scheduler({ basePath }: { basePath: string }) {
         <button
           className="cta-button payment-btn"
           onClick={handlePayment}
-          disabled={!selectedSlot || isLoading}
+          disabled={!selectedSlot || isLoading || busyLoading}
         >
           {isLoading ? t.payProcessing : t.payButton}
         </button>

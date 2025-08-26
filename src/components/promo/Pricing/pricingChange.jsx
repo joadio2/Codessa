@@ -77,7 +77,7 @@ export default function PricingChange({ basePath }) {
             {plan === "anual" ? (
               <div className={styles.priceInfo}>
                 <p className={styles.price}>
-                  50<span className={styles.currency}>€</span>
+                  59<span className={styles.currency}>€</span>
                   <span className={styles.period}>{t.pricing.period}</span>
                 </p>
                 <p className={styles.note}>{t.pricing.annual.note}</p>
@@ -85,7 +85,7 @@ export default function PricingChange({ basePath }) {
             ) : (
               <div className={styles.priceInfo}>
                 <p className={styles.price}>
-                  99<span className={styles.currency}>€</span>
+                  109<span className={styles.currency}>€</span>
                   <span className={styles.period}>{t.pricing.period}</span>
                 </p>
                 <p className={styles.note}>{t.pricing.monthly.note}</p>
@@ -100,6 +100,18 @@ export default function PricingChange({ basePath }) {
             <li>✓ {t.pricing.features.item4}</li>
             <li>✓ {t.pricing.features.item5}</li>
             <li>✓ {t.pricing.features.item6}</li>
+            <li className={plan === "anual" ? "" : styles.desactivado}>
+              {plan === "anual" ? "✓" : "✗"} {t.pricing.features.item7}
+            </li>
+            <li className={plan === "anual" ? "" : styles.desactivado}>
+              {plan === "anual" ? "✓" : "✗"} {t.pricing.features.item8}
+            </li>
+            <li className={plan === "anual" ? "" : styles.desactivado}>
+              {plan === "anual" ? "✓" : "✗"} {t.pricing.features.item9}
+            </li>
+            <li className={plan === "anual" ? "" : styles.desactivado}>
+              {plan === "anual" ? "✓" : "✗"} {t.pricing.features.item10}
+            </li>
           </ul>
 
           <button onClick={handleStartProject} className={styles.cta}>

@@ -5,7 +5,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 ---
-<section id="proceso">
+<section id="process">
     <h2>{t("process.title")}</h2>
     <p class="section-subtitle">
         {t("process.subtitle")}
@@ -64,14 +64,10 @@ const t = useTranslations(lang);
 
 <style >
    
-    #proceso {
+    #process {
         padding:  0 0 2rem;
         text-align: center;
-        background: linear-gradient(
-            180deg,
-            var(--color-primary) 30%,
-            #020617 90%
-        );
+        background: var(--color-primary);
     }
     h2 {
         font-size: 2.8rem;
