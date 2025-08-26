@@ -3,10 +3,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utilsPromo"
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-import Image from "astro/components/Image.astro";
-import Restaurant from "../assets/restaurant.png"
-import Lawyer from "../assets/lawyer.png"
-import Dashboard from "../assets/dashboard.png"
+
         
 
 const projectsByLang = {
@@ -165,7 +162,9 @@ const projectsByLang = {
   }
 } as const;
 const projects = (projectsByLang as any)[lang]?.projects ?? projectsByLang.en.projects;
-
+const handleCtaClick = () => {
+  window.location.href = `/${lang}/contact`;
+};
 ---
 
 <section class="portfolio-section">
@@ -250,7 +249,7 @@ const projects = (projectsByLang as any)[lang]?.projects ?? projectsByLang.en.pr
 
     <div class="section-footer">
       <p class="footer-text">{t("portafolio.footerText")}</p>
-      <button class="cta-button">
+      <a class="cta-button" href={`/${lang}/contact`}>
         {t("portafolio.ctaButton")}
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
