@@ -1,0 +1,224 @@
+---
+// Datos de ejemplo para mensajes
+const messages = [
+  {
+    id: 1,
+    sender: "María García",
+    preview: "Hola, ¿podemos revisar el progreso del proyecto?",
+    time: "5m",
+    unread: true,
+    avatar: "MG"
+  },
+  {
+    id: 2,
+    sender: "Carlos López",
+    preview: "Los wireframes están listos para revisión",
+    time: "1h",
+    unread: true,
+    avatar: "CL"
+  },
+  {
+    id: 3,
+    sender: "Ana Rodríguez",
+    preview: "Gracias por la reunión de hoy",
+    time: "3h",
+    unread: false,
+    avatar: "AR"
+  },
+  {
+    id: 4,
+    sender: "Luis Martín",
+    preview: "¿Podemos programar una llamada?",
+    time: "1d",
+    unread: false,
+    avatar: "LM"
+  }
+];
+---
+
+<div class="messages-widget">
+  <div class="widget-header">
+    <h3>Mensajes</h3>
+    <div class="unread-count">
+      {messages.filter(m => m.unread).length}
+    </div>
+  </div>
+
+  <div class="messages-list">
+    {messages.map((message) => (
+      <div class={`message-item ${message.unread ? 'unread' : ''}`}>
+        <div class="message-avatar">
+          {message.avatar}
+        </div>
+        
+        <div class="message-content">
+          <div class="message-header">
+            <span class="sender-name">{message.sender}</span>
+            <span class="message-time">{message.time}</span>
+          </div>
+          <p class="message-preview">{message.preview}</p>
+        </div>
+
+        {message.unread && (
+          <div class="unread-indicator"></div>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <div class="widget-footer">
+    <button class="compose-btn">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+      </svg>
+      Nuevo mensaje
+    </button>
+  </div>
+</div>
+
+<style>
+  .messages-widget {
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    height: fit-content;
+  }
+
+  .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .widget-header h3 {
+    color: var(--color-text);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .unread-count {
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .message-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 0.875rem;
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .message-item:hover {
+    background-color: var(--color-secondary);
+  }
+
+  .message-item.unread {
+    background-color: var(--color-secondary);
+  }
+
+  .message-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .message-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .sender-name {
+    font-weight: 500;
+    color: var(--color-text);
+    font-size: 0.875rem;
+  }
+
+  .message-time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .message-preview {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+  }
+
+  .unread-indicator {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    position: absolute;
+    top: 0.875rem;
+    right: 0.875rem;
+  }
+
+  .widget-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .compose-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-accent);
+    color: white;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .compose-btn:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  @media (max-width: 768px) {
+    .message-preview {
+      max-width: 180px;
+    }
+  }
+</style>

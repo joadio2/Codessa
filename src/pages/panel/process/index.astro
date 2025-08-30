@@ -1,0 +1,17 @@
+---
+import PanelLayout from '../../../layouts/PanelLayout.astro';
+import KanbanBoard from '../../../components/panel/KanbanBoard.astro';
+---
+
+<PanelLayout title="Gestión de Procesos" activePage="procesos">
+  <div class="procesos-page">
+    <KanbanBoard />
+  </div>
+</PanelLayout>
+
+<style>
+  .procesos-page {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+</style>

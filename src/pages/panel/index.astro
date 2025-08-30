@@ -1,0 +1,202 @@
+---
+import PanelLayout from '../../layouts/PanelLayout.astro';
+import OrdersTable from '../../components/panel/OrdersTable.astro';
+import MeetingsWidget from '../../components/panel/MeetingWidget.astro';
+import MessagesWidget from '../../components/panel/MessagesWidget.astro';
+const resp = await fetch(`${import.meta.env.PUBLIC_SUPABASE_URL}/control-orders`, {
+  headers: {
+    Authorization: `Bearer ${import.meta.env.PUBLIC_SUPABASE_ANON_KEY}`,
+    "Content-Type": "application/json",
+  },
+});
+
+const { orders, meetings } = await resp.json();
+---
+
+<PanelLayout title="Dashboard Principal" activePage="dashboard">
+  <div class="dashboard-page">
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <p class="page-subtitle">Resumen de actividades y métricas principales</p>
+    </div>
+
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-icon orders">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <h3>24</h3>
+          <p>Pedidos Activos</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon meetings">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <h3>8</h3>
+          <p>Reuniones Hoy</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon revenue">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <h3>$45,280</h3>
+          <p>Ingresos Este Mes</p>
+        </div>
+      </div>
+    </div>
+
+    
+      
+        <OrdersTable orders={orders} />
+       <div class="sidebar-widgets">
+        <MeetingsWidget  meetings={meetings} />
+        <MessagesWidget />
+      </div>
+      
+    </div>
+  </div>
+</PanelLayout>
+
+<style>
+  .dashboard-page {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    color: var(--color-text);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    column-span: 1;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .stat-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-icon.orders {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  .stat-icon.meetings {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+  }
+
+  .stat-icon.messages {
+    background-color: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+  }
+
+  .stat-icon.revenue {
+    background-color: rgba(48, 197, 155, 0.2);
+    color: var(--color-accent);
+  }
+
+  .stat-content h3 {
+    color: var(--color-text);
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-content p {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .dashboard-content {
+    
+
+  }
+
+  .main-section {
+    width: 100%;
+  }
+
+  .sidebar-widgets {
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    margin-top: 2rem;
+    gap: 2rem;
+    align-items: start;
+  }
+  .item-widget {
+    
+  }
+
+  @media (max-width: 1200px) {
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .sidebar-widgets {
+      grid-row: 1;
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-stats {
+      grid-template-columns: 1fr;
+    }
+    
+    .sidebar-widgets {
+      flex-direction: column;
+    }
+  }
+</style>

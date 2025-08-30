@@ -10,7 +10,7 @@ export const ui = {
   en: {
     hero: {
       title: "Your Professional Website, Built to Win Clients.",
-      titleHighlight: "From just €50/month.",
+      titleHighlight: "From just €59/month.",
       subtitle:
         "Get a stunning, high-speed, SEO-optimized online presence designed to turn visitors into loyal customers.",
       cta: "Discover Plans",
@@ -20,7 +20,7 @@ export const ui = {
         title: "Launch Offer",
         subtitle: "Don't Miss Out!",
         description: {
-          pre: "This special price of €50/month is only for the ",
+          pre: "This special price of €59/month is only for the ",
           strong: "first 10 clients",
           post: " this month or until the timer hits zero. Secure your spot now!",
         },
@@ -158,7 +158,7 @@ export const ui = {
   es: {
     hero: {
       title: "Tu Web Profesional que Atrae Clientes.",
-      titleHighlight: "Desde solo 50€/mes.",
+      titleHighlight: "Desde solo 59€/mes.",
       subtitle:
         "Creamos sitios web ultrarrápidos y optimizados para Google, diseñados para convertir visitantes en ventas.",
       cta: "Descubre los Planes",
@@ -168,7 +168,7 @@ export const ui = {
         title: "Oferta de Lanzamiento",
         subtitle: "¡No te quedes fuera!",
         description: {
-          pre: "Este precio especial de 50€/mes es solo para los ",
+          pre: "Este precio especial de 59€/mes es solo para los ",
           strong: "primeros 10 clientes",
           post: " de este mes o hasta que el contador llegue a cero. ¡Asegura tu lugar ahora!",
         },
@@ -306,7 +306,7 @@ export const ui = {
   pt: {
     hero: {
       title: "Atraia Mais Clientes com um Site Profissional.",
-      titleHighlight: "A partir de 50€/mês.",
+      titleHighlight: "A partir de 59€/mês.",
       subtitle:
         "Criamos websites ultra-rápidos e otimizados para os motores de busca, desenhados para converter visitantes em vendas.",
       cta: "Ver Planos",
@@ -316,7 +316,7 @@ export const ui = {
         title: "Oferta de Lançamento",
         subtitle: "Não Fique de Fora!",
         description: {
-          pre: "Este preço especial de 50€/mês é apenas para os ",
+          pre: "Este preço especial de 59€/mês é apenas para os ",
           strong: "primeiros 10 clientes",
           post: " deste mês ou até o temporizador chegar a zero. Garanta já o seu lugar!",
         },

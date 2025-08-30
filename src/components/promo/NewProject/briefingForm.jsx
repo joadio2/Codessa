@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import styles from "./BriefingForm.module.css";
 import { translationsBriefing } from "./transalate";
 
@@ -50,9 +49,6 @@ const ServiceIcon = ({ type }) => {
     </svg>
   );
 };
-
-const api_url = import.meta.env.PUBLIC_SUPABASE_URL;
-const token = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 export default function BriefingForm({ basePath }) {
   const lang = basePath.split("/")[1];
