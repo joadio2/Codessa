@@ -6,8 +6,8 @@ const lang = getLangFromUrl(Astro.url);
 interface Props {
 	title: string;
 }
-
 const { title } = Astro.props;
+const version = Date.now(); // cache-busting para favicons
 ---
 
 <!doctype html>
@@ -29,7 +29,13 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Fusionando código y marketing para un crecimiento digital sin precedentes." />
 		<meta name="viewport" content="width=device-width" />
+
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="codessa" />
+		<link rel="manifest" href="/site.webmanifest" />
+
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
